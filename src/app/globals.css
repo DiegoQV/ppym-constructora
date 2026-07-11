@@ -20,6 +20,8 @@ body { background: var(--background); color: var(--foreground); font-family: Int
 
 html { scroll-behavior: smooth; }
 
+.reveal-pending { opacity: 0; transform: translateY(1rem); }
+
 .hero-grid {
   background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
   background-size: 48px 48px;
@@ -48,8 +50,7 @@ html { scroll-behavior: smooth; }
   50% { box-shadow: 0 10px 28px rgba(0, 0, 0, .3), 0 0 0 11px rgba(37, 211, 102, 0); }
 }
 
-.hero-photo-enter { animation: hero-photo-enter 1.25s cubic-bezier(.2, .7, .2, 1) both; transform-origin: 70% 50%; }
-.hero-enter { animation: hero-enter .65s ease-out both; }
+.hero-photo-enter { transform-origin: 70% 50%; }
 .hero-enter-delay-1 { animation-delay: .08s; }
 .hero-enter-delay-2 { animation-delay: .16s; }
 .hero-enter-delay-3 { animation-delay: .24s; }
@@ -63,8 +64,6 @@ html { scroll-behavior: smooth; }
 
 .hero-title-line-v2 {
   display: block;
-  opacity: 0;
-  animation: hero-title-build-v2 .9s cubic-bezier(.16, 1, .3, 1) both;
   will-change: transform;
 }
 
@@ -73,33 +72,17 @@ html { scroll-behavior: smooth; }
 .hero-title-line-v2-3 { animation-delay: .52s; }
 .hero-title-line-v2-4 { animation-delay: .68s; }
 
-.whatsapp-attention {
-  animation: whatsapp-attention 1.15s ease-out 2.4s 2;
-}
-
 .technical-lines path,
 .technical-lines circle {
   stroke-dasharray: 1500;
-  stroke-dashoffset: 1500;
-  animation: technical-draw 1.45s cubic-bezier(.45, 0, .2, 1) .65s forwards;
+  stroke-dashoffset: 0;
 }
 
 .technical-lines .technical-orbit {
   stroke-dasharray: none;
   stroke-dashoffset: 0;
-  animation: technical-orbit .7s cubic-bezier(.2, .8, .2, 1) 1.55s both;
   transform-box: fill-box;
   transform-origin: center;
-}
-
-.technical-labels {
-  opacity: 0;
-  animation: technical-reveal .55s ease-out 1.75s forwards;
-}
-
-.technical-markers {
-  opacity: 0;
-  animation: technical-reveal .5s ease-out 1.95s forwards;
 }
 
 .cement-fill {
@@ -117,7 +100,6 @@ html { scroll-behavior: smooth; }
   color: #e7b928;
   content: attr(data-text);
   clip-path: polygon(0 64%, 8% 58%, 17% 62%, 27% 55%, 38% 61%, 49% 56%, 61% 63%, 73% 57%, 85% 61%, 100% 54%, 100% 100%, 0 100%);
-  animation: cement-rise 5.5s cubic-bezier(.45, 0, .55, 1) 1.7s infinite alternate;
 }
 
 @keyframes cement-rise {
@@ -128,16 +110,20 @@ html { scroll-behavior: smooth; }
   100% { clip-path: polygon(0 72%, 10% 66%, 21% 71%, 32% 64%, 44% 70%, 56% 65%, 68% 73%, 80% 67%, 90% 71%, 100% 63%, 100% 100%, 0 100%); }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .hero-photo-enter { animation: hero-photo-enter 1.25s cubic-bezier(.2, .7, .2, 1) both; }
+  .hero-enter { animation: hero-enter .65s ease-out both; }
+  .hero-title-line-v2 { animation: hero-title-build-v2 .9s cubic-bezier(.16, 1, .3, 1) both; }
+  .whatsapp-attention { animation: whatsapp-attention 1.15s ease-out 2.4s 2; }
+  .technical-lines path,
+  .technical-lines circle { stroke-dashoffset: 1500; animation: technical-draw 1.45s cubic-bezier(.45, 0, .2, 1) .65s forwards; }
+  .technical-lines .technical-orbit { animation: technical-orbit .7s cubic-bezier(.2, .8, .2, 1) 1.55s both; }
+  .technical-labels { animation: technical-reveal .55s ease-out 1.75s both; }
+  .technical-markers { animation: technical-reveal .5s ease-out 1.95s both; }
+  .cement-fill::before { animation: cement-rise 5.5s cubic-bezier(.45, 0, .55, 1) 1.7s infinite alternate; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-enter,
-  .hero-photo-enter,
-  .hero-title-line-v2,
-  .technical-lines path,
-  .technical-lines circle,
-  .technical-lines .technical-orbit,
-  .technical-labels,
-  .technical-markers { animation: none; opacity: 1; transform: none; stroke-dashoffset: 0; filter: none; }
-  .whatsapp-attention { animation: none; }
   .cement-fill::before { animation: none; clip-path: polygon(0 58%, 100% 58%, 100% 100%, 0 100%); }
 }
