@@ -108,6 +108,7 @@ html { scroll-behavior: smooth; }
   color: #e7b928;
   content: attr(data-text);
   clip-path: polygon(0 64%, 8% 58%, 17% 62%, 27% 55%, 38% 61%, 49% 56%, 61% 63%, 73% 57%, 85% 61%, 100% 54%, 100% 100%, 0 100%);
+  animation: cement-rise 5.5s cubic-bezier(.45, 0, .55, 1) 1.7s infinite alternate;
 }
 
 @keyframes cement-rise {
@@ -120,10 +121,8 @@ html { scroll-behavior: smooth; }
 
 @media (prefers-reduced-motion: no-preference) {
   .whatsapp-attention { animation: whatsapp-attention 1.15s ease-out 2.4s 2; }
-  .cement-fill::before { animation: cement-rise 5.5s cubic-bezier(.45, 0, .55, 1) 1.7s infinite alternate; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .cement-fill::before { animation: none; clip-path: polygon(0 58%, 100% 58%, 100% 100%, 0 100%); }
 }
