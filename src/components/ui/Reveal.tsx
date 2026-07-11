@@ -15,8 +15,7 @@ export function Reveal({ children, className }: RevealProps) {
     const element = ref.current;
     if (!element) return;
 
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mediaQuery.matches || !("IntersectionObserver" in window)) return;
+    if (!("IntersectionObserver" in window)) return;
 
     const rect = element.getBoundingClientRect();
     const isAlreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
