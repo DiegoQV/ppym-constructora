@@ -34,7 +34,7 @@ export function Hero() {
   const advisoryUrl = createWhatsAppUrl(company.phone, "Hola, quisiera solicitar asesoría técnica.");
 
   return (
-    <section id="inicio" className="relative isolate flex min-h-[760px] overflow-hidden bg-charcoal pb-16 pt-30 text-white sm:min-h-[800px] sm:pt-36 lg:min-h-[850px] lg:items-center lg:py-32">
+    <section id="inicio" className="hero-shell relative isolate flex min-h-[760px] overflow-hidden bg-charcoal pb-16 pt-30 text-white sm:min-h-[800px] sm:pt-36 lg:min-h-[850px] lg:items-center lg:py-32">
       <Image
         src="/images/hero/ppym-large-construction-team-right-v4.png"
         alt=""
@@ -50,20 +50,20 @@ export function Hero() {
 
       <Container className="relative">
         <div className="max-w-[47rem]">
-          <p className="hero-enter mb-7 flex max-w-xl items-start gap-3 text-[11px] font-bold uppercase leading-5 tracking-[0.15em] text-technical-yellow sm:mb-8 sm:text-xs">
+          <p className="hero-eyebrow hero-enter mb-7 flex max-w-xl items-start gap-3 text-[11px] font-bold uppercase leading-5 tracking-[0.15em] text-technical-yellow sm:mb-8 sm:text-xs">
             <span className="mt-2 h-px w-8 shrink-0 bg-technical-yellow" />
             Ingeniería, construcción y consultoría técnica
           </p>
-          <h1 className="max-w-[11.5ch] font-heading text-[clamp(2.5rem,11.7vw,3.15rem)] font-bold leading-[1.04] tracking-[-0.052em] text-white sm:text-[clamp(3.15rem,6.5vw,5.45rem)] md:leading-[1] lg:leading-[0.96]">
+          <h1 className="hero-title max-w-[11.5ch] font-heading text-[clamp(2.5rem,11.7vw,3.15rem)] font-bold leading-[1.04] tracking-[-0.052em] text-white sm:text-[clamp(3.15rem,6.5vw,5.45rem)] md:leading-[1] lg:leading-[0.96]">
             <span className="hero-title-mask-v2 block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-1 block whitespace-nowrap">Soluciones</span></span>
             <span className="hero-title-mask-v2 block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-2 block whitespace-nowrap">técnicas para</span></span>
             <span className="hero-title-mask-v2 block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-3 block whitespace-nowrap"><span className="cement-fill" data-text="construir">construir</span> con</span></span>
             <span className="hero-title-mask-v2 hero-title-mask-descender block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-4 block whitespace-nowrap">seguridad.</span></span>
           </h1>
-          <p className="hero-enter hero-enter-delay-2 mt-7 max-w-[42rem] text-base leading-7 text-white/88 sm:text-lg sm:leading-8">
+          <p className="hero-description hero-enter hero-enter-delay-2 mt-7 max-w-[42rem] text-base leading-7 text-white/88 sm:text-lg sm:leading-8">
             Saneamiento físico-legal, expedientes para licencias, elaboración de planos, topografía y construcción en Chachapoyas y la región Amazonas.
           </p>
-          <div className="hero-enter hero-enter-delay-3 mt-6 inline-flex max-w-full items-start gap-3.5 border border-white/14 border-l-2 border-l-technical-yellow/80 bg-charcoal/58 px-3.5 py-3 text-left shadow-[0_8px_24px_rgba(0,0,0,.14)] backdrop-blur-md sm:px-4">
+          <div className="hero-trust hero-enter hero-enter-delay-3 mt-6 inline-flex max-w-full items-start gap-3.5 border border-white/14 border-l-2 border-l-technical-yellow/80 bg-charcoal/58 px-3.5 py-3 text-left shadow-[0_8px_24px_rgba(0,0,0,.14)] backdrop-blur-md sm:px-4">
             <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0 text-technical-yellow" />
             <div className="min-w-0">
               <strong className="block text-xs font-semibold leading-5 text-white/95">{technicalEntity.label}</strong>
@@ -74,7 +74,7 @@ export function Hero() {
               </p>
             </div>
           </div>
-          <div className="hero-enter hero-enter-delay-4 mt-8 flex flex-col gap-3 min-[430px]:flex-row">
+          <div className="hero-actions hero-enter hero-enter-delay-4 mt-8 flex flex-col gap-3 min-[430px]:flex-row">
             <span className="block w-full min-[430px]:w-auto">
               <Button href={advisoryUrl} className="min-h-12 w-full px-6 shadow-[0_10px_28px_rgba(231,185,40,.2)]" aria-label="Solicitar asesoría técnica por WhatsApp">
                 <MessageCircle aria-hidden size={17} /> Solicitar asesoría técnica

@@ -23,7 +23,7 @@ export function About() {
     <section
       id="nosotros"
       aria-labelledby="about-title"
-      className="relative scroll-mt-20 overflow-hidden bg-[#ebeae5] py-24 text-charcoal sm:py-28 lg:scroll-mt-24 lg:py-32"
+      className="about-section relative scroll-mt-20 overflow-hidden bg-[#ebeae5] py-24 text-charcoal sm:py-28 lg:scroll-mt-24 lg:py-32"
     >
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-charcoal/14" />
       <div aria-hidden className="absolute -right-28 top-40 size-[34rem] rounded-full border border-charcoal/[.045]" />
@@ -40,34 +40,48 @@ export function About() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-14 lg:grid-cols-[1.12fr_.88fr] lg:items-start lg:gap-20 xl:gap-28">
+        <div className="about-layout mt-14 grid gap-14 lg:grid-cols-[1.12fr_.88fr] lg:items-start lg:gap-20 xl:gap-28">
           <Reveal className="about-collage order-2 lg:order-1 lg:pt-0.5">
             <div className="grid grid-cols-[1.08fr_.92fr] gap-3 sm:gap-5">
-              <figure className="about-photo-frame about-photo-frame-1 relative min-h-[500px] overflow-hidden bg-charcoal sm:min-h-[650px]">
+              <figure className="about-photo-interactive about-photo-frame about-photo-frame-1 about-photo-primary relative min-h-[500px] overflow-hidden bg-charcoal sm:min-h-[650px]">
                 <Image
                   src="/images/about/ppym-supervision-chachapoyas-v3.webp"
                   alt="Escena conceptual de supervisión profesional en una obra de Chachapoyas"
                   fill
                   sizes="(min-width: 1280px) 360px, (min-width: 1024px) 30vw, 54vw"
-                  className="object-cover object-[52%_center]"
+                  className="about-photo-image object-cover object-[52%_center]"
                 />
                 <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(17,19,21,.62)_100%)]" />
-                <span className="absolute bottom-4 left-4 bg-charcoal/80 px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.16em] text-white/64 backdrop-blur-sm sm:bottom-5 sm:left-5">
+                <div aria-hidden className="about-photo-weave absolute inset-0 z-[1]" />
+                <div aria-hidden className="about-photo-lines absolute inset-0 z-[2]">
+                  <span className="about-photo-line about-photo-line-top-left" />
+                  <span className="about-photo-line about-photo-line-top-right" />
+                  <span className="about-photo-line about-photo-line-bottom-left" />
+                  <span className="about-photo-line about-photo-line-bottom-right" />
+                </div>
+                <span className="absolute bottom-4 left-4 z-[3] bg-charcoal/80 px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.16em] text-white/64 backdrop-blur-sm sm:bottom-5 sm:left-5">
                   Imagen conceptual
                 </span>
               </figure>
 
               <div className="grid grid-rows-[1fr_auto] gap-3 sm:gap-5">
-                <figure className="about-photo-frame about-photo-frame-2 relative min-h-[330px] overflow-hidden bg-charcoal sm:min-h-[450px]">
+                <figure className="about-photo-interactive about-photo-frame about-photo-frame-2 about-photo-secondary relative min-h-[330px] overflow-hidden bg-charcoal sm:min-h-[450px]">
                   <Image
                     src="/images/about/ppym-vivienda-andina-v3.webp"
                     alt="Propuesta conceptual de vivienda contemporánea adaptada al entorno andino"
                     fill
                     sizes="(min-width: 1280px) 310px, (min-width: 1024px) 27vw, 46vw"
-                    className="object-cover object-[56%_center]"
+                    className="about-photo-image object-cover object-[56%_center]"
                   />
                   <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,transparent_60%,rgba(17,19,21,.38)_100%)]" />
-                  <span className="absolute bottom-4 right-4 bg-charcoal/80 px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.16em] text-white/64 backdrop-blur-sm sm:bottom-5 sm:right-5">
+                  <div aria-hidden className="about-photo-weave absolute inset-0 z-[1]" />
+                  <div aria-hidden className="about-photo-lines absolute inset-0 z-[2]">
+                    <span className="about-photo-line about-photo-line-top-left" />
+                    <span className="about-photo-line about-photo-line-top-right" />
+                    <span className="about-photo-line about-photo-line-bottom-left" />
+                    <span className="about-photo-line about-photo-line-bottom-right" />
+                  </div>
+                  <span className="absolute bottom-4 right-4 z-[3] bg-charcoal/80 px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.16em] text-white/64 backdrop-blur-sm sm:bottom-5 sm:right-5">
                     Visual conceptual
                   </span>
                 </figure>
@@ -114,7 +128,7 @@ export function About() {
             </p>
             <h2
               id="about-title"
-              className="mt-6 max-w-[9ch] font-heading text-[clamp(3.5rem,6vw,5.6rem)] font-bold leading-[.92] tracking-[-0.065em]"
+              className="about-title mt-6 max-w-[9ch] font-heading text-[clamp(3.5rem,6vw,5.6rem)] font-bold leading-[.92] tracking-[-0.065em]"
             >
               Somos PPYM.
             </h2>

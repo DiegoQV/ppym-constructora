@@ -6,17 +6,17 @@ import { services } from "@/data/services";
 
 export function Services() {
   return (
-    <section id="servicios" aria-labelledby="services-title" className="relative scroll-mt-20 bg-warm-white py-24 sm:py-28 lg:scroll-mt-24 lg:py-36">
+    <section id="servicios" aria-labelledby="services-title" className="services-section relative scroll-mt-20 bg-warm-white py-24 sm:py-28 lg:scroll-mt-24 lg:py-36">
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-charcoal/12" />
       <Container>
-        <div className="grid gap-14 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20 xl:gap-28">
+        <div className="services-layout grid gap-14 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20 xl:gap-28">
           <header className="lg:sticky lg:top-32 lg:self-start">
             <p className="mb-7 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-gray">
               <span className="h-px w-8 bg-technical-yellow" />
               02 / Servicios
             </p>
             <Reveal className="services-heading max-w-[32rem]">
-              <h2 id="services-title" className="font-heading text-[clamp(2.75rem,5.35vw,5.25rem)] font-bold leading-[0.94] tracking-[-0.06em] text-charcoal">
+              <h2 id="services-title" className="services-title font-heading text-[clamp(2.75rem,5.35vw,5.25rem)] font-bold leading-[0.94] tracking-[-0.06em] text-charcoal">
                 <span className="services-heading-mask block overflow-hidden"><span className="services-heading-line services-heading-line-1 block whitespace-nowrap">Del predio</span></span>
                 <span className="services-heading-mask block overflow-hidden"><span className="services-heading-line services-heading-line-2 block whitespace-nowrap">al proyecto.</span></span>
               </h2>
