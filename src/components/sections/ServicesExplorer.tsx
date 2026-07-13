@@ -30,12 +30,6 @@ export function ServicesExplorer({ services, phone }: ServicesExplorerProps) {
   const selectService = (serviceId: string) => {
     if (serviceId === activeId || transitionPhase === "exiting") return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setActiveId(serviceId);
-      setTransitionPhase("idle");
-      return;
-    }
-
     if (settleTimer.current) clearTimeout(settleTimer.current);
     setTransitionPhase("exiting");
 
