@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { company } from "@/data/company";
@@ -30,7 +30,7 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className={cn("fixed inset-x-0 top-0 z-50 border-b transition duration-300", scrolled || open ? "border-white/10 bg-charcoal/95 shadow-[0_8px_30px_rgba(0,0,0,.14)] backdrop-blur-md" : "border-transparent bg-transparent")}>
+    <header className={cn("fixed inset-x-0 top-0 z-50 border-b transition duration-300", scrolled || open ? "border-white/10 bg-charcoal/95 shadow-[0_8px_30px_rgba(0,0,0,.14)] backdrop-blur-md" : "border-transparent bg-charcoal/20 backdrop-blur-[2px]")}>
       <Container className="flex h-20 items-center justify-between lg:h-24">
         <a href="#inicio" className="group relative flex min-h-11 items-center text-white transition duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow" aria-label={`${company.shortName}, ir al inicio`}>
           <span aria-hidden className="absolute -inset-x-2 inset-y-1 -z-10 border-b border-technical-yellow/0 bg-white/0 transition duration-300 group-hover:border-technical-yellow/65 group-hover:bg-white/[.035]" />
@@ -41,16 +41,23 @@ export function Navbar() {
               fill
               priority
               sizes="144px"
-              className="scale-[1.22] object-contain brightness-110 drop-shadow-[0_2px_1px_rgba(255,255,255,.18)] drop-shadow-[0_6px_14px_rgba(0,0,0,.65)] transition duration-300 group-hover:scale-[1.26]"
+              className="scale-[1.16] object-contain brightness-105 drop-shadow-[0_5px_12px_rgba(0,0,0,.5)] transition duration-300 group-hover:scale-[1.2]"
             />
           </span>
           <span className="sr-only">{company.legalName}</span>
         </a>
 
         <nav aria-label="Navegación principal" className="hidden items-center gap-1 lg:flex">
-          {navigation.map((item) => <a key={item.href} href={item.href} className="inline-flex min-h-11 items-center px-3 text-[15px] font-medium text-white/72 transition hover:text-white focus-visible:outline-2 focus-visible:outline-technical-yellow">{item.label}</a>)}
+          {navigation.map((item) => <a key={item.href} href={item.href} className="inline-flex min-h-11 items-center px-3 text-base font-medium tracking-[0.02em] text-white/88 transition hover:text-white focus-visible:outline-2 focus-visible:outline-technical-yellow">{item.label}</a>)}
         </nav>
-        <div className="hidden lg:block"><Button href={advisoryUrl} className="min-w-40" aria-label="Solicitar asesoría por WhatsApp">Solicitar asesoría</Button></div>
+        <a
+          href={advisoryUrl}
+          aria-label="Contactar a PPYM por WhatsApp"
+          className="group hidden min-h-11 items-center gap-2 border-b border-white/35 px-1 text-sm font-semibold text-white/90 transition hover:border-technical-yellow hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow lg:inline-flex"
+        >
+          Contactar
+          <ArrowUpRight aria-hidden className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </a>
 
         <button type="button" className="grid size-11 place-items-center text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-technical-yellow lg:hidden" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((value) => !value)}>{open ? <X aria-hidden /> : <Menu aria-hidden />}</button>
       </Container>
