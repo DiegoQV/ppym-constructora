@@ -16,23 +16,50 @@ const projects = [
 
 export function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [headingArmed, setHeadingArmed] = useState(false);
   const [headingVisible, setHeadingVisible] = useState(false);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
+    const heading = headingRef.current;
+    if (!heading) return;
+    setHeadingArmed(true);
+
+    let frame = 0;
+    const activateIfVisible = () => {
+      const rect = heading.getBoundingClientRect();
+      if (rect.top > window.innerHeight * 0.86 || rect.bottom < window.innerHeight * 0.08) return;
       setHeadingVisible(true);
-      observer.disconnect();
-    }, { threshold: 0.22 });
-    observer.observe(section);
-    return () => observer.disconnect();
+    };
+    const scheduleCheck = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(activateIfVisible);
+    };
+
+    const observer = "IntersectionObserver" in window
+      ? new IntersectionObserver(([entry]) => {
+          if (!entry.isIntersecting) return;
+          setHeadingVisible(true);
+          observer?.disconnect();
+        }, { threshold: 0.35, rootMargin: "-5% 0px -15% 0px" })
+      : null;
+
+    observer?.observe(heading);
+    window.addEventListener("scroll", scheduleCheck, { passive: true });
+    window.addEventListener("resize", scheduleCheck, { passive: true });
+    scheduleCheck();
+
+    return () => {
+      observer?.disconnect();
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleCheck);
+      window.removeEventListener("resize", scheduleCheck);
+    };
   }, []);
 
   return (
-    <section ref={sectionRef} id="proyectos" aria-labelledby="projects-title" className={cn("projects-section relative scroll-mt-20 overflow-hidden bg-charcoal py-20 text-white lg:h-[calc(100svh-5.9rem)] lg:min-h-[780px] lg:scroll-mt-24 lg:py-8", headingVisible && "heading-visible")}>
+    <section ref={sectionRef} id="proyectos" aria-labelledby="projects-title" className={cn("projects-section relative scroll-mt-20 overflow-hidden bg-charcoal py-20 text-white lg:h-[calc(100svh-5.9rem)] lg:min-h-[780px] lg:scroll-mt-24 lg:py-8", headingArmed && "heading-armed", headingVisible && "heading-visible")}>
       <div aria-hidden className="technical-grid absolute inset-0 opacity-20" />
       <Container className="relative lg:flex lg:h-full lg:flex-col">
         <div className="flex items-center justify-between gap-6 border-b border-white/15 pb-4">
@@ -43,7 +70,7 @@ export function Projects() {
         <div className="grid items-end gap-6 py-7 lg:grid-cols-[1fr_.75fr]">
           <div>
             <p className="font-mono text-[9px] uppercase tracking-[.2em] text-technical-yellow">Cinco hipótesis de proyecto</p>
-            <h2 id="projects-title" className="project-heading mt-3 max-w-[16ch] font-heading text-[clamp(3.2rem,5vw,5.8rem)] font-bold leading-[.9] tracking-[-.07em]">
+            <h2 ref={headingRef} id="projects-title" className="project-heading mt-3 max-w-[16ch] font-heading text-[clamp(3.2rem,5vw,5.8rem)] font-bold leading-[.9] tracking-[-.07em]">
               <span className="project-heading-mask"><span className="project-heading-line">El lugar cambia.</span></span>
               <span className="project-heading-mask"><span className="project-heading-line">La respuesta</span></span>
               <span className="project-heading-mask project-heading-mask-accent"><span className="project-heading-line">también.</span></span>

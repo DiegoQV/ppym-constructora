@@ -153,6 +153,11 @@ html { scroll-behavior: smooth; }
   to { transform: scaleX(1); }
 }
 
+@keyframes project-heading-reduced {
+  from { opacity: .35; }
+  to { opacity: 1; }
+}
+
 .hero-photo-enter { transform-origin: 70% 50%; }
 .hero-photo-enter { animation: hero-photo-enter 1.25s cubic-bezier(.2, .7, .2, 1) both; }
 .hero-enter { animation: hero-enter .65s ease-out both; }
@@ -534,10 +539,11 @@ html { scroll-behavior: smooth; }
 }
 .project-heading-line {
   display: block;
-  opacity: 0;
-  transform: translateY(112%);
+  opacity: 1;
+  transform: none;
   will-change: transform, opacity;
 }
+.projects-section.heading-armed:not(.heading-visible) .project-heading-line { opacity: 0; transform: translateY(112%); }
 .projects-section.heading-visible .project-heading-line { animation: project-heading-rise .82s cubic-bezier(.16, 1, .3, 1) both; }
 .projects-section.heading-visible .project-heading-mask:nth-child(2) .project-heading-line { animation-delay: .12s; }
 .projects-section.heading-visible .project-heading-mask:nth-child(3) .project-heading-line { animation-delay: .24s; }
@@ -760,4 +766,15 @@ html { scroll-behavior: smooth; }
 
   .geometry-overlay { display: none; }
   .differentiators-motion .type-line-v3 { clip-path: none; }
+
+  .projects-section.heading-armed:not(.heading-visible) .project-heading-line { opacity: .35; transform: none; }
+  .projects-section.heading-visible .project-heading-line {
+    animation: project-heading-reduced .28s ease-out both !important;
+  }
+  .projects-section.heading-visible .project-heading-mask:nth-child(2) .project-heading-line { animation-delay: .06s !important; }
+  .projects-section.heading-visible .project-heading-mask:nth-child(3) .project-heading-line { animation-delay: .12s !important; }
+  .projects-section.heading-visible .project-heading-mask-accent::after { animation-duration: .22s !important; animation-delay: .14s !important; }
+  .project-blade { transition: flex .3s ease, filter .2s ease !important; }
+  .project-blade-image { transform: none !important; transition: filter .25s ease !important; }
+  .project-blade-content { transform: none !important; transition: opacity .2s ease .08s !important; }
 }
