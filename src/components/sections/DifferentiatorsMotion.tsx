@@ -25,23 +25,36 @@ export function DifferentiatorsMotion() {
     const element = rootRef.current;
     if (!element) return;
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion || !("IntersectionObserver" in window)) {
-      const frame = window.requestAnimationFrame(() => setActive(true));
-      return () => window.cancelAnimationFrame(frame);
-    }
+    let frame = 0;
+    const activate = () => setActive(true);
+    const checkPosition = () => {
+      const rect = element.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.86 && rect.bottom > window.innerHeight * 0.08) activate();
+    };
+    const scheduleCheck = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(checkPosition);
+    };
 
-    const observer = new IntersectionObserver(
+    const observer = "IntersectionObserver" in window ? new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
-        setActive(true);
-        observer.disconnect();
+        activate();
+        observer?.disconnect();
       },
-      { threshold: 0.28 },
-    );
+      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
+    ) : null;
 
-    observer.observe(element);
-    return () => observer.disconnect();
+    observer?.observe(element);
+    window.addEventListener("scroll", scheduleCheck, { passive: true });
+    window.addEventListener("resize", scheduleCheck, { passive: true });
+    scheduleCheck();
+    return () => {
+      observer?.disconnect();
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleCheck);
+      window.removeEventListener("resize", scheduleCheck);
+    };
   }, []);
 
   useEffect(() => {

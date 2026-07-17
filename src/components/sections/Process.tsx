@@ -34,13 +34,35 @@ export function Process() {
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
+
+    let frame = 0;
+    const activate = () => {
       setAssembled(true);
-      observer.disconnect();
-    }, { threshold: 0.18 });
-    observer.observe(stage);
-    return () => observer.disconnect();
+    };
+    const checkPosition = () => {
+      const rect = stage.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.88 && rect.bottom > window.innerHeight * 0.08) activate();
+    };
+    const scheduleCheck = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(checkPosition);
+    };
+    const observer = "IntersectionObserver" in window ? new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      activate();
+      observer?.disconnect();
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }) : null;
+
+    observer?.observe(stage);
+    window.addEventListener("scroll", scheduleCheck, { passive: true });
+    window.addEventListener("resize", scheduleCheck, { passive: true });
+    scheduleCheck();
+    return () => {
+      observer?.disconnect();
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleCheck);
+      window.removeEventListener("resize", scheduleCheck);
+    };
   }, []);
 
   return (
