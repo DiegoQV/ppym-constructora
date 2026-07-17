@@ -737,6 +737,5 @@ html { scroll-behavior: smooth; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .whatsapp-attention,
-  .cement-fill::before { animation: none !important; }
+  .whatsapp-attention { animation: none !important; }
 }
