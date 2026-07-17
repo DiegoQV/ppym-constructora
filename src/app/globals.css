@@ -737,45 +737,6 @@ html { scroll-behavior: smooth; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: .22s !important;
-    animation-delay: 0ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: .18s !important;
-    transition-delay: 0ms !important;
-  }
-
-  .reveal-pending,
-  .differentiators-scene.reveal-pending .differentiators-copy,
-  .differentiators-sequence.reveal-pending .differentiator-step {
-    opacity: 1;
-    transform: none;
-  }
-
-  .differentiators-scene.reveal-pending .differentiators-image {
-    filter: none;
-    transform: none;
-  }
-
-  .differentiators-sequence.reveal-pending .differentiators-sequence-line { transform: none; }
-  .process-journey.reveal-pending .process-journey-line,
-  .process-journey.reveal-pending .process-step { opacity: 1; transform: none; }
-
-  .geometry-overlay { display: none; }
-  .differentiators-motion .type-line-v3 { clip-path: none; }
-
-  .projects-section.heading-armed:not(.heading-visible) .project-heading-line { opacity: .35; transform: none; }
-  .projects-section.heading-visible .project-heading-line {
-    animation: project-heading-reduced .28s ease-out both !important;
-  }
-  .projects-section.heading-visible .project-heading-mask:nth-child(2) .project-heading-line { animation-delay: .06s !important; }
-  .projects-section.heading-visible .project-heading-mask:nth-child(3) .project-heading-line { animation-delay: .12s !important; }
-  .projects-section.heading-visible .project-heading-mask-accent::after { animation-duration: .22s !important; animation-delay: .14s !important; }
-  .project-blade { transition: flex .3s ease, filter .2s ease !important; }
-  .project-blade-image { transform: none !important; transition: filter .25s ease !important; }
-  .project-blade-content { transform: none !important; transition: opacity .2s ease .08s !important; }
+  .whatsapp-attention,
+  .cement-fill::before { animation: none !important; }
 }
