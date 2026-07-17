@@ -33,7 +33,7 @@ export function About() {
         <div className="flex items-center justify-between gap-6 border-b border-charcoal/15 pb-6">
           <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-gray">
             <span className="h-px w-8 bg-technical-yellow" />
-            03 / Nosotros
+            02 / Nosotros
           </p>
           <p className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-text-gray/65 sm:block">
             Chachapoyas · Amazonas

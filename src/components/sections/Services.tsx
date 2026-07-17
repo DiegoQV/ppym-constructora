@@ -13,7 +13,7 @@ export function Services() {
           <header className="lg:sticky lg:top-32 lg:self-start">
             <p className="mb-7 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-gray">
               <span className="h-px w-8 bg-technical-yellow" />
-              02 / Servicios
+              03 / Servicios
             </p>
             <Reveal className="services-heading max-w-[32rem]">
               <h2 id="services-title" className="services-title font-heading text-[clamp(2.75rem,5.35vw,5.25rem)] font-bold leading-[0.94] tracking-[-0.06em] text-charcoal">
