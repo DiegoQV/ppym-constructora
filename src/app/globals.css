@@ -799,6 +799,10 @@ html { scroll-behavior: smooth; }
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) {
+  .hero-copy { max-width: 43rem; }
+  .hero-description { max-width: 39rem; }
+  .hero-photo { object-position: center 47%; }
+
   .services-section { padding-block: 7rem; }
   .services-layout { gap: 4rem; }
   .services-title { font-size: clamp(3.5rem, 5.1vw, 4.4rem); }
@@ -880,6 +884,27 @@ html { scroll-behavior: smooth; }
   .equipment-panel-enter .my-auto { padding-block: .35rem; }
   .equipment-panel-enter .mt-4 { margin-top: .6rem; }
   .equipment-panel-enter .py-2 { padding-block: .35rem; }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) and (max-height: 840px) {
+  .hero-shell { padding-block: 6.6rem 3rem; }
+  .hero-copy { transform: translateY(-.35rem); }
+  .hero-title {
+    font-size: clamp(3.35rem, 8.25vh, 4.05rem);
+    line-height: .95;
+  }
+  .hero-eyebrow { margin-bottom: 1rem; }
+  .hero-description {
+    margin-top: 1rem;
+    max-width: 38rem;
+    font-size: .95rem;
+    line-height: 1.55;
+  }
+  .hero-trust {
+    margin-top: .85rem;
+    padding-block: .55rem;
+  }
+  .hero-actions { margin-top: 1rem; }
 }
 
 @media (min-width: 1180px) and (max-width: 1439px) and (max-height: 840px) {
