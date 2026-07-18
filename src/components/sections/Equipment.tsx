@@ -80,7 +80,7 @@ export function Equipment() {
           <p className="hidden font-mono text-[8px] uppercase tracking-[.2em] text-text-gray/60 sm:block">Equipo · criterio · coordinación</p>
         </div>
 
-        <Reveal className="mb-5 mt-6 grid items-end gap-5 sm:mb-6 sm:mt-7 lg:mb-7 lg:grid-cols-[1fr_.72fr] lg:gap-6">
+        <Reveal className="equipment-heading-block mb-5 mt-6 grid items-end gap-5 sm:mb-6 sm:mt-7 lg:mb-7 lg:grid-cols-[1fr_.72fr] lg:gap-6">
           <div>
             <p className="font-mono text-[9px] uppercase tracking-[.2em] text-text-gray">Recursos que responden</p>
             <h2 ref={headingRef} id="equipment-title" className="equipment-heading mt-3 max-w-[14ch] font-heading text-[clamp(3.25rem,5.2vw,5.7rem)] font-bold leading-[.88] tracking-[-.075em]">

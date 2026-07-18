@@ -67,7 +67,7 @@ export function Projects() {
           <p className="hidden font-mono text-[8px] uppercase tracking-[.2em] text-white/35 sm:block">Colección referencial · Amazonas</p>
         </div>
 
-        <div className="grid items-end gap-6 py-7 lg:grid-cols-[1fr_.75fr]">
+        <div className="projects-heading-block grid items-end gap-6 py-7 lg:grid-cols-[1fr_.75fr]">
           <div>
             <p className="font-mono text-[9px] uppercase tracking-[.2em] text-technical-yellow">Cinco hipótesis de proyecto</p>
             <h2 ref={headingRef} id="projects-title" className="project-heading mt-3 max-w-[16ch] font-heading text-[clamp(3.2rem,5vw,5.8rem)] font-bold leading-[.9] tracking-[-.07em]">
@@ -107,8 +107,8 @@ export function Projects() {
                   <span className="font-mono text-[8px] uppercase tracking-[.18em] text-technical-yellow">{project.location} · {project.scope}</span>
                   <span className="mt-4 flex items-end justify-between gap-8">
                     <span>
-                      <span className="block font-heading text-[clamp(2.8rem,4.4vw,5rem)] font-semibold leading-[.9] tracking-[-.065em]">{project.name}</span>
-                      <span className="mt-5 block max-w-xl text-base leading-7 text-white/72 sm:text-lg">{project.description}</span>
+                      <span className="project-blade-title block font-heading text-[clamp(2.8rem,4.4vw,5rem)] font-semibold leading-[.9] tracking-[-.065em]">{project.name}</span>
+                      <span className="project-blade-description mt-5 block max-w-xl text-base leading-7 text-white/72 sm:text-lg">{project.description}</span>
                     </span>
                     <span className="hidden size-12 shrink-0 place-items-center border border-white/35 text-technical-yellow sm:grid"><ArrowUpRight aria-hidden className="size-5" /></span>
                   </span>

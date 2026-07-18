@@ -73,7 +73,7 @@ export function Process() {
           <p className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-text-gray/60 sm:block">Del primer dato al resultado</p>
         </div>
 
-        <div className="mb-7 mt-7 grid items-end gap-6 lg:grid-cols-[1fr_.72fr]">
+        <div className="process-heading-block mb-7 mt-7 grid items-end gap-6 lg:grid-cols-[1fr_.72fr]">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-gray">Método PPYM</p>
             <h2 id="process-title" className="mt-3 max-w-[15ch] font-heading text-[clamp(3.2rem,5vw,5.6rem)] font-bold leading-[.9] tracking-[-0.07em]">Decidir antes de construir.</h2>
@@ -101,10 +101,10 @@ export function Process() {
               <div><p className="font-mono text-[9px] uppercase tracking-[.2em] text-white/45">Etapa {activeStage.number} / 05</p><p className="mt-1 font-mono text-[10px] uppercase tracking-[.2em] text-technical-yellow">{activeStage.action}</p></div>
             </div>
 
-            <div className="my-auto py-10">
-              <p aria-hidden className="font-heading text-[clamp(5rem,8vw,8rem)] font-bold leading-[.72] tracking-[-.08em] text-white/[.08]">{activeStage.number}</p>
-              <h3 className="mt-5 max-w-[10ch] font-heading text-[clamp(2.7rem,4.2vw,4.8rem)] font-semibold leading-[.9] tracking-[-.065em]">{activeStage.title}</h3>
-              <p className="mt-5 max-w-md text-base leading-7 text-white/68 lg:text-[1.05rem]">{activeStage.description}</p>
+            <div className="process-story-copy my-auto py-10">
+              <p aria-hidden className="process-story-number font-heading text-[clamp(5rem,8vw,8rem)] font-bold leading-[.72] tracking-[-.08em] text-white/[.08]">{activeStage.number}</p>
+              <h3 className="process-story-title mt-5 max-w-[10ch] font-heading text-[clamp(2.7rem,4.2vw,4.8rem)] font-semibold leading-[.9] tracking-[-.065em]">{activeStage.title}</h3>
+              <p className="process-story-description mt-5 max-w-md text-base leading-7 text-white/68 lg:text-[1.05rem]">{activeStage.description}</p>
             </div>
 
             <div className="flex items-center justify-between gap-6 border-t border-white/20 pt-5 font-mono text-[8px] uppercase tracking-[.18em]"><span className="text-white/38">Resultado de etapa</span><span className="text-right text-technical-yellow">{activeStage.output}</span></div>

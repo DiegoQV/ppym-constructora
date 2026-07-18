@@ -834,6 +834,52 @@ html { scroll-behavior: smooth; }
     padding-block: .65rem;
   }
   .hero-actions { margin-top: 1.2rem; }
+
+  .process-cinema,
+  .projects-section,
+  .equipment-section {
+    height: calc(100svh - 5.9rem);
+    min-height: 620px;
+    padding-block: 1.25rem;
+  }
+
+  .process-heading-block,
+  .equipment-heading-block {
+    margin-block: .8rem;
+  }
+  .projects-heading-block { padding-block: .8rem; }
+
+  .process-heading-block h2,
+  .project-heading,
+  .equipment-heading {
+    margin-top: .45rem;
+    font-size: clamp(2.65rem, 6.2vh, 3.25rem);
+    line-height: .9;
+  }
+
+  .process-heading-block p,
+  .projects-heading-block p,
+  .equipment-heading-block p { line-height: 1.4; }
+
+  .process-story-panel { padding: 1.25rem 1.75rem; }
+  .process-story-copy { padding-block: .35rem; }
+  .process-story-number { font-size: 3.5rem; }
+  .process-story-title { margin-top: .55rem; font-size: clamp(2.1rem, 5.2vh, 2.65rem); }
+  .process-story-description { margin-top: .65rem; font-size: .92rem; line-height: 1.45; }
+  .process-cinema-tab { padding-block: .6rem; }
+  .process-cinema-tab > span:last-child { margin-top: .4rem; font-size: .9rem; }
+
+  .project-blade-content { padding: 1.5rem 1.75rem; }
+  .project-blade-title { font-size: clamp(2.25rem, 5.5vh, 2.8rem); }
+  .project-blade-description { margin-top: .75rem; font-size: .92rem; line-height: 1.45; }
+
+  .equipment-tab { min-height: 3.75rem; padding-block: .35rem; }
+  .equipment-console { grid-template-columns: minmax(0, 1fr) 20rem; }
+  .equipment-panel-enter { padding: 1rem 1.25rem; }
+  .equipment-panel-enter h3 { font-size: 2.1rem; }
+  .equipment-panel-enter .my-auto { padding-block: .35rem; }
+  .equipment-panel-enter .mt-4 { margin-top: .6rem; }
+  .equipment-panel-enter .py-2 { padding-block: .35rem; }
 }
 
 .cement-fill {
