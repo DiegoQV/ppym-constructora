@@ -838,7 +838,7 @@ html { scroll-behavior: smooth; }
   .process-cinema,
   .projects-section,
   .equipment-section {
-    height: calc(100svh - 5.9rem);
+    height: calc(100svh - 5rem);
     min-height: 620px;
     padding-block: 1.25rem;
   }
@@ -880,6 +880,21 @@ html { scroll-behavior: smooth; }
   .equipment-panel-enter .my-auto { padding-block: .35rem; }
   .equipment-panel-enter .mt-4 { margin-top: .6rem; }
   .equipment-panel-enter .py-2 { padding-block: .35rem; }
+}
+
+@media (min-width: 1180px) and (max-width: 1439px) and (max-height: 840px) {
+  .navbar-container { height: 5rem; }
+  .navbar-logo { width: 8rem; height: 4.25rem; }
+
+  #nosotros,
+  #servicios,
+  #diferenciadores,
+  #proceso,
+  #proyectos,
+  #equipos,
+  #contacto {
+    scroll-margin-top: 5rem;
+  }
 }
 
 .cement-fill {

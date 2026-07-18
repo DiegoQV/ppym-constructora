@@ -31,10 +31,10 @@ export function Navbar() {
 
   return (
     <header className={cn("fixed inset-x-0 top-0 z-50 border-b transition duration-300", scrolled || open ? "border-white/10 bg-charcoal/95 shadow-[0_8px_30px_rgba(0,0,0,.14)] backdrop-blur-md" : "border-transparent bg-charcoal/20 backdrop-blur-[2px]")}>
-      <Container className="flex h-20 items-center justify-between min-[1180px]:h-24">
+      <Container className="navbar-container flex h-20 items-center justify-between min-[1180px]:h-24">
         <a href="#inicio" className="group relative flex min-h-11 items-center text-white transition duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow" aria-label={`${company.shortName}, ir al inicio`}>
           <span aria-hidden className="absolute -inset-x-2 inset-y-1 -z-10 border-b border-technical-yellow/0 bg-white/0 transition duration-300 group-hover:border-technical-yellow/65 group-hover:bg-white/[.035]" />
-          <span className="relative block h-17 w-32 overflow-hidden sm:h-19 sm:w-36">
+          <span className="navbar-logo relative block h-17 w-32 overflow-hidden sm:h-19 sm:w-36">
             <Image
               src="/logo/ppym-logo-navbar-inverse.png"
               alt=""
