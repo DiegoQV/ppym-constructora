@@ -801,10 +801,20 @@ html { scroll-behavior: smooth; }
 @media (min-width: 1024px) and (max-width: 1439px) {
   .hero-copy {
     max-width: 43rem;
-    margin-left: clamp(2rem, 3vw, 2.75rem);
+    margin-left: clamp(6rem, 9vw, 8.5rem);
   }
-  .hero-description { max-width: 39rem; }
+  .hero-description { max-width: 34rem; }
   .hero-photo { object-position: center 47%; }
+  .hero-primary-gradient {
+    background-image: linear-gradient(
+      90deg,
+      rgba(4, 9, 12, .97) 0%,
+      rgba(4, 9, 12, .92) 34%,
+      rgba(4, 9, 12, .62) 52%,
+      rgba(4, 9, 12, .2) 70%,
+      rgba(4, 9, 12, .04) 100%
+    );
+  }
 
   .services-section { padding-block: 7rem; }
   .services-layout { gap: 4rem; }
@@ -899,7 +909,7 @@ html { scroll-behavior: smooth; }
   .hero-eyebrow { margin-bottom: 1rem; }
   .hero-description {
     margin-top: 1rem;
-    max-width: 38rem;
+    max-width: 34rem;
     font-size: .95rem;
     line-height: 1.55;
   }

@@ -43,7 +43,7 @@ export function Hero() {
         sizes="100vw"
         className="hero-photo hero-photo-enter -z-30 object-cover object-[73%_center] sm:object-[68%_center] lg:object-center"
       />
-      <div aria-hidden className="absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(4,9,12,.96)_0%,rgba(4,9,12,.88)_30%,rgba(4,9,12,.42)_56%,rgba(4,9,12,.04)_100%)] max-lg:bg-[linear-gradient(180deg,rgba(4,9,12,.96)_0%,rgba(4,9,12,.86)_55%,rgba(4,9,12,.48)_100%)]" />
+      <div aria-hidden className="hero-primary-gradient absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(4,9,12,.96)_0%,rgba(4,9,12,.88)_30%,rgba(4,9,12,.42)_56%,rgba(4,9,12,.04)_100%)] max-lg:bg-[linear-gradient(180deg,rgba(4,9,12,.96)_0%,rgba(4,9,12,.86)_55%,rgba(4,9,12,.48)_100%)]" />
       <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(4,9,12,.32)_0%,transparent_25%,transparent_70%,rgba(4,9,12,.68)_100%)]" />
       <div aria-hidden className="absolute inset-0 -z-10 hero-grid opacity-30" />
       <TechnicalOverlay />
