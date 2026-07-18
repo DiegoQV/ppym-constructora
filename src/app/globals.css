@@ -801,7 +801,7 @@ html { scroll-behavior: smooth; }
 @media (min-width: 1024px) and (max-width: 1439px) {
   .hero-copy {
     max-width: 43rem;
-    margin-left: clamp(6rem, 9vw, 8.5rem);
+    margin-left: clamp(4.5rem, 6.2vw, 5.25rem);
   }
   .hero-description { max-width: 34rem; }
   .hero-photo { object-position: center 47%; }
