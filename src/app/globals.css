@@ -1207,13 +1207,10 @@ html { scroll-behavior: smooth; }
   .whatsapp-attention { animation: none !important; }
   .equipment-heading-word { animation: none !important; opacity: 1 !important; transform: none !important; }
   .equipment-heading-period { color: #e7b928; transition: none; }
-  .about-title-typed,
-  .about-title-character,
   .about-overline,
   .about-subtitle,
   .about-paragraph,
   .about-quality { clip-path: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
-  .about-title-typed::after { display: none !important; }
   .contact-kicker,
   .contact-heading-line,
   .contact-brief,
