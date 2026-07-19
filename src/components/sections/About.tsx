@@ -123,14 +123,25 @@ export function About() {
           </Reveal>
 
           <Reveal className="about-copy order-1 lg:order-2">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-gray">
+            <p className="about-overline font-mono text-[10px] uppercase tracking-[0.2em] text-text-gray">
               Constructora &amp; Consultora
             </p>
             <h2
               id="about-title"
+              aria-label="Somos PPYM."
               className="about-title mt-6 max-w-[9ch] font-heading text-[clamp(3.5rem,6vw,5.6rem)] font-bold leading-[.92] tracking-[-0.065em]"
             >
-              Somos PPYM.
+              <span aria-hidden className="about-title-typed block w-fit whitespace-nowrap">
+                {Array.from("Somos PPYM.").map((character, index) => (
+                  <span
+                    key={`${character}-${index}`}
+                    className="about-title-character"
+                    style={{ transitionDelay: `${120 + index * 55}ms` }}
+                  >
+                    {character === " " ? "\u00a0" : character}
+                  </span>
+                ))}
+              </span>
             </h2>
             <h3 className="about-subtitle mt-8 max-w-xl font-heading text-2xl font-semibold leading-[1.15] tracking-[-0.035em] sm:text-3xl">
               Construcción, consultoría y gestión técnica desde Chachapoyas.
@@ -144,7 +155,7 @@ export function About() {
 
             <ul className="about-qualities mt-9 grid gap-x-6 gap-y-4 border-y border-charcoal/15 py-7 sm:grid-cols-2">
               {qualities.map((quality) => (
-                <li key={quality} className="flex items-start gap-3 text-sm leading-6 text-charcoal/78">
+                <li key={quality} className="about-quality flex items-start gap-3 text-sm leading-6 text-charcoal/78">
                   <Check aria-hidden className="mt-1 size-4 shrink-0 text-technical-yellow" strokeWidth={2.5} />
                   {quality}
                 </li>
