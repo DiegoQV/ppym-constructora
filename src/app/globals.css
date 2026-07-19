@@ -1001,9 +1001,9 @@ html { scroll-behavior: smooth; }
   .equipment-console { grid-template-columns: minmax(0, 1fr) 22rem; }
   .equipment-panel-enter {
     justify-content: space-between;
-    gap: .75rem;
+    gap: 1rem;
     overflow: hidden;
-    padding: 1rem 1.25rem;
+    padding: 1.25rem;
   }
   .equipment-panel-enter h3 {
     font-size: 1.95rem;
@@ -1030,9 +1030,17 @@ html { scroll-behavior: smooth; }
     font-size: .75rem;
     line-height: 1.5;
   }
+  .equipment-console .backdrop-blur-sm > p:first-child {
+    color: rgba(255, 255, 255, .7);
+    font-size: .5rem;
+  }
+  .equipment-criterion > p:first-child {
+    color: rgba(255, 255, 255, .58);
+    font-size: .5rem;
+  }
 
   .equipment-section {
-    height: calc(100svh - 5.9rem + 4rem);
+    height: calc(100svh - 5.9rem + 8rem);
     padding-bottom: 3rem;
   }
 
