@@ -110,7 +110,7 @@ export function Projects() {
                       <span className="project-blade-title block font-heading text-[clamp(2.8rem,4.4vw,5rem)] font-semibold leading-[.9] tracking-[-.065em]">{project.name}</span>
                       <span className="project-blade-description mt-5 block max-w-xl text-base leading-7 text-white/72 sm:text-lg">{project.description}</span>
                     </span>
-                    <span className="hidden size-12 shrink-0 place-items-center border border-white/35 text-technical-yellow sm:grid"><ArrowUpRight aria-hidden className="size-5" /></span>
+                    <span className="project-blade-action hidden size-12 shrink-0 place-items-center border border-white/35 text-technical-yellow sm:grid"><ArrowUpRight aria-hidden className="size-5" /></span>
                   </span>
                 </span>
               </button>

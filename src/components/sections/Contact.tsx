@@ -48,13 +48,13 @@ export function Contact() {
     <section ref={sectionRef} id="contacto" aria-labelledby="contact-title" className={cn("contact-section relative scroll-mt-20 overflow-hidden bg-technical-yellow text-charcoal lg:scroll-mt-24", armed && "contact-armed", visible && "contact-visible")}>
       <div aria-hidden className="technical-grid-dark absolute inset-0 opacity-35" />
       <span aria-hidden className="contact-ghost-number absolute right-2 top-[.08em] hidden font-heading text-[20rem] font-bold leading-none tracking-[-.1em] text-charcoal/[.03] lg:block xl:right-6">08</span>
-      <Container className="relative py-20 sm:py-24 lg:py-28">
+      <Container className="contact-container relative py-20 sm:py-24 lg:py-28">
           <div className="contact-kicker flex items-center justify-between gap-6 border-b border-charcoal/20 pb-4">
             <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-charcoal/65"><span className="h-px w-8 bg-charcoal" />08 / Contacto</p>
             <p className="hidden font-mono text-[8px] uppercase tracking-[.2em] text-charcoal/45 sm:block">Chachapoyas · Amazonas · Perú</p>
           </div>
 
-        <div className="grid gap-10 py-12 sm:py-14 lg:grid-cols-[1fr_.43fr] lg:items-end lg:gap-16 lg:py-16">
+        <div className="contact-main grid gap-10 py-12 sm:py-14 lg:grid-cols-[1fr_.43fr] lg:items-end lg:gap-16 lg:py-16">
           <div>
             <p className="font-mono text-[9px] uppercase tracking-[.2em] text-charcoal/60">Una conversación concreta para empezar</p>
             <h2 id="contact-title" className="contact-heading mt-5 max-w-[11ch] font-heading text-[clamp(3.35rem,7.25vw,7.65rem)] font-bold leading-[.82] tracking-[-.085em]">

@@ -101,7 +101,7 @@ export function DifferentiatorsMotion() {
         </g>
       </svg>
 
-      <h2 id="differentiators-title" aria-label={headline} className="relative z-[2] mt-6 max-w-[10ch] font-heading text-[clamp(3.35rem,5.5vw,6rem)] font-bold leading-[.91] tracking-[-0.07em]">
+      <h2 id="differentiators-title" aria-label={headline} className="differentiators-motion-title relative z-[2] mt-6 max-w-[10ch] font-heading text-[clamp(3.35rem,5.5vw,6rem)] font-bold leading-[.91] tracking-[-0.07em]">
         <span aria-hidden>
           {headlineLines.map(({ text, steps, delay }) => (
             <span

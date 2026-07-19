@@ -30,7 +30,7 @@ export function About() {
       <div aria-hidden className="absolute -right-12 top-56 size-[22rem] rounded-full border border-charcoal/[.045]" />
 
       <Container className="relative">
-        <div className="flex items-center justify-between gap-6 border-b border-charcoal/15 pb-6">
+        <div className="about-section-index flex items-center justify-between gap-6 border-b border-charcoal/15 pb-6">
           <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-gray">
             <span className="h-px w-8 bg-technical-yellow" />
             02 / Nosotros
@@ -98,8 +98,8 @@ export function About() {
               </div>
             </div>
 
-            <div className="mt-3 grid overflow-hidden bg-charcoal text-white sm:mt-5 sm:grid-cols-[1fr_auto]">
-              <div className="flex items-start gap-4 px-5 py-5 sm:px-6">
+            <div className="about-credential mt-3 grid overflow-hidden bg-charcoal text-white sm:mt-5 sm:grid-cols-[1fr_auto]">
+              <div className="about-credential-copy flex items-start gap-4 px-5 py-5 sm:px-6">
                 <span className="grid size-10 shrink-0 place-items-center border border-white/12 text-technical-yellow">
                   <ShieldCheck aria-hidden className="size-5" />
                 </span>
@@ -122,7 +122,7 @@ export function About() {
             </div>
           </Reveal>
 
-          <Reveal className="order-1 lg:order-2">
+          <Reveal className="about-copy order-1 lg:order-2">
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-gray">
               Constructora &amp; Consultora
             </p>
@@ -132,17 +132,17 @@ export function About() {
             >
               Somos PPYM.
             </h2>
-            <h3 className="mt-8 max-w-xl font-heading text-2xl font-semibold leading-[1.15] tracking-[-0.035em] sm:text-3xl">
+            <h3 className="about-subtitle mt-8 max-w-xl font-heading text-2xl font-semibold leading-[1.15] tracking-[-0.035em] sm:text-3xl">
               Construcción, consultoría y gestión técnica desde Chachapoyas.
             </h3>
-            <p className="mt-6 max-w-xl text-base leading-7 text-text-gray sm:text-lg sm:leading-8">
+            <p className="about-paragraph about-paragraph-first mt-6 max-w-xl text-base leading-7 text-text-gray sm:text-lg sm:leading-8">
               Constructora &amp; Consultora PPYM E.I.R.L. inició actividades en 2018 con una propuesta orientada a resolver de manera integral las necesidades técnicas, legales y operativas de cada proyecto.
             </p>
-            <p className="mt-4 max-w-xl text-base leading-7 text-text-gray sm:text-lg sm:leading-8">
+            <p className="about-paragraph about-paragraph-second mt-4 max-w-xl text-base leading-7 text-text-gray sm:text-lg sm:leading-8">
               Desde el saneamiento del predio hasta la elaboración de planos, la topografía y la construcción, buscamos que el cliente encuentre orientación clara y continuidad en una sola empresa.
             </p>
 
-            <ul className="mt-9 grid gap-x-6 gap-y-4 border-y border-charcoal/15 py-7 sm:grid-cols-2">
+            <ul className="about-qualities mt-9 grid gap-x-6 gap-y-4 border-y border-charcoal/15 py-7 sm:grid-cols-2">
               {qualities.map((quality) => (
                 <li key={quality} className="flex items-start gap-3 text-sm leading-6 text-charcoal/78">
                   <Check aria-hidden className="mt-1 size-4 shrink-0 text-technical-yellow" strokeWidth={2.5} />

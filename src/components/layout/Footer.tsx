@@ -45,9 +45,9 @@ export function Footer() {
 
         <div className="flex flex-col gap-5 py-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[11px] text-white/50">© {new Date().getFullYear()} {company.shortName}. Todos los derechos reservados.</p>
-          <div className="flex items-center justify-between gap-6 sm:justify-end">
+          <div className="footer-bottom-actions flex items-center justify-between gap-6 sm:justify-end">
             <span className="font-mono text-[7px] uppercase tracking-[.18em] text-white/40">Construir con criterio</span>
-            <a href="#inicio" aria-label="Volver al inicio" className="group flex min-h-11 items-center gap-3 border-l border-white/15 pl-5 font-mono text-[8px] uppercase tracking-[.18em] text-white/50 transition-colors hover:text-technical-yellow focus-visible:outline-2 focus-visible:outline-technical-yellow">
+            <a href="#inicio" aria-label="Volver al inicio" className="footer-back-to-top group flex min-h-11 items-center gap-3 border-l border-white/15 pl-5 font-mono text-[8px] uppercase tracking-[.18em] text-white/50 transition-colors hover:text-technical-yellow focus-visible:outline-2 focus-visible:outline-technical-yellow">
               Volver arriba
               <span className="grid size-9 place-items-center border border-white/15 transition-colors group-hover:border-technical-yellow/50"><ArrowUp aria-hidden className="size-4 transition-transform duration-300 group-hover:-translate-y-1" /></span>
             </a>

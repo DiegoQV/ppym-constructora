@@ -120,14 +120,14 @@ export function Equipment() {
               <div><p className="font-mono text-[8px] uppercase tracking-[.2em] text-white/38">Capacidad {active.number} / 04</p><p className="mt-2 font-mono text-[9px] uppercase tracking-[.2em] text-technical-yellow">{active.short}</p></div>
               <span className="grid size-12 place-items-center border border-white/15 text-technical-yellow"><ActiveIcon aria-hidden className="size-5" strokeWidth={1.35} /></span>
             </div>
-            <div className="my-auto py-5 lg:py-3">
+            <div className="equipment-panel-body my-auto py-5 lg:py-3">
               <h3 className="font-heading text-[clamp(2.35rem,2.8vw,3.2rem)] font-semibold leading-[.92] tracking-[-.06em]">{active.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-white/62">{active.role}</p>
-              <div className="mt-4 border-t border-white/15">
-                {active.applications.map((application, index) => <p key={application} className="flex items-center gap-4 border-b border-white/15 py-2 text-[.82rem] text-white/72"><span className="font-mono text-[7px] text-technical-yellow">0{index + 1}</span>{application}</p>)}
+              <p className="equipment-panel-role mt-3 text-sm leading-6 text-white/62">{active.role}</p>
+              <div className="equipment-applications mt-4 border-t border-white/15">
+                {active.applications.map((application, index) => <p key={application} className="equipment-application flex items-center gap-4 border-b border-white/15 py-2 text-[.82rem] text-white/72"><span className="font-mono text-[7px] text-technical-yellow">0{index + 1}</span>{application}</p>)}
               </div>
             </div>
-            <div className="border-l border-technical-yellow pl-4"><p className="font-mono text-[7px] uppercase tracking-[.16em] text-white/35">Criterio operativo</p><p className="mt-1.5 text-xs leading-5 text-white/68">{active.criterion}</p></div>
+            <div className="equipment-criterion border-l border-technical-yellow pl-4"><p className="font-mono text-[7px] uppercase tracking-[.16em] text-white/35">Criterio operativo</p><p className="equipment-criterion-copy mt-1.5 text-xs leading-5 text-white/68">{active.criterion}</p></div>
           </div>
         </div>
         </Reveal>

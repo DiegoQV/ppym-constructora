@@ -76,7 +76,7 @@ export function Differentiators() {
       <div aria-hidden className="absolute right-20 top-48 size-2 rounded-full bg-technical-yellow" />
 
       <Container className="relative">
-        <div className="flex items-center justify-between gap-6 border-b border-white/15 pb-6">
+        <div className="differentiators-index flex items-center justify-between gap-6 border-b border-white/15 pb-6">
           <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/55">
             <span className="h-px w-8 bg-technical-yellow" />
             04 / Diferenciadores
@@ -98,13 +98,13 @@ export function Differentiators() {
           />
           <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,11,.92)_0%,rgba(8,10,11,.72)_29%,rgba(8,10,11,.08)_66%,rgba(8,10,11,.12)_100%)]" />
           <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,11,.08)_55%,rgba(8,10,11,.76)_100%)]" />
-          <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-10 lg:p-14">
+          <div className="differentiators-visual-content absolute inset-0 flex flex-col justify-between p-6 sm:p-10 lg:p-14">
             <div className="differentiators-copy max-w-xl">
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-technical-yellow">
                 Capacidad conectada
               </p>
               <DifferentiatorsMotion />
-              <p className="mt-7 max-w-md text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
+              <p className="differentiators-description mt-7 max-w-md text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
                 Cada decisión técnica, documental y constructiva encuentra su lugar dentro de una misma ruta.
               </p>
             </div>
@@ -141,10 +141,10 @@ export function Differentiators() {
                   <span className="differentiator-node hidden lg:block" />
                   <Icon aria-hidden className="differentiator-card-icon size-5 text-technical-yellow" strokeWidth={1.6} />
                 </div>
-                <div className="mt-auto pt-10">
-                  <p className="mb-4 font-mono text-[9px] uppercase tracking-[0.2em] text-technical-yellow">{action}</p>
-                  <h3 className="font-heading text-xl font-semibold tracking-[-0.035em] sm:text-2xl lg:h-8 lg:text-xl xl:text-2xl">{title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-white/52 lg:h-24">{description}</p>
+                <div className="differentiator-step-copy mt-auto pt-10">
+                  <p className="differentiator-step-action mb-4 font-mono text-[9px] uppercase tracking-[0.2em] text-technical-yellow">{action}</p>
+                  <h3 className="differentiator-step-title font-heading text-xl font-semibold tracking-[-0.035em] sm:text-2xl lg:h-8 lg:text-xl xl:text-2xl">{title}</h3>
+                  <p className="differentiator-step-description mt-3 text-sm leading-6 text-white/52 lg:h-24">{description}</p>
                 </div>
               </article>
           ))}
@@ -157,7 +157,7 @@ export function Differentiators() {
               <span className="h-px w-8 bg-technical-yellow" />
               Siguiente paso
             </p>
-            <p className="mt-5 max-w-2xl font-heading text-[clamp(2rem,3.8vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.05em]">
+            <p className="differentiators-closing-title mt-5 max-w-2xl font-heading text-[clamp(2rem,3.8vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.05em]">
               Tu proyecto merece una ruta clara desde el inicio.
             </p>
           </div>
@@ -165,7 +165,7 @@ export function Differentiators() {
             href={projectUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex min-h-16 w-fit items-center gap-5 bg-technical-yellow px-6 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-charcoal transition-colors hover:bg-technical-yellow-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow sm:min-h-20 sm:px-8"
+            className="differentiators-closing-cta group flex min-h-16 w-fit items-center gap-5 bg-technical-yellow px-6 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-charcoal transition-colors hover:bg-technical-yellow-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow sm:min-h-20 sm:px-8"
           >
             Solicitar orientación
             <ArrowUpRight aria-hidden className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

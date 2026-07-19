@@ -604,8 +604,8 @@ html { scroll-behavior: smooth; }
 .equipment-heading-mask {
   display: inline-block;
   overflow: hidden;
-  margin: -.04em .18em -.12em 0;
-  padding: .04em 0 .12em;
+  margin: -.04em .1em -.12em 0;
+  padding: .04em .08em .12em 0;
   vertical-align: top;
 }
 .equipment-heading-word {
@@ -816,19 +816,108 @@ html { scroll-behavior: smooth; }
     );
   }
 
-  .services-section { padding-block: 7rem; }
-  .services-layout { gap: 4rem; }
-  .services-title { font-size: clamp(3.5rem, 5.1vw, 4.4rem); }
-
-  .about-section { padding-block: 6rem; }
-  .about-layout {
-    gap: 3.5rem;
-    grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
-    margin-top: 2.75rem;
+  .services-section { padding-block: 5rem; }
+  .services-layout { gap: 3.75rem; }
+  .services-sidebar { top: 6rem; }
+  .services-title { font-size: clamp(3.35rem, 4.8vw, 4.05rem); }
+  .services-intro {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.65;
   }
-  .about-photo-primary { min-height: 540px; }
-  .about-photo-secondary { min-height: 356px; }
-  .about-title { font-size: clamp(3.75rem, 5.6vw, 4.75rem); }
+  .services-explore { margin-top: 2rem; padding-top: 1rem; }
+  .service-trigger {
+    min-height: 4.25rem;
+    padding-block: 1rem;
+    padding-right: 4.75rem;
+  }
+  .service-trigger-title { font-size: 1.45rem; }
+  .service-trigger-active { top: 5rem; }
+  .service-panel { margin-bottom: 1rem; }
+  .service-panel-image { height: 11.5rem; }
+  .service-panel-content {
+    gap: 1.5rem;
+    padding: 1.4rem 1.75rem;
+  }
+  .service-description { font-size: .9rem; line-height: 1.55; }
+  .service-copy-enter .service-cta { margin-top: 1rem; }
+  .service-scope-enter { padding-left: 1.5rem; }
+  .service-scope-enter > p { margin-bottom: .65rem; }
+  .service-scope-list { row-gap: .5rem; }
+
+  .differentiators-section { padding-block: 7rem 5rem; }
+  .differentiators-index { padding-bottom: 1.25rem; }
+  .differentiators-scene { margin-top: 2rem; }
+  .differentiators-visual {
+    height: clamp(31rem, calc(100svh - 7rem), 36rem);
+    min-height: 0;
+  }
+  .differentiators-visual-content { padding: 2.5rem; }
+  .differentiators-motion-title {
+    margin-top: 1.15rem;
+    font-size: clamp(3.45rem, 4.8vw, 4.25rem);
+  }
+  .differentiators-description {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .differentiator-step {
+    min-height: 15rem;
+    padding: 3rem 1.5rem 1rem;
+  }
+  .differentiator-step-copy { padding-top: 2rem; }
+  .differentiator-step-action { margin-bottom: .7rem; }
+  .differentiator-step-title { height: auto; font-size: 1.25rem; }
+  .differentiator-step-description {
+    height: auto;
+    margin-top: .55rem;
+    color: rgba(255, 255, 255, .62);
+    font-size: .875rem;
+    line-height: 1.55;
+  }
+  .differentiators-closing {
+    margin-top: 2.5rem;
+    padding-block: 2rem;
+  }
+  .differentiators-closing-title {
+    margin-top: 1rem;
+    font-size: clamp(2.45rem, 3.5vw, 3rem);
+  }
+  .differentiators-closing-cta { min-height: 4.25rem; }
+
+  .about-section { padding-block: 4rem; }
+  .about-section-index { padding-bottom: 1.25rem; }
+  .about-layout {
+    gap: 3.25rem;
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+    margin-top: 2rem;
+  }
+  .about-photo-primary { min-height: 500px; }
+  .about-photo-secondary { min-height: 330px; }
+  .about-year-card { min-height: 150px; padding: 1.25rem; }
+  .about-title {
+    margin-top: 1.1rem;
+    font-size: clamp(3.55rem, 5.1vw, 4.25rem);
+  }
+  .about-subtitle {
+    margin-top: 1.5rem;
+    font-size: 1.65rem;
+    line-height: 1.12;
+  }
+  .about-paragraph {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .about-paragraph-first { margin-top: 1.25rem; }
+  .about-paragraph-second { margin-top: .75rem; }
+  .about-qualities {
+    margin-top: 1.5rem;
+    row-gap: .75rem;
+    padding-block: 1.25rem;
+  }
+  .about-credential { margin-top: .75rem; }
+  .about-credential-copy { padding-block: 1rem; }
 }
 
 @media (min-width: 1024px) and (max-height: 840px) {
@@ -860,6 +949,8 @@ html { scroll-behavior: smooth; }
     padding-block: 1.25rem;
   }
 
+  .process-cinema { padding-bottom: 2.5rem; }
+
   .process-heading-block,
   .equipment-heading-block {
     margin-block: .8rem;
@@ -882,21 +973,101 @@ html { scroll-behavior: smooth; }
   .process-story-copy { padding-block: .35rem; }
   .process-story-number { font-size: 3.5rem; }
   .process-story-title { margin-top: .55rem; font-size: clamp(2.1rem, 5.2vh, 2.65rem); }
-  .process-story-description { margin-top: .65rem; font-size: .92rem; line-height: 1.45; }
+  .process-story-description {
+    margin-top: .65rem;
+    color: rgba(255, 255, 255, .8);
+    font-size: .92rem;
+    line-height: 1.45;
+  }
   .process-cinema-tab { padding-block: .6rem; }
   .process-cinema-tab > span:last-child { margin-top: .4rem; font-size: .9rem; }
 
   .project-blade-content { padding: 1.5rem 1.75rem; }
   .project-blade-title { font-size: clamp(2.25rem, 5.5vh, 2.8rem); }
-  .project-blade-description { margin-top: .75rem; font-size: .92rem; line-height: 1.45; }
+  .project-blade-description {
+    margin-top: .75rem;
+    color: rgba(255, 255, 255, .82);
+    font-size: .92rem;
+    line-height: 1.45;
+  }
+  .project-blade-action { margin-right: 1.5rem; }
+
+  .projects-section {
+    height: calc(100svh - 5.9rem + 1.75rem);
+    padding-bottom: 3rem;
+  }
 
   .equipment-tab { min-height: 3.75rem; padding-block: .35rem; }
-  .equipment-console { grid-template-columns: minmax(0, 1fr) 20rem; }
-  .equipment-panel-enter { padding: 1rem 1.25rem; }
-  .equipment-panel-enter h3 { font-size: 2.1rem; }
-  .equipment-panel-enter .my-auto { padding-block: .35rem; }
-  .equipment-panel-enter .mt-4 { margin-top: .6rem; }
-  .equipment-panel-enter .py-2 { padding-block: .35rem; }
+  .equipment-console { grid-template-columns: minmax(0, 1fr) 22rem; }
+  .equipment-panel-enter {
+    justify-content: space-between;
+    gap: .75rem;
+    overflow: hidden;
+    padding: 1rem 1.25rem;
+  }
+  .equipment-panel-enter h3 {
+    font-size: 1.95rem;
+    line-height: .9;
+  }
+  .equipment-panel-body {
+    margin-block: 0;
+    padding-block: 0;
+  }
+  .equipment-panel-role {
+    margin-top: .5rem;
+    font-size: .86rem;
+    line-height: 1.5;
+  }
+  .equipment-applications { margin-top: .5rem; }
+  .equipment-application {
+    padding-block: .35rem;
+    font-size: .82rem;
+    line-height: 1.4;
+  }
+  .equipment-criterion { margin-top: 0; }
+  .equipment-criterion-copy {
+    margin-top: .35rem;
+    font-size: .75rem;
+    line-height: 1.5;
+  }
+
+  .equipment-section {
+    height: calc(100svh - 5.9rem + 4rem);
+    padding-bottom: 3rem;
+  }
+
+  .contact-container { padding-block: 4.5rem 4rem; }
+  .contact-main {
+    gap: 3rem;
+    padding-block: 2.5rem;
+  }
+  .contact-heading {
+    font-size: clamp(4.5rem, 6.4vw, 5.4rem);
+    line-height: .84;
+  }
+  .contact-brief {
+    top: 0;
+    padding: 1.75rem;
+  }
+  .contact-brief > p:nth-of-type(2) {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .contact-primary-cta {
+    min-height: 3.5rem;
+    margin-top: 1.5rem;
+    padding-block: .75rem;
+  }
+  .contact-cta-icon { margin-right: 1rem; }
+  .contact-brief > p:nth-of-type(3) { margin-top: 1rem; }
+  .contact-detail {
+    min-height: 7.5rem;
+    padding: 1.25rem;
+  }
+  .contact-detail > span:last-child { margin-top: 1rem; }
+  .footer-back-to-top { margin-right: 0; }
+  .footer-bottom-actions { position: relative; right: 5rem; }
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) and (max-height: 840px) {
