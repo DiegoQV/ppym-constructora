@@ -752,6 +752,70 @@ html { scroll-behavior: smooth; }
   .project-blade-content { background: linear-gradient(0deg, rgba(8, 10, 11, .86), transparent); }
 }
 
+@media (max-width: 639px) {
+  .navbar-container { height: 4.5rem; padding-inline: 1.25rem; }
+  .navbar-logo { width: 7.5rem; height: 4rem; }
+
+  .hero-shell {
+    align-items: flex-start;
+    min-height: 100svh;
+    padding-block: clamp(11rem, 24svh, 15rem) 4rem;
+  }
+  .hero-shell > div:last-child { padding-inline: 1.25rem; }
+  .hero-eyebrow {
+    max-width: none;
+    margin-bottom: 1.35rem;
+    gap: .5rem;
+    font-size: .578125rem;
+    line-height: 1.4;
+    letter-spacing: .055em;
+  }
+  .hero-eyebrow-rule { width: 1.5rem; }
+  .hero-title {
+    max-width: 11.5ch;
+    font-size: clamp(2.35rem, 10.4vw, 2.65rem);
+    line-height: 1.02;
+    letter-spacing: -.05em;
+  }
+  .hero-description {
+    max-width: 34rem;
+    margin-top: 1.8125rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .hero-trust {
+    display: flex;
+    width: 100%;
+    margin-top: 1.625rem;
+    padding: .8rem .9rem;
+  }
+  .hero-trust strong {
+    margin-bottom: .2rem;
+    font-size: .8125rem;
+  }
+  .hero-trust p {
+    margin-top: 0;
+    row-gap: .1rem;
+    font-size: .71875rem;
+  }
+  .hero-trust .font-mono { font-size: .6875rem; }
+  .hero-actions { margin-top: 1.5rem; gap: .75rem; }
+  .hero-actions a { min-height: 3rem; padding-block: .7rem; }
+  .hero-actions > span:first-child a { letter-spacing: .01em; }
+  .hero-actions > a:last-child {
+    border-color: rgba(255, 255, 255, .5);
+    background-color: rgba(17, 19, 21, .5);
+    background-image: linear-gradient(rgba(255, 255, 255, .09), rgba(255, 255, 255, .09));
+  }
+  .hero-photo { object-position: 70% 56%; }
+  .hero-primary-gradient {
+    background-image: linear-gradient(180deg, rgba(4, 9, 12, .9) 0%, rgba(4, 9, 12, .74) 48%, rgba(4, 9, 12, .42) 100%);
+  }
+  .hero-secondary-gradient {
+    background-image: linear-gradient(180deg, rgba(4, 9, 12, .18) 0%, transparent 30%, transparent 72%, rgba(4, 9, 12, .36) 100%);
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .process-step:hover .process-step-node {
     border-color: #e7b928;

@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { company } from "@/data/company";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
+import { cn } from "@/lib/utils";
 
 function WhatsAppIcon() {
   return (
@@ -11,12 +15,27 @@ function WhatsAppIcon() {
 
 export function WhatsAppFloat() {
   const url = createWhatsAppUrl(company.phone, "Hola, quisiera solicitar asesoría técnica.");
+  const [mobileVisible, setMobileVisible] = useState(false);
+
+  useEffect(() => {
+    const updateVisibility = () => setMobileVisible(window.scrollY > window.innerHeight * 0.72);
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+    };
+  }, []);
 
   return (
     <a
       href={url}
       aria-label={`Solicitar asesoría técnica por WhatsApp al ${company.displayPhone}`}
-      className="whatsapp-attention fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-40 grid size-12 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_10px_28px_rgba(0,0,0,.3)] ring-1 ring-white/20 transition duration-300 hover:-translate-y-1 hover:bg-[#20bd5a] hover:shadow-[0_14px_34px_rgba(0,0,0,.36)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25D366] sm:bottom-[calc(1.75rem+env(safe-area-inset-bottom))] sm:right-7 sm:size-15"
+      className={cn(
+        "whatsapp-attention fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-40 grid size-12 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_10px_28px_rgba(0,0,0,.3)] ring-1 ring-white/20 transition duration-300 hover:-translate-y-1 hover:bg-[#20bd5a] hover:shadow-[0_14px_34px_rgba(0,0,0,.36)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25D366] sm:bottom-[calc(1.75rem+env(safe-area-inset-bottom))] sm:right-7 sm:size-15",
+        !mobileVisible && "pointer-events-none translate-y-20 opacity-0 sm:pointer-events-auto sm:translate-y-0 sm:opacity-100",
+      )}
     >
       <WhatsAppIcon />
     </a>

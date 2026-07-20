@@ -44,15 +44,16 @@ export function Hero() {
         className="hero-photo hero-photo-enter -z-30 object-cover object-[73%_center] sm:object-[68%_center] lg:object-center"
       />
       <div aria-hidden className="hero-primary-gradient absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(4,9,12,.96)_0%,rgba(4,9,12,.88)_30%,rgba(4,9,12,.42)_56%,rgba(4,9,12,.04)_100%)] max-lg:bg-[linear-gradient(180deg,rgba(4,9,12,.96)_0%,rgba(4,9,12,.86)_55%,rgba(4,9,12,.48)_100%)]" />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(4,9,12,.32)_0%,transparent_25%,transparent_70%,rgba(4,9,12,.68)_100%)]" />
+      <div aria-hidden className="hero-secondary-gradient absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(4,9,12,.32)_0%,transparent_25%,transparent_70%,rgba(4,9,12,.68)_100%)]" />
       <div aria-hidden className="absolute inset-0 -z-10 hero-grid opacity-30" />
       <TechnicalOverlay />
 
       <Container className="relative">
         <div className="hero-copy max-w-[47rem]">
           <p className="hero-eyebrow hero-enter mb-7 flex max-w-xl items-start gap-3 text-[11px] font-bold uppercase leading-5 tracking-[0.15em] text-technical-yellow sm:mb-8 sm:text-xs">
-            <span className="mt-2 h-px w-8 shrink-0 bg-technical-yellow" />
-            Ingeniería, construcción y consultoría técnica
+            <span className="hero-eyebrow-rule mt-2 h-px w-8 shrink-0 bg-technical-yellow" />
+            <span className="whitespace-nowrap sm:hidden">Ingeniería · Construcción · Consultoría</span>
+            <span className="hidden sm:inline">Ingeniería, construcción y consultoría técnica</span>
           </p>
           <h1 className="hero-title max-w-[11.5ch] font-heading text-[clamp(2.5rem,11.7vw,3.15rem)] font-bold leading-[1.04] tracking-[-0.052em] text-white sm:text-[clamp(3.15rem,6.5vw,5.45rem)] md:leading-[1] lg:leading-[0.96]">
             <span className="hero-title-mask-v2 block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-1 block whitespace-nowrap">Soluciones</span></span>
@@ -74,13 +75,13 @@ export function Hero() {
               </p>
             </div>
           </div>
-          <div className="hero-actions hero-enter hero-enter-delay-4 mt-8 flex flex-col gap-3 min-[430px]:flex-row">
-            <span className="block w-full min-[430px]:w-auto">
+          <div className="hero-actions hero-enter hero-enter-delay-4 mt-8 flex flex-col gap-3 sm:flex-row">
+            <span className="block w-full sm:w-auto">
               <Button href={advisoryUrl} className="min-h-12 w-full px-6 shadow-[0_10px_28px_rgba(231,185,40,.2)]" aria-label="Solicitar asesoría técnica por WhatsApp">
                 <MessageCircle aria-hidden size={17} /> Solicitar asesoría técnica
               </Button>
             </span>
-            <Button href="#servicios" variant="secondary" className="min-h-12 w-full bg-charcoal/20 px-6 backdrop-blur-[2px] min-[430px]:w-auto">
+            <Button href="#servicios" variant="secondary" className="min-h-12 w-full bg-charcoal/20 px-6 backdrop-blur-[2px] sm:w-auto">
               Ver servicios y trámites <ArrowDownRight aria-hidden size={17} />
             </Button>
           </div>
