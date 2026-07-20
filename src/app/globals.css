@@ -816,6 +816,46 @@ html { scroll-behavior: smooth; }
   }
 }
 
+@media (max-width: 374px) {
+  .about-collage > div:first-child {
+    grid-template-columns: minmax(0, .82fr) minmax(0, 1fr);
+  }
+  .about-collage > div:first-child > * { min-width: 0; }
+  .about-photo-primary { min-height: 26rem; }
+  .about-photo-secondary { min-height: 19rem; }
+  .about-year-card {
+    min-height: 10rem;
+    overflow: hidden;
+  }
+  .about-year-card > div { gap: .375rem; }
+  .about-year-card > div > span:last-child {
+    min-width: 0;
+    font-size: .4375rem;
+    letter-spacing: .08em;
+  }
+
+  .whatsapp-attention {
+    right: .75rem;
+    bottom: calc(.75rem + env(safe-area-inset-bottom));
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 639px) {
+  .about-collage > div:first-child {
+    grid-template-columns: minmax(0, .72fr) minmax(0, 1fr);
+  }
+  .about-collage > div:first-child > * { min-width: 0; }
+  .about-year-card { overflow: hidden; }
+  .about-year-card > div { gap: .5rem; }
+  .about-year-card > div > span:last-child {
+    min-width: 0;
+    font-size: .5rem;
+    letter-spacing: .1em;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .process-step:hover .process-step-node {
     border-color: #e7b928;
