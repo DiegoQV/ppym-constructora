@@ -85,7 +85,7 @@ export function Process() {
 
         <div className="process-experience grid lg:min-h-0 lg:flex-1 lg:grid-cols-[1fr_11.5rem]">
         <div ref={stageRef} className="process-stage relative isolate min-h-[600px] overflow-hidden bg-charcoal text-white lg:min-h-0">
-          <Image src="/images/process/ppym-proceso-constructivo-v1.png" alt="Evolución conceptual de una obra desde el replanteo hasta el edificio terminado en un paisaje de Amazonas" fill sizes="(min-width: 1440px) 1216px, 100vw" className="object-cover object-center" />
+          <Image src="/images/process/ppym-proceso-constructivo-v1.webp" alt="Evolución conceptual de una obra desde el replanteo hasta el edificio terminado en un paisaje de Amazonas" fill sizes="(min-width: 1440px) 1216px, 100vw" className="object-cover object-center" />
           <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,12,13,.94)_0%,rgba(10,12,13,.67)_31%,rgba(10,12,13,.12)_67%,rgba(10,12,13,.25)_100%)]" />
           <div aria-hidden className="technical-grid absolute inset-0 opacity-20 mix-blend-screen" />
 

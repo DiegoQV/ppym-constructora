@@ -63,7 +63,7 @@ export function ServicesExplorer({ services, phone }: ServicesExplorerProps) {
               )}
             >
               {!isActive && <span aria-hidden className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-technical-yellow transition-transform duration-500 ease-out group-hover:scale-x-100" />}
-              <span className={cn("font-mono text-[11px] tracking-[0.16em] transition-colors duration-300", isActive ? "text-technical-yellow" : "text-text-gray/70 group-hover:text-technical-yellow")}>
+              <span className={cn("font-mono text-[11px] tracking-[0.16em] transition-colors duration-300", isActive ? "text-technical-yellow" : "text-text-gray group-hover:text-technical-yellow")}>
                 {service.number}
               </span>
               <span className={cn("service-trigger-title font-heading text-xl font-semibold tracking-[-0.025em] transition-transform duration-300 ease-out sm:text-2xl lg:text-[1.7rem]", !isActive && "group-hover:translate-x-1")}>

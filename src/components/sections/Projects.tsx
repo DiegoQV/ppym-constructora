@@ -7,11 +7,11 @@ import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils";
 
 const projects = [
-  { number: "01", name: "Residencia Ladera", type: "Vivienda", location: "Chachapoyas", scope: "Arquitectura · estructura · ejecución", image: "/images/projects/residencia-ladera-v1.png", description: "Pendiente, lluvia y paisaje convertidos en implantación, materialidad y protección." },
-  { number: "02", name: "Refugio de Niebla", type: "Hospitalidad", location: "Amazonas", scope: "Pabellones · recorridos · drenaje", image: "/images/projects/refugio-niebla-v1.png", description: "Piezas contenidas siguen la topografía y construyen una experiencia vinculada al bosque de montaña." },
-  { number: "03", name: "Esquina Urbana", type: "Uso mixto", location: "Chachapoyas", scope: "Comercio · oficinas · envolvente", image: "/images/projects/edificio-urbano-v1.png", description: "Un edificio compacto que protege al peatón y responde al ritmo de una ciudad intermedia." },
-  { number: "04", name: "Patio Común", type: "Equipamiento", location: "Chachapoyas", scope: "Espacio público · accesibilidad · estructura", image: "/images/projects/centro-comunitario-v1.png", description: "Cubierta, patio y circulación protegida articulan encuentro, formación y comunidad." },
-  { number: "05", name: "Centro Productivo", type: "Agroindustria", location: "Región Amazonas", scope: "Producción · administración · logística", image: "/images/projects/centro-productivo-v1.png", description: "Infraestructura durable para transformar producción local en un entorno de montaña exigente." },
+  { number: "01", name: "Residencia Ladera", type: "Vivienda", location: "Chachapoyas", scope: "Arquitectura · estructura · ejecución", image: "/images/projects/residencia-ladera-v1.webp", description: "Pendiente, lluvia y paisaje convertidos en implantación, materialidad y protección." },
+  { number: "02", name: "Refugio de Niebla", type: "Hospitalidad", location: "Amazonas", scope: "Pabellones · recorridos · drenaje", image: "/images/projects/refugio-niebla-v1.webp", description: "Piezas contenidas siguen la topografía y construyen una experiencia vinculada al bosque de montaña." },
+  { number: "03", name: "Esquina Urbana", type: "Uso mixto", location: "Chachapoyas", scope: "Comercio · oficinas · envolvente", image: "/images/projects/edificio-urbano-v1.webp", description: "Un edificio compacto que protege al peatón y responde al ritmo de una ciudad intermedia." },
+  { number: "04", name: "Patio Común", type: "Equipamiento", location: "Chachapoyas", scope: "Espacio público · accesibilidad · estructura", image: "/images/projects/centro-comunitario-v1.webp", description: "Cubierta, patio y circulación protegida articulan encuentro, formación y comunidad." },
+  { number: "05", name: "Centro Productivo", type: "Agroindustria", location: "Región Amazonas", scope: "Producción · administración · logística", image: "/images/projects/centro-productivo-v1.webp", description: "Infraestructura durable para transformar producción local en un entorno de montaña exigente." },
 ] as const;
 
 export function Projects() {

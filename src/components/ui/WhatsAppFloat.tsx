@@ -13,7 +13,7 @@ function WhatsAppIcon() {
   );
 }
 
-export function WhatsAppFloat() {
+export function WhatsAppFloat({ hidden = false }: { hidden?: boolean }) {
   const url = createWhatsAppUrl(company.phone, "Hola, quisiera solicitar asesoría técnica.");
   const [mobileVisible, setMobileVisible] = useState(false);
 
@@ -35,6 +35,7 @@ export function WhatsAppFloat() {
       className={cn(
         "whatsapp-attention fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-40 grid size-12 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_10px_28px_rgba(0,0,0,.3)] ring-1 ring-white/20 transition duration-300 hover:-translate-y-1 hover:bg-[#20bd5a] hover:shadow-[0_14px_34px_rgba(0,0,0,.36)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25D366] sm:bottom-[calc(1.75rem+env(safe-area-inset-bottom))] sm:right-7 sm:size-15",
         !mobileVisible && "pointer-events-none translate-y-20 opacity-0 sm:pointer-events-auto sm:translate-y-0 sm:opacity-100",
+        hidden && "pointer-events-none translate-y-4 scale-90 opacity-0 sm:pointer-events-none sm:translate-y-4 sm:scale-90 sm:opacity-0",
       )}
     >
       <WhatsAppIcon />

@@ -36,7 +36,7 @@ export function Hero() {
   return (
     <section id="inicio" className="hero-shell relative isolate flex min-h-[760px] overflow-hidden bg-charcoal pb-16 pt-30 text-white sm:min-h-[800px] sm:pt-36 lg:min-h-[850px] lg:items-center lg:py-32">
       <Image
-        src="/images/hero/ppym-large-construction-team-right-v4.png"
+        src="/images/hero/ppym-large-construction-team-right-v4.webp"
         alt=""
         fill
         priority
@@ -77,7 +77,7 @@ export function Hero() {
           </div>
           <div className="hero-actions hero-enter hero-enter-delay-4 mt-8 flex flex-col gap-3 sm:flex-row">
             <span className="block w-full sm:w-auto">
-              <Button href={advisoryUrl} className="min-h-12 w-full px-6 shadow-[0_10px_28px_rgba(231,185,40,.2)]" aria-label="Solicitar asesoría técnica por WhatsApp">
+              <Button href={advisoryUrl} target="_blank" rel="noopener noreferrer" className="min-h-12 w-full px-6 shadow-[0_10px_28px_rgba(231,185,40,.2)]" aria-label="Solicitar asesoría técnica por WhatsApp">
                 <MessageCircle aria-hidden size={17} /> Solicitar asesoría técnica
               </Button>
             </span>

@@ -36,10 +36,11 @@ export function Navbar() {
           <span aria-hidden className="absolute -inset-x-2 inset-y-1 -z-10 border-b border-technical-yellow/0 bg-white/0 transition duration-300 group-hover:border-technical-yellow/65 group-hover:bg-white/[.035]" />
           <span className="navbar-logo relative block h-17 w-32 overflow-hidden sm:h-19 sm:w-36">
             <Image
-              src="/logo/ppym-logo-navbar-inverse.png"
+              src="/logo/ppym-logo-navbar-inverse.webp"
               alt=""
               fill
-              priority
+              fetchPriority="high"
+              loading="eager"
               sizes="144px"
               className="scale-[1.16] object-contain brightness-105 drop-shadow-[0_5px_12px_rgba(0,0,0,.5)] transition duration-300 group-hover:scale-[1.2]"
             />
@@ -62,10 +63,10 @@ export function Navbar() {
         <button type="button" className="grid size-11 place-items-center text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-technical-yellow min-[1180px]:hidden" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((value) => !value)}>{open ? <X aria-hidden /> : <Menu aria-hidden />}</button>
       </Container>
 
-      <div id="mobile-navigation" className={cn("overflow-hidden border-t border-white/10 bg-charcoal transition-[max-height,opacity] duration-300 min-[1180px]:hidden", open ? "max-h-[calc(100vh-5rem)] opacity-100 min-[1024px]:max-h-[calc(100vh-4.5rem)]" : "pointer-events-none max-h-0 opacity-0")}>
+      <div id="mobile-navigation" aria-hidden={!open} inert={!open} className={cn("overflow-hidden border-t border-white/10 bg-charcoal transition-[max-height,opacity] duration-300 min-[1180px]:hidden", open ? "max-h-[calc(100vh-5rem)] opacity-100 min-[1024px]:max-h-[calc(100vh-4.5rem)]" : "pointer-events-none max-h-0 opacity-0")}>
         <nav aria-label="Navegación móvil" className="flex min-h-[calc(100vh-5rem)] flex-col px-6 pb-8 pt-5 min-[1024px]:min-h-[calc(100vh-4.5rem)]">
           {navigation.map((item, index) => <a key={item.href} href={item.href} onClick={() => setOpen(false)} className="flex min-h-13 items-center border-b border-white/10 font-heading text-xl font-semibold text-white focus-visible:outline-2 focus-visible:outline-technical-yellow"><span className="mr-4 text-xs font-normal text-technical-yellow">0{index + 1}</span>{item.label}</a>)}
-          <Button href={advisoryUrl} className="mt-auto w-full" aria-label="Solicitar asesoría por WhatsApp">Solicitar asesoría</Button>
+          <Button href={advisoryUrl} target="_blank" rel="noopener noreferrer" className="mt-auto w-full" aria-label="Solicitar asesoría por WhatsApp">Solicitar asesoría</Button>
         </nav>
       </div>
     </header>

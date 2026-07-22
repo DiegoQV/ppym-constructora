@@ -13,7 +13,7 @@ export function Footer() {
           <div>
             <a href="#inicio" aria-label={`${company.shortName}, volver al inicio`} className="group inline-flex focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow">
               <span className="relative block h-22 w-40 overflow-hidden">
-                <Image src="/logo/ppym-logo-navbar-inverse.png" alt="" fill sizes="160px" className="scale-[1.14] object-contain object-left transition-transform duration-500 group-hover:scale-[1.19]" />
+                <Image src="/logo/ppym-logo-navbar-inverse.webp" alt="" fill sizes="160px" className="scale-[1.14] object-contain object-left transition-transform duration-500 group-hover:scale-[1.19]" />
               </span>
               <span className="sr-only">{company.legalName}</span>
             </a>
@@ -46,8 +46,8 @@ export function Footer() {
         <div className="flex flex-col gap-5 py-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[11px] text-white/50">© {new Date().getFullYear()} {company.shortName}. Todos los derechos reservados.</p>
           <div className="footer-bottom-actions flex items-center justify-between gap-6 sm:justify-end">
-            <span className="font-mono text-[7px] uppercase tracking-[.18em] text-white/40">Construir con criterio</span>
-            <a href="#inicio" aria-label="Volver al inicio" className="footer-back-to-top group flex min-h-11 items-center gap-3 border-l border-white/15 pl-5 font-mono text-[8px] uppercase tracking-[.18em] text-white/50 transition-colors hover:text-technical-yellow focus-visible:outline-2 focus-visible:outline-technical-yellow">
+            <a href="/privacidad" className="flex min-h-11 items-center font-mono text-[7px] uppercase tracking-[.18em] text-white/50 transition-colors hover:text-technical-yellow focus-visible:outline-2 focus-visible:outline-technical-yellow">Privacidad</a>
+            <a href="#inicio" aria-label="Volver arriba" className="footer-back-to-top group flex min-h-11 items-center gap-3 border-l border-white/15 pl-5 font-mono text-[8px] uppercase tracking-[.18em] text-white/50 transition-colors hover:text-technical-yellow focus-visible:outline-2 focus-visible:outline-technical-yellow">
               Volver arriba
               <span className="grid size-9 place-items-center border border-white/15 transition-colors group-hover:border-technical-yellow/50"><ArrowUp aria-hidden className="size-4 transition-transform duration-300 group-hover:-translate-y-1" /></span>
             </a>

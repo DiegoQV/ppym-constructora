@@ -54,6 +54,26 @@ html { scroll-behavior: smooth; }
   50% { box-shadow: 0 10px 28px rgba(0, 0, 0, .3), 0 0 0 11px rgba(37, 211, 102, 0); }
 }
 
+@keyframes assistant-attention {
+  0%, 100% { filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .42)) drop-shadow(0 0 0 rgba(231, 185, 40, 0)); }
+  50% { filter: drop-shadow(0 12px 16px rgba(0, 0, 0, .44)) drop-shadow(0 0 7px rgba(231, 185, 40, .7)); }
+}
+
+@keyframes assistant-block-build {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(7px); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0); }
+}
+
+@keyframes assistant-user-lock {
+  from { opacity: 0; clip-path: inset(0 0 0 100%); transform: translateX(10px); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); transform: translateX(0); }
+}
+
+@keyframes assistant-option-place {
+  from { opacity: 0; transform: translateX(9px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 @keyframes service-panel-enter {
   from { opacity: 0; transform: translateY(12px) scale(.985); }
   to { opacity: 1; transform: translateY(0); }
@@ -1304,11 +1324,31 @@ html { scroll-behavior: smooth; }
 }
 
 .whatsapp-attention { animation: whatsapp-attention 1.15s ease-out 2.4s 2; }
+.assistant-launcher { animation: assistant-attention 1.25s ease-out 4.8s 2; }
+.assistant-launcher-shape,
+.assistant-launcher-core { clip-path: polygon(18% 0, 100% 0, 100% 82%, 82% 100%, 0 100%, 0 18%); }
+.assistant-message { opacity: 0; animation: assistant-block-build .5s cubic-bezier(.16, 1, .3, 1) forwards; }
+.assistant-message-visitor { animation-name: assistant-user-lock; animation-duration: .36s; }
+.assistant-option { opacity: 0; animation: assistant-option-place .42s cubic-bezier(.16, 1, .3, 1) forwards; }
+.assistant-panel[aria-hidden="true"] .assistant-message,
+.assistant-panel[aria-hidden="true"] .assistant-option { animation-name: none; }
+.assistant-panel { transform-origin: bottom right; }
+.assistant-scroll { scrollbar-color: rgba(17, 19, 21, .24) transparent; scrollbar-width: thin; }
+.assistant-scroll::-webkit-scrollbar { width: 5px; }
+.assistant-scroll::-webkit-scrollbar-track { background: transparent; }
+.assistant-scroll::-webkit-scrollbar-thumb { background: rgba(17, 19, 21, .22); }
 .cement-fill::before { animation: cement-flow 5.8s cubic-bezier(.45, 0, .55, 1) 1s infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .whatsapp-attention { animation: none !important; }
+  .assistant-launcher { animation: none !important; }
+  .assistant-message,
+  .assistant-option { animation: none !important; clip-path: none !important; opacity: 1 !important; transform: none !important; }
+  .differentiators-motion .type-line-v3 { animation: none !important; clip-path: none !important; }
+  .differentiators-motion .geometry-core,
+  .differentiators-motion .geometry-guides,
+  .differentiators-motion .geometry-piece { animation: none !important; opacity: .55; transform: none !important; }
   .equipment-heading-word { animation: none !important; opacity: 1 !important; transform: none !important; }
   .equipment-heading-period { color: #e7b928; transition: none; }
   .about-overline,
