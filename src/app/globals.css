@@ -125,8 +125,8 @@ html { scroll-behavior: smooth; }
 }
 
 @keyframes type-line-reveal-v3 {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0 0 0); }
+  from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(.08em); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0); }
 }
 
 @keyframes process-console-enter {
@@ -418,8 +418,10 @@ html { scroll-behavior: smooth; }
 .type-line-v3 {
   clip-path: inset(0 0 0 0);
   color: #fff;
+  opacity: 1;
   text-shadow: 0 3px 18px rgba(0, 0, 0, .28);
-  will-change: clip-path;
+  transform: translateY(0);
+  will-change: clip-path, opacity, transform;
 }
 
 .motion-active .geometry-core { animation: geometry-core-build 1.8s cubic-bezier(.65, 0, .35, 1) .12s both; }
@@ -429,7 +431,7 @@ html { scroll-behavior: smooth; }
 .motion-active .geometry-piece-b { animation-delay: .14s; }
 .motion-active .geometry-piece-c { animation-delay: .2s; }
 .motion-active .geometry-piece-d { animation-delay: .26s; }
-.differentiators-motion.motion-armed:not(.motion-active) .type-line-v3 { clip-path: inset(0 100% 0 0); }
+.differentiators-motion.motion-armed:not(.motion-active) .type-line-v3 { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(.08em); }
 .motion-active .type-line-v3 {
   animation-name: type-line-reveal-v3;
   animation-duration: .62s;
@@ -437,6 +439,8 @@ html { scroll-behavior: smooth; }
 }
 .motion-complete .type-line-v3 {
   clip-path: inset(0 0 0 0) !important;
+  opacity: 1 !important;
+  transform: none !important;
   animation: none !important;
 }
 .differentiators-closing { position: relative; }

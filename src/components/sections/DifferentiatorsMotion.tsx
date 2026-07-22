@@ -24,36 +24,53 @@ export function DifferentiatorsMotion() {
   useEffect(() => {
     const element = rootRef.current;
     if (!element) return;
+    const scene = element.closest<HTMLElement>(".differentiators-visual") ?? element;
 
     let frame = 0;
-    const activate = () => setActive(true);
+    let observer: IntersectionObserver | null = null;
+    let activated = false;
+    const activate = () => {
+      if (activated || document.visibilityState === "hidden") return;
+      activated = true;
+      setActive(true);
+      observer?.disconnect();
+      window.removeEventListener("scroll", scheduleCheck);
+      window.removeEventListener("resize", scheduleCheck);
+    };
     const checkPosition = () => {
-      const rect = element.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.86 && rect.bottom > window.innerHeight * 0.08) activate();
+      const rect = scene.getBoundingClientRect();
+      const visibleTop = Math.max(rect.top, 0);
+      const visibleBottom = Math.min(rect.bottom, window.innerHeight);
+      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+      const requiredHeight = Math.min(rect.height * 0.32, 260);
+
+      if (
+        rect.top < window.innerHeight * 0.72 &&
+        rect.bottom > window.innerHeight * 0.16 &&
+        visibleHeight >= requiredHeight
+      ) activate();
     };
     const scheduleCheck = () => {
       window.cancelAnimationFrame(frame);
       frame = window.requestAnimationFrame(checkPosition);
     };
 
-    const observer = "IntersectionObserver" in window ? new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        activate();
-        observer?.disconnect();
-      },
-      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" },
+    observer = "IntersectionObserver" in window ? new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) scheduleCheck(); },
+      { threshold: [0.2, 0.32, 0.5], rootMargin: "0px 0px -16% 0px" },
     ) : null;
 
-    observer?.observe(element);
+    observer?.observe(scene);
     window.addEventListener("scroll", scheduleCheck, { passive: true });
     window.addEventListener("resize", scheduleCheck, { passive: true });
+    document.addEventListener("visibilitychange", scheduleCheck);
     scheduleCheck();
     return () => {
       observer?.disconnect();
       window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", scheduleCheck);
       window.removeEventListener("resize", scheduleCheck);
+      document.removeEventListener("visibilitychange", scheduleCheck);
     };
   }, []);
 
