@@ -1349,10 +1349,6 @@ html { scroll-behavior: smooth; }
   .assistant-launcher { animation: none !important; }
   .assistant-message,
   .assistant-option { animation: none !important; clip-path: none !important; opacity: 1 !important; transform: none !important; }
-  .differentiators-motion .type-line-v3 { animation: none !important; clip-path: none !important; }
-  .differentiators-motion .geometry-core,
-  .differentiators-motion .geometry-guides,
-  .differentiators-motion .geometry-piece { animation: none !important; opacity: .55; transform: none !important; }
   .equipment-heading-word { animation: none !important; opacity: 1 !important; transform: none !important; }
   .equipment-heading-period { color: #e7b928; transition: none; }
   .about-overline,
