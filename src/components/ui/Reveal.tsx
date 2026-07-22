@@ -18,16 +18,25 @@ export function Reveal({ children, className }: RevealProps) {
 
     let revealed = false;
     let checkFrame = 0;
+    let prepareFrame = 0;
     let revealFrame = 0;
     const reveal = () => {
       if (revealed) return;
       revealed = true;
-      element.getBoundingClientRect();
-      revealFrame = window.requestAnimationFrame(() => element.classList.remove("reveal-pending"));
+      observer?.disconnect();
+
+      // Two frames guarantee that the hidden state is painted before its class
+      // is removed. A single frame can be collapsed by Safari and Chromium on
+      // short viewports when the element intersects during hydration.
+      prepareFrame = window.requestAnimationFrame(() => {
+        revealFrame = window.requestAnimationFrame(() => {
+          element.classList.remove("reveal-pending");
+        });
+      });
     };
     const checkPosition = () => {
       const rect = element.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.9 && rect.bottom > window.innerHeight * 0.08) reveal();
+      if (rect.top < window.innerHeight * 0.94 && rect.bottom > window.innerHeight * 0.04) reveal();
     };
     const scheduleCheck = () => {
       window.cancelAnimationFrame(checkFrame);
@@ -38,9 +47,8 @@ export function Reveal({ children, className }: RevealProps) {
       ([entry]) => {
         if (!entry.isIntersecting) return;
         reveal();
-        observer?.disconnect();
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0.01, rootMargin: "0px 0px -8% 0px" },
     ) : null;
 
     observer?.observe(element);
@@ -50,6 +58,7 @@ export function Reveal({ children, className }: RevealProps) {
     return () => {
       observer?.disconnect();
       window.cancelAnimationFrame(checkFrame);
+      window.cancelAnimationFrame(prepareFrame);
       window.cancelAnimationFrame(revealFrame);
       window.removeEventListener("scroll", scheduleCheck);
       window.removeEventListener("resize", scheduleCheck);

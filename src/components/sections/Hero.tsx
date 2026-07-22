@@ -64,14 +64,22 @@ export function Hero() {
           <p className="hero-description hero-enter hero-enter-delay-2 mt-7 max-w-[42rem] text-base leading-7 text-white/88 sm:text-lg sm:leading-8">
             Saneamiento físico-legal, expedientes para licencias, elaboración de planos, topografía y construcción en Chachapoyas y la región Amazonas.
           </p>
-          <div className="hero-trust hero-enter hero-enter-delay-3 mt-6 inline-flex max-w-full items-start gap-3.5 border border-white/14 border-l-2 border-l-technical-yellow/80 bg-charcoal/58 px-3.5 py-3 text-left shadow-[0_8px_24px_rgba(0,0,0,.14)] backdrop-blur-md sm:px-4">
-            <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0 text-technical-yellow" />
-            <div className="min-w-0">
-              <strong className="block text-xs font-semibold leading-5 text-white/95">{technicalEntity.label}</strong>
-              <p className="flex flex-wrap items-baseline gap-x-2 text-[11px] leading-4 text-white/70 sm:text-xs">
-                <span>{technicalEntity.issuer}</span>
-                <span className="text-white/30" aria-hidden>•</span>
-                <span className="font-mono text-[10px] tracking-[0.04em] text-white/72 sm:text-[11px]">ET {technicalEntity.code}</span>
+          <div className="hero-trust hero-enter hero-enter-delay-3 relative mt-6 inline-flex max-w-full overflow-hidden border border-technical-yellow/34 bg-[radial-gradient(circle_at_12%_20%,rgba(231,185,40,.2),transparent_42%),linear-gradient(112deg,rgba(39,36,24,.94)_0%,rgba(21,23,24,.9)_72%)] px-3 py-2.5 text-left shadow-[0_16px_36px_rgba(0,0,0,.28),0_0_24px_rgba(231,185,40,.06)] backdrop-blur-md sm:px-3.5 sm:py-3">
+            <span aria-hidden className="absolute inset-y-0 left-0 w-[3px] bg-technical-yellow" />
+            <span aria-hidden className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,rgba(231,185,40,.62),rgba(231,185,40,.12)_52%,transparent)]" />
+            <span className="relative mr-2.5 mt-0.5 flex size-7 shrink-0 items-center justify-center bg-technical-yellow text-charcoal shadow-[0_6px_18px_rgba(231,185,40,.18)] sm:size-8">
+              <ShieldCheck aria-hidden className="size-4 sm:size-[18px]" />
+            </span>
+            <div className="relative min-w-0">
+              <span className="mb-0.5 flex items-center gap-1.5 text-[8px] font-bold uppercase tracking-[0.15em] text-technical-yellow sm:text-[9px]">
+                <span aria-hidden className="size-1 rounded-full bg-technical-yellow" />
+                Acreditación vigente
+              </span>
+              <strong className="block font-heading text-xs font-semibold leading-[18px] text-white sm:text-sm">{technicalEntity.label}</strong>
+              <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[10px] leading-4 text-white/68 sm:text-[11px]">
+                <span className="font-medium text-white/78">{technicalEntity.issuer}</span>
+                <span className="text-white/25" aria-hidden>•</span>
+                <span className="font-mono text-[8px] tracking-[0.04em] text-white/58 sm:text-[9px]">ET {technicalEntity.code}</span>
               </p>
             </div>
           </div>
