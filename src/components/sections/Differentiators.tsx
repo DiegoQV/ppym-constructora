@@ -79,7 +79,7 @@ export function Differentiators() {
         <div className="differentiators-index flex items-center justify-between gap-6 border-b border-white/15 pb-6">
           <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/55">
             <span className="h-px w-8 bg-technical-yellow" />
-            04 / Diferenciadores
+            Diferenciadores
           </p>
           <p className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-white/35 sm:block">
             Criterio · Cercanía · Continuidad

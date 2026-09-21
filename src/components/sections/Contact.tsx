@@ -47,10 +47,9 @@ export function Contact() {
   return (
     <section ref={sectionRef} id="contacto" aria-labelledby="contact-title" className={cn("contact-section relative scroll-mt-20 overflow-hidden bg-technical-yellow text-charcoal lg:scroll-mt-24", armed && "contact-armed", visible && "contact-visible")}>
       <div aria-hidden className="technical-grid-dark absolute inset-0 opacity-35" />
-      <span aria-hidden className="contact-ghost-number absolute right-2 top-[.08em] hidden font-heading text-[20rem] font-bold leading-none tracking-[-.1em] text-charcoal/[.03] lg:block xl:right-6">08</span>
       <Container className="contact-container relative py-20 sm:py-24 lg:py-28">
           <div className="contact-kicker flex items-center justify-between gap-6 border-b border-charcoal/20 pb-4">
-            <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-charcoal/65"><span className="h-px w-8 bg-charcoal" />08 / Contacto</p>
+            <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-charcoal/65"><span className="h-px w-8 bg-charcoal" />Contacto</p>
             <p className="hidden font-mono text-[8px] uppercase tracking-[.2em] text-charcoal/45 sm:block">Chachapoyas · Amazonas · Perú</p>
           </div>
 

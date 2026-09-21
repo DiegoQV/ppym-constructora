@@ -76,7 +76,7 @@ export function Equipment() {
       <div aria-hidden className="absolute inset-0 technical-grid-dark opacity-[.18]" />
       <Container className="relative lg:flex lg:h-full lg:flex-col">
         <div className="flex items-center justify-between gap-6 border-b border-charcoal/15 pb-4">
-          <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-text-gray"><span className="h-px w-8 bg-technical-yellow" />07 / Capacidad operativa</p>
+          <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-text-gray"><span className="h-px w-8 bg-technical-yellow" />Capacidad operativa</p>
           <p className="hidden font-mono text-[8px] uppercase tracking-[.2em] text-text-gray/60 sm:block">Equipo · criterio · coordinación</p>
         </div>
 
@@ -117,7 +117,7 @@ export function Equipment() {
 
           <div key={active.number} id="equipment-panel" role="tabpanel" aria-labelledby={`equipment-tab-${active.number}`} className="equipment-panel-enter flex min-h-[500px] flex-col bg-charcoal p-7 text-white sm:p-9 lg:min-h-0 lg:p-6">
             <div className="flex items-start justify-between gap-5">
-              <div><p className="font-mono text-[8px] uppercase tracking-[.2em] text-white/38">Capacidad {active.number} / 04</p><p className="mt-2 font-mono text-[9px] uppercase tracking-[.2em] text-technical-yellow">{active.short}</p></div>
+              <div><p className="font-mono text-[8px] uppercase tracking-[.2em] text-white/38">Capacidad {active.number}</p><p className="mt-2 font-mono text-[9px] uppercase tracking-[.2em] text-technical-yellow">{active.short}</p></div>
               <span className="grid size-12 place-items-center border border-white/15 text-technical-yellow"><ActiveIcon aria-hidden className="size-5" strokeWidth={1.35} /></span>
             </div>
             <div className="equipment-panel-body my-auto py-5 lg:py-3">

@@ -69,7 +69,7 @@ export function Process() {
     <section ref={sectionRef} id="proceso" aria-labelledby="process-title" className={cn("process-cinema relative scroll-mt-20 overflow-hidden bg-[#e9e8e2] py-20 text-charcoal sm:py-24 lg:h-[calc(100svh-5.9rem)] lg:min-h-[760px] lg:scroll-mt-24 lg:py-8", assembled && "is-assembled")}>
       <Container className="lg:flex lg:h-full lg:flex-col">
         <div className="flex items-center justify-between gap-6 border-b border-charcoal/15 pb-4">
-          <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-gray"><span className="h-px w-8 bg-technical-yellow" />05 / Proceso</p>
+          <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-gray"><span className="h-px w-8 bg-technical-yellow" />Proceso</p>
           <p className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-text-gray/60 sm:block">Del primer dato al resultado</p>
         </div>
 
@@ -98,7 +98,7 @@ export function Process() {
           <div key={activeStage.number} id={`process-panel-${activeIndex}`} role="tabpanel" aria-labelledby={`process-tab-${activeIndex}`} className="process-story-panel relative z-10 flex min-h-[600px] max-w-xl flex-col p-7 sm:p-10 lg:h-full lg:min-h-0 lg:p-10 xl:p-12">
             <div className="flex items-center gap-4">
               <span className="grid size-12 place-items-center border border-technical-yellow/70 text-technical-yellow"><ActiveIcon aria-hidden className="size-5" strokeWidth={1.35} /></span>
-              <div><p className="font-mono text-[9px] uppercase tracking-[.2em] text-white/45">Etapa {activeStage.number} / 05</p><p className="mt-1 font-mono text-[10px] uppercase tracking-[.2em] text-technical-yellow">{activeStage.action}</p></div>
+              <div><p className="font-mono text-[9px] uppercase tracking-[.2em] text-white/45">Etapa {activeStage.number}</p><p className="mt-1 font-mono text-[10px] uppercase tracking-[.2em] text-technical-yellow">{activeStage.action}</p></div>
             </div>
 
             <div className="process-story-copy my-auto py-10">

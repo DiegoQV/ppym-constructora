@@ -13,7 +13,7 @@ export function Services() {
           <header className="services-sidebar lg:sticky lg:top-32 lg:self-start">
             <p className="mb-7 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-gray">
               <span className="h-px w-8 bg-technical-yellow" />
-              03 / Servicios
+              Servicios
             </p>
             <Reveal className="services-heading max-w-[32rem]">
               <h2 id="services-title" className="services-title font-heading text-[clamp(2.75rem,5.35vw,5.25rem)] font-bold leading-[0.94] tracking-[-0.06em] text-charcoal">
@@ -27,7 +27,7 @@ export function Services() {
             <div className="services-explore mt-10 hidden items-center gap-4 border-t border-charcoal/15 pt-5 lg:flex">
               <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-gray">Explora</span>
               <span aria-hidden className="h-px flex-1 bg-charcoal/15" />
-              <span className="text-xs text-text-gray">07 líneas de servicio</span>
+              <span className="text-xs text-text-gray">Líneas de servicio</span>
             </div>
           </header>
 

@@ -24,9 +24,8 @@ export function Footer() {
           <nav aria-label="Navegación del pie de página">
             <p className="font-mono text-[8px] uppercase tracking-[.2em] text-white/45">Recorrido</p>
             <div className="mt-5 grid grid-cols-2 gap-x-8 gap-y-1 lg:grid-cols-1">
-              {navigation.map((item, index) => (
-                <a key={item.href} href={item.href} className="footer-link group flex min-h-9 items-center gap-3 text-sm text-white/62 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-technical-yellow">
-                  <span className="font-mono text-[7px] text-technical-yellow/65">0{index + 1}</span>
+              {navigation.map((item) => (
+                <a key={item.href} href={item.href} className="footer-link group flex min-h-9 items-center text-sm text-white/62 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-technical-yellow">
                   <span>{item.label}</span>
                 </a>
               ))}

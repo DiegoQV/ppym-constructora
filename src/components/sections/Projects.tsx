@@ -63,7 +63,7 @@ export function Projects() {
       <div aria-hidden className="technical-grid absolute inset-0 opacity-20" />
       <Container className="relative lg:flex lg:h-full lg:flex-col">
         <div className="flex items-center justify-between gap-6 border-b border-white/15 pb-4">
-          <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-white/55"><span className="h-px w-8 bg-technical-yellow" />06 / Proyectos</p>
+          <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-white/55"><span className="h-px w-8 bg-technical-yellow" />Proyectos</p>
           <p className="hidden font-mono text-[8px] uppercase tracking-[.2em] text-white/35 sm:block">Colección referencial · Amazonas</p>
         </div>
 
