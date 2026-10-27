@@ -59,7 +59,7 @@ export function Projects() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="proyectos" aria-labelledby="projects-title" className={cn("projects-section relative scroll-mt-20 overflow-hidden bg-charcoal py-20 text-white lg:h-[calc(100svh-5.9rem)] lg:min-h-[780px] lg:scroll-mt-24 lg:py-8", headingArmed && "heading-armed", headingVisible && "heading-visible")}>
+    <section ref={sectionRef} id="proyectos" aria-labelledby="projects-title" className={cn("projects-section relative scroll-mt-20 overflow-hidden bg-charcoal py-20 text-white lg:h-[calc(100svh-1.9rem)] lg:min-h-[844px] lg:scroll-mt-24 lg:pt-8 lg:pb-24", headingArmed && "heading-armed", headingVisible && "heading-visible")}>
       <div aria-hidden className="technical-grid absolute inset-0 opacity-20" />
       <Container className="relative lg:flex lg:h-full lg:flex-col">
         <div className="flex items-center justify-between gap-6 border-b border-white/15 pb-4">

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Building2, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, MapPin, MessageCircle, Phone } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { company } from "@/data/company";
@@ -13,9 +13,8 @@ const contactUrl = createWhatsAppUrl(
 );
 
 const contactDetails = [
-  { label: "Línea directa", value: company.displayPhone, href: `tel:+51${company.phone}`, Icon: Phone },
-  { label: "Oficina", value: `${company.address}, ${company.city}`, href: "https://maps.google.com/?q=Jr.+Sachapuyos+250,+Chachapoyas,+Peru", Icon: MapPin },
-  { label: "Identificación", value: `RUC ${company.ruc}`, Icon: Building2 },
+  { label: "Línea directa", value: company.displayPhone, description: "", action: "Llamar", href: `tel:+51${company.phone}`, Icon: Phone },
+  { label: "Oficina", value: company.address, description: `${company.city}, ${company.region}`, action: "Ver ubicación", href: "https://maps.google.com/?q=Jr.+Sachapuyos+250,+Chachapoyas,+Peru", Icon: MapPin },
 ] as const;
 
 export function Contact() {
@@ -46,41 +45,47 @@ export function Contact() {
 
   return (
     <section ref={sectionRef} id="contacto" aria-labelledby="contact-title" className={cn("contact-section relative scroll-mt-20 overflow-hidden bg-technical-yellow text-charcoal lg:scroll-mt-24", armed && "contact-armed", visible && "contact-visible")}>
-      <div aria-hidden className="technical-grid-dark absolute inset-0 opacity-35" />
-      <Container className="contact-container relative py-20 sm:py-24 lg:py-28">
+      <div aria-hidden className="technical-grid-dark absolute inset-0 opacity-[.07]" />
+      <Container className="contact-container relative py-20 sm:py-24 lg:pb-24 lg:pt-20">
           <div className="contact-kicker flex items-center justify-between gap-6 border-b border-charcoal/20 pb-4">
-            <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-charcoal/65"><span className="h-px w-8 bg-charcoal" />Contacto</p>
-            <p className="hidden font-mono text-[8px] uppercase tracking-[.2em] text-charcoal/45 sm:block">Chachapoyas · Amazonas · Perú</p>
+            <p className="flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[.12em] text-charcoal"><span className="h-px w-8 bg-charcoal" />Contacto</p>
+            <p className="hidden font-mono text-xs font-semibold uppercase tracking-[.08em] text-charcoal/85 sm:block">Chachapoyas · Amazonas · Perú</p>
           </div>
 
-        <div className="contact-main grid gap-10 py-12 sm:py-14 lg:grid-cols-[1fr_.43fr] lg:items-end lg:gap-16 lg:py-16">
+        <div className="contact-main grid gap-10 py-10 sm:py-12 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:gap-14 lg:py-12">
           <div>
-            <p className="font-mono text-[9px] uppercase tracking-[.2em] text-charcoal/60">Una conversación concreta para empezar</p>
-            <h2 id="contact-title" className="contact-heading mt-5 max-w-[11ch] font-heading text-[clamp(3.35rem,7.25vw,7.65rem)] font-bold leading-[.82] tracking-[-.085em]">
+            <p className="max-w-md text-xs font-bold uppercase leading-6 tracking-[.1em] text-charcoal sm:text-sm">Una conversación concreta para empezar</p>
+            <h2 id="contact-title" className="contact-heading mt-5 max-w-[11ch] font-heading text-[clamp(2.85rem,5.8vw,6.25rem)] font-bold leading-[.94] tracking-[-.065em]">
               <span className="contact-heading-mask"><span className="contact-heading-line">Hablemos de</span></span>
               <span className="contact-heading-mask"><span className="contact-heading-line">su próximo</span></span>
               <span className="contact-heading-mask"><span className="contact-heading-line">proyecto<span className="text-charcoal/35">.</span></span></span>
             </h2>
           </div>
 
-          <div className="contact-brief relative overflow-hidden bg-charcoal p-7 text-white sm:p-9 lg:top-4">
+          <div className="contact-brief relative overflow-hidden bg-charcoal p-6 text-white sm:p-9 lg:p-10">
             <span aria-hidden className="absolute right-5 top-4 font-mono text-[4.5rem] leading-none text-white/[.035]">↗</span>
-            <p className="font-mono text-[8px] uppercase tracking-[.2em] text-technical-yellow/90">Punto de partida</p>
-            <p className="relative mt-6 max-w-md text-base leading-7 text-white/68 sm:text-lg">Cuéntenos qué necesita resolver, dónde se ubica y en qué etapa se encuentra. Empezaremos por entender el contexto.</p>
-            <a href={contactUrl} target="_blank" rel="noreferrer" className="contact-primary-cta group relative mt-8 flex min-h-16 items-center justify-between border-y border-white/20 py-4 font-heading text-lg font-semibold tracking-[-.035em] transition-colors hover:border-technical-yellow focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow sm:text-xl">
-              Iniciar conversación
-              <span className="contact-cta-icon grid h-11 w-11 place-items-center bg-technical-yellow text-charcoal"><ArrowUpRight aria-hidden className="size-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
+            <p className="text-xs font-bold uppercase leading-5 tracking-[.1em] text-technical-yellow">Empecemos por su consulta</p>
+            <h3 className="relative mt-5 max-w-[15ch] font-heading text-3xl font-semibold leading-[1.1] tracking-[-.04em] sm:text-4xl">¿Qué necesita resolver?</h3>
+            <p className="relative mt-5 max-w-md text-base leading-7 text-white/75 sm:text-lg">Cuéntenos qué necesita, dónde está su proyecto y en qué etapa se encuentra.</p>
+            <a href={contactUrl} target="_blank" rel="noopener noreferrer" className="contact-primary-cta group relative mt-7 flex min-h-14 items-center justify-between gap-3 bg-technical-yellow px-4 py-4 text-sm font-bold text-charcoal transition-colors hover:bg-technical-yellow-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow sm:px-5 sm:text-base">
+              <span className="flex items-center gap-2.5"><MessageCircle aria-hidden className="size-5 shrink-0" />Escribir por WhatsApp</span>
+              <ArrowUpRight aria-hidden className="size-5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
-            <p className="mt-5 font-mono text-[7px] uppercase tracking-[.16em] text-white/45">Respuesta directa vía WhatsApp</p>
+            <p className="mt-4 text-sm font-medium leading-5 text-white/80">Contacto directo con nuestro equipo.</p>
           </div>
         </div>
 
-        <div className="contact-details grid border-l border-t border-charcoal/25 sm:grid-cols-3">
-          {contactDetails.map(({ label, value, Icon, ...detail }) => {
-            const content = <><span className="flex items-center justify-between gap-4"><span className="font-mono text-[8px] uppercase tracking-[.18em] text-charcoal/60 transition-colors group-hover:text-white/55">{label}</span><Icon aria-hidden className="size-[18px] text-charcoal/65 transition-colors group-hover:text-technical-yellow" strokeWidth={1.7} /></span><span className="mt-5 block max-w-[22ch] text-sm font-medium leading-6 text-charcoal/80 transition-colors group-hover:text-white/80">{value}</span></>;
-            const className = "contact-detail group min-h-32 border-b border-r border-charcoal/25 bg-technical-yellow/70 p-5 transition-colors hover:bg-charcoal sm:min-h-36 sm:p-6";
-            return "href" in detail ? <a key={label} href={detail.href} target={detail.href.startsWith("http") ? "_blank" : undefined} rel={detail.href.startsWith("http") ? "noreferrer" : undefined} className={className}>{content}</a> : <div key={label} className={className}>{content}</div>;
-          })}
+        <div className="contact-details grid gap-x-12 border-t border-charcoal/25 md:grid-cols-2 lg:gap-x-20">
+          {contactDetails.map(({ label, value, description, action, href, Icon }) => (
+            <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} className="contact-detail group flex items-center justify-between gap-4 py-6 text-charcoal focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-charcoal max-md:first:border-b max-md:first:border-charcoal/15">
+              <span className="min-w-0">
+                <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[.1em] text-charcoal/90"><Icon aria-hidden className="size-4 shrink-0" strokeWidth={2} />{label}</span>
+                <span className="mt-2 block text-base font-semibold leading-6 sm:text-lg">{value}</span>
+                {description && <span className="mt-0.5 block text-sm font-medium leading-5 text-charcoal/90">{description}</span>}
+              </span>
+              <span className="inline-flex min-h-11 shrink-0 items-center gap-2 text-sm font-medium underline decoration-charcoal/35 underline-offset-4 transition-colors group-hover:decoration-charcoal group-focus-visible:decoration-charcoal">{action}<ArrowUpRight aria-hidden className="size-3.5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
+            </a>
+          ))}
         </div>
       </Container>
     </section>

@@ -751,19 +751,6 @@ html { scroll-behavior: smooth; }
 .contact-primary-cta:hover .contact-cta-icon,
 .contact-primary-cta:focus-visible .contact-cta-icon { width: 3.5rem; }
 .contact-detail { position: relative; }
-.contact-detail::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  background: #111315;
-  content: "";
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .5s cubic-bezier(.16, 1, .3, 1), background-color .3s ease;
-}
-.contact-detail:hover::after { background: #e7b928; transform: scaleX(1); }
 .contact-section.contact-armed:not(.contact-visible) .contact-kicker { opacity: 0; transform: translateY(10px); }
 .contact-section.contact-armed:not(.contact-visible) .contact-heading-line { opacity: 0; transform: translateY(112%) skewY(2deg); }
 .contact-section.contact-armed:not(.contact-visible) .contact-brief { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateX(24px); }
@@ -1157,7 +1144,11 @@ html { scroll-behavior: smooth; }
     padding-block: 1.25rem;
   }
 
-  .process-cinema { padding-bottom: 2.5rem; }
+  .process-cinema {
+    height: calc(100svh - 1rem);
+    min-height: 684px;
+    padding-bottom: 6.5rem;
+  }
 
   .process-heading-block,
   .equipment-heading-block {
@@ -1201,8 +1192,9 @@ html { scroll-behavior: smooth; }
   .project-blade-action { margin-right: 1.5rem; }
 
   .projects-section {
-    height: calc(100svh - 5.9rem + 1.75rem);
-    padding-bottom: 3rem;
+    height: calc(100svh - 5.9rem + 5.75rem);
+    min-height: 684px;
+    padding-bottom: 7rem;
   }
 
   .equipment-tab { min-height: 3.75rem; padding-block: .35rem; }
@@ -1248,8 +1240,9 @@ html { scroll-behavior: smooth; }
   }
 
   .equipment-section {
-    height: calc(100svh - 5.9rem + 8rem);
-    padding-bottom: 3rem;
+    height: calc(100svh - 5.9rem + 12rem);
+    min-height: 684px;
+    padding-bottom: 7rem;
   }
 
   .contact-container { padding-block: 4.5rem 4rem; }
@@ -1258,8 +1251,8 @@ html { scroll-behavior: smooth; }
     padding-block: 2.5rem;
   }
   .contact-heading {
-    font-size: clamp(4.5rem, 6.4vw, 5.4rem);
-    line-height: .84;
+    font-size: clamp(3.5rem, 5.2vw, 4.5rem);
+    line-height: .94;
   }
   .contact-brief {
     top: 0;
@@ -1277,11 +1270,6 @@ html { scroll-behavior: smooth; }
   }
   .contact-cta-icon { margin-right: 1rem; }
   .contact-brief > p:nth-of-type(3) { margin-top: 1rem; }
-  .contact-detail {
-    min-height: 7.5rem;
-    padding: 1.25rem;
-  }
-  .contact-detail > span:last-child { margin-top: 1rem; }
   .footer-back-to-top { margin-right: 0; }
   .footer-bottom-actions { position: relative; right: 5rem; }
 }

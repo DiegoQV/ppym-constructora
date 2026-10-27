@@ -16,7 +16,7 @@ export const technicalEntity = {
 
 export const trustIndicators = [
   { overline: "Trayectoria", label: "Desde 2018" },
-  { overline: "Acreditación", label: technicalEntity.label, status: technicalEntity.status },
+  { overline: "Acreditación", label: "Techo Propio", status: technicalEntity.status },
   { overline: "Enfoque", label: "Soluciones integrales" },
   { overline: "Sede", label: "Chachapoyas, Amazonas" },
 ] as const;

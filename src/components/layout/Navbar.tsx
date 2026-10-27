@@ -54,7 +54,7 @@ export function Navbar() {
         <a
           href={advisoryUrl}
           aria-label="Contactar a PPYM por WhatsApp"
-          className="group hidden min-h-11 items-center gap-2 border-b border-white/35 px-1 text-sm font-semibold text-white/90 transition hover:border-technical-yellow hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow min-[1180px]:inline-flex"
+          className="group hidden min-h-11 shrink-0 items-center justify-center gap-3 border border-technical-yellow bg-technical-yellow px-5 py-3 text-sm font-bold text-charcoal shadow-[0_6px_20px_rgba(231,185,40,.14)] transition-colors duration-200 hover:border-technical-yellow-hover hover:bg-technical-yellow-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow min-[1180px]:inline-flex"
         >
           Contactar
           <ArrowUpRight aria-hidden className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

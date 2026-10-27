@@ -72,7 +72,7 @@ export function Equipment() {
   }, []);
 
   return (
-    <section id="equipos" aria-labelledby="equipment-title" className={cn("equipment-section relative scroll-mt-20 overflow-hidden bg-[#deddd7] py-20 text-charcoal sm:py-24 lg:h-[calc(100svh-5.9rem)] lg:min-h-[780px] lg:scroll-mt-24 lg:py-8", headingArmed && "heading-armed", headingVisible && "heading-visible")}>
+    <section id="equipos" aria-labelledby="equipment-title" className={cn("equipment-section relative scroll-mt-20 overflow-hidden bg-[#deddd7] py-20 text-charcoal sm:py-24 lg:h-[calc(100svh-1.9rem)] lg:min-h-[844px] lg:scroll-mt-24 lg:pt-8 lg:pb-24", headingArmed && "heading-armed", headingVisible && "heading-visible")}>
       <div aria-hidden className="absolute inset-0 technical-grid-dark opacity-[.18]" />
       <Container className="relative lg:flex lg:h-full lg:flex-col">
         <div className="flex items-center justify-between gap-6 border-b border-charcoal/15 pb-4">

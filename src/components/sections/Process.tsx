@@ -66,7 +66,7 @@ export function Process() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="proceso" aria-labelledby="process-title" className={cn("process-cinema relative scroll-mt-20 overflow-hidden bg-[#e9e8e2] py-20 text-charcoal sm:py-24 lg:h-[calc(100svh-5.9rem)] lg:min-h-[760px] lg:scroll-mt-24 lg:py-8", assembled && "is-assembled")}>
+    <section ref={sectionRef} id="proceso" aria-labelledby="process-title" className={cn("process-cinema relative scroll-mt-20 overflow-hidden bg-[#e9e8e2] py-20 text-charcoal sm:py-24 lg:h-[calc(100svh-1.9rem)] lg:min-h-[824px] lg:scroll-mt-24 lg:pt-8 lg:pb-24", assembled && "is-assembled")}>
       <Container className="lg:flex lg:h-full lg:flex-col">
         <div className="flex items-center justify-between gap-6 border-b border-charcoal/15 pb-4">
           <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-gray"><span className="h-px w-8 bg-technical-yellow" />Proceso</p>

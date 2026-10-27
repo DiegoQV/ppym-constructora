@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ArrowUpRight, Check, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
+import { TechoPropioLogo } from "@/components/ui/TechoPropioLogo";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { company } from "@/data/company";
@@ -100,9 +101,7 @@ export function About() {
 
             <div className="about-credential mt-3 grid overflow-hidden bg-charcoal text-white sm:mt-5 sm:grid-cols-[1fr_auto]">
               <div className="about-credential-copy flex items-start gap-4 px-5 py-5 sm:px-6">
-                <span className="grid size-10 shrink-0 place-items-center border border-white/12 text-technical-yellow">
-                  <ShieldCheck aria-hidden className="size-5" />
-                </span>
+                <TechoPropioLogo className="self-center" />
                 <div>
                   <p className="text-sm font-semibold text-white sm:text-base">{technicalEntity.label}</p>
                   <p className="mt-1 text-sm text-white/52">por el {technicalEntity.issuer}</p>
