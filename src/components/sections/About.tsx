@@ -60,9 +60,6 @@ export function About() {
                   <span className="about-photo-line about-photo-line-bottom-left" />
                   <span className="about-photo-line about-photo-line-bottom-right" />
                 </div>
-                <span className="absolute bottom-4 left-4 z-[3] bg-charcoal/80 px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.16em] text-white/64 backdrop-blur-sm sm:bottom-5 sm:left-5">
-                  Imagen conceptual
-                </span>
               </figure>
 
               <div className="grid grid-rows-[1fr_auto] gap-3 sm:gap-5">
@@ -82,9 +79,6 @@ export function About() {
                     <span className="about-photo-line about-photo-line-bottom-left" />
                     <span className="about-photo-line about-photo-line-bottom-right" />
                   </div>
-                  <span className="absolute bottom-4 right-4 z-[3] bg-charcoal/80 px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.16em] text-white/64 backdrop-blur-sm sm:bottom-5 sm:right-5">
-                    Visual conceptual
-                  </span>
                 </figure>
 
                 <div className="about-year-card flex min-h-40 flex-col justify-between bg-technical-yellow p-5 text-charcoal sm:min-h-44 sm:p-6">
