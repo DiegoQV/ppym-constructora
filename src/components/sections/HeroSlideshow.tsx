@@ -15,14 +15,15 @@ export function HeroSlideshow({ children }: { children: ReactNode }) {
   const root = useRef<HTMLElement>(null);
   const [currentIndex, setIndex] = useState(0);
   const index = currentIndex % slides.length;
-  const [paused, setPaused] = useState(false);
+  const [pausedByUser, setPaused] = useState<boolean | null>(null);
   const [reducedMotion, setReducedMotion] = useState(true);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [pageVisible, setPageVisible] = useState(true);
   const [loaded, setLoaded] = useState<number[]>([]);
   const [failed, setFailed] = useState<number[]>([]);
   const [requested, setRequested] = useState<number | null>(null);
-  const playing = !paused && !reducedMotion && visible && pageVisible;
+  const paused = pausedByUser ?? reducedMotion;
+  const playing = !paused && visible && pageVisible;
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -32,22 +33,24 @@ export function HeroSlideshow({ children }: { children: ReactNode }) {
     syncVisibility();
     motion.addEventListener("change", syncMotion);
     document.addEventListener("visibilitychange", syncVisibility);
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: .15 });
-    if (root.current) observer.observe(root.current);
+    const observer = "IntersectionObserver" in window
+      ? new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting))
+      : null;
+    if (root.current) observer?.observe(root.current);
     return () => {
       motion.removeEventListener("change", syncMotion);
       document.removeEventListener("visibilitychange", syncVisibility);
-      observer.disconnect();
+      observer?.disconnect();
     };
   }, []);
 
   useEffect(() => {
-    if (!playing || !loaded.includes(index)) return;
+    if (!playing) return;
     const next = slideOffsets.map(offset => (index + offset) % slides.length).find(candidate => loaded.includes(candidate));
     if (next === undefined) return;
-    const timer = window.setTimeout(() => setIndex(next), 7000);
+    const timer = window.setTimeout(() => setIndex(next), failed.includes(index) ? 0 : 7000);
     return () => window.clearTimeout(timer);
-  }, [index, playing, loaded]);
+  }, [index, playing, loaded, failed]);
 
   const select = (next: number) => {
     setPaused(true);
@@ -97,8 +100,8 @@ export function HeroSlideshow({ children }: { children: ReactNode }) {
         }}>
           <button type="button" className="hero-slider-arrow" aria-label="Foto anterior" onClick={() => step(-1)}><ChevronLeft size={18} /></button>
           <button type="button" className="hero-slider-arrow" aria-label="Foto siguiente" onClick={() => step(1)}><ChevronRight size={18} /></button>
-          <button type="button" className="hero-slider-arrow hero-slider-toggle" aria-label={reducedMotion ? "Presentación manual por movimiento reducido" : paused ? "Reproducir presentación" : "Pausar presentación"} disabled={reducedMotion} onClick={() => { setRequested(null); setPaused(current => !current); }}>
-            {paused || reducedMotion ? <Play size={15} /> : <Pause size={15} />}
+          <button type="button" className="hero-slider-arrow hero-slider-toggle" aria-label={paused ? "Reproducir presentación" : "Pausar presentación"} onClick={() => { setRequested(null); setPaused(!paused); }}>
+            {paused ? <Play size={15} /> : <Pause size={15} />}
           </button>
         </div>
       </Container>
