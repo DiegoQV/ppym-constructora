@@ -15,30 +15,23 @@ export function HeroSlideshow({ children }: { children: ReactNode }) {
   const root = useRef<HTMLElement>(null);
   const [currentIndex, setIndex] = useState(0);
   const index = currentIndex % slides.length;
-  const [pausedByUser, setPaused] = useState<boolean | null>(null);
-  const [reducedMotion, setReducedMotion] = useState(true);
+  const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(true);
   const [pageVisible, setPageVisible] = useState(true);
   const [loaded, setLoaded] = useState<number[]>([]);
   const [failed, setFailed] = useState<number[]>([]);
   const [requested, setRequested] = useState<number | null>(null);
-  const paused = pausedByUser ?? reducedMotion;
   const playing = !paused && visible && pageVisible;
 
   useEffect(() => {
-    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const syncMotion = () => setReducedMotion(motion.matches);
-    const syncVisibility = () => setPageVisible(document.visibilityState === "visible");
-    syncMotion();
+    const syncVisibility = () => setPageVisible(!document.hidden);
     syncVisibility();
-    motion.addEventListener("change", syncMotion);
     document.addEventListener("visibilitychange", syncVisibility);
     const observer = "IntersectionObserver" in window
       ? new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting))
       : null;
     if (root.current) observer?.observe(root.current);
     return () => {
-      motion.removeEventListener("change", syncMotion);
       document.removeEventListener("visibilitychange", syncVisibility);
       observer?.disconnect();
     };

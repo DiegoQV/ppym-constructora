@@ -27,40 +27,35 @@ export function WorkPageTurn({ children, direction, onComplete }: {
   useEffect(() => { doneRef.current = onComplete; }, [onComplete]);
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const mobile = window.matchMedia("(max-width: 767px)");
-    const duration = reduced.matches ? 0 : mobile.matches ? 320 : 1050;
+    const duration = mobile.matches ? 750 : 1050;
     let frame = 0;
     let start: number | null = null;
     const mirror = ([x, y]: Point): Point => [direction < 0 ? 100 - x : x, y];
     const svgPoints = (points: Point[]) => points.map(mirror).map((point) => point.join(",")).join(" ");
     const tick = (time: number) => {
       start ??= time;
-      const progress = duration ? Math.min((time - start) / duration, 1) : 1;
+      const progress = Math.min((time - start) / duration, 1);
       // A smooth start and finish, with a continuous diagonal fold in between.
       const eased = progress * progress * (3 - 2 * progress);
-      if (mobile.matches || reduced.matches) {
-        if (sheetRef.current) sheetRef.current.style.opacity = String(1 - eased);
-      } else {
-        const cut = 200 * (1 - eased);
-        const width = 15 * Math.sin(Math.PI * progress);
-        const front = sheetPolygon(cut);
-        const inner = sheetPolygon(Math.max(0, cut - width));
-        const outer = sheetPolygon(Math.min(200, cut + width * 0.45));
-        // Only the diagonal endpoints are needed to form the reverse of the sheet.
-        const diagonal = (points: Point[], line: number) => points.filter(([x, y]) => Math.abs(x + y - line) < 0.01);
-        const fold = [...front.filter(([x, y]) => x + y >= cut - width), ...diagonal(inner, Math.max(0, cut - width)).reverse()];
-        const shadow = [...outer.filter(([x, y]) => x + y >= cut), ...diagonal(front, cut).reverse()];
-        if (sheetRef.current) sheetRef.current.style.clipPath = `polygon(${front.map(mirror).map(([x, y]) => `${x}% ${y}%`).join(",")})`;
-        foldRef.current?.setAttribute("points", svgPoints(fold));
-        shadowRef.current?.setAttribute("points", svgPoints(shadow));
-        const [x1, y1] = mirror([(cut - width) / 2, (cut - width) / 2]);
-        const [x2, y2] = mirror([cut / 2, cut / 2]);
-        gradientRef.current?.setAttribute("x1", String(x1));
-        gradientRef.current?.setAttribute("y1", String(y1));
-        gradientRef.current?.setAttribute("x2", String(x2));
-        gradientRef.current?.setAttribute("y2", String(y2));
-      }
+      const cut = 200 * (1 - eased);
+      const width = 15 * Math.sin(Math.PI * progress);
+      const front = sheetPolygon(cut);
+      const inner = sheetPolygon(Math.max(0, cut - width));
+      const outer = sheetPolygon(Math.min(200, cut + width * 0.45));
+      // Only the diagonal endpoints are needed to form the reverse of the sheet.
+      const diagonal = (points: Point[], line: number) => points.filter(([x, y]) => Math.abs(x + y - line) < 0.01);
+      const fold = [...front.filter(([x, y]) => x + y >= cut - width), ...diagonal(inner, Math.max(0, cut - width)).reverse()];
+      const shadow = [...outer.filter(([x, y]) => x + y >= cut), ...diagonal(front, cut).reverse()];
+      if (sheetRef.current) sheetRef.current.style.clipPath = `polygon(${front.map(mirror).map(([x, y]) => `${x}% ${y}%`).join(",")})`;
+      foldRef.current?.setAttribute("points", svgPoints(fold));
+      shadowRef.current?.setAttribute("points", svgPoints(shadow));
+      const [x1, y1] = mirror([(cut - width) / 2, (cut - width) / 2]);
+      const [x2, y2] = mirror([cut / 2, cut / 2]);
+      gradientRef.current?.setAttribute("x1", String(x1));
+      gradientRef.current?.setAttribute("y1", String(y1));
+      gradientRef.current?.setAttribute("x2", String(x2));
+      gradientRef.current?.setAttribute("y2", String(y2));
       if (progress < 1) frame = window.requestAnimationFrame(tick);
       else doneRef.current();
     };

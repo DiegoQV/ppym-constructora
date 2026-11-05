@@ -17,34 +17,26 @@ export function WorkPortfolio() {
   const [index, setIndex] = useState(0);
   const [turn, setTurn] = useState<{ from: number; to: number; direction: number } | null>(null);
   const [paused, setPaused] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [pageVisible, setPageVisible] = useState(true);
-  const [hovered, setHovered] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(true);
   const [ready, setReady] = useState<Set<string>>(() => new Set());
   const [failed, setFailed] = useState<Set<string>>(() => new Set());
   const [requested, setRequested] = useState<{ to: number; direction: number } | null>(null);
   const displayed = turn?.to ?? index;
-  const automatic = !paused && !reducedMotion;
-  const playing = automatic && visible && pageVisible && !hovered && !turn && !requested && pages[index].photos.every((photo) => ready.has(photo.src));
+  const automatic = !paused;
+  const playing = automatic && visible && pageVisible && !turn && !requested && pages[index].photos.every((photo) => ready.has(photo.src));
 
   useEffect(() => {
-    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updateMotion = () => {
-      setReducedMotion(motion.matches);
-      if (motion.matches) setPaused(true);
-    };
-    updateMotion();
-    const updateVisibility = () => setPageVisible(document.visibilityState === "visible");
+    const updateVisibility = () => setPageVisible(!document.hidden);
     updateVisibility();
-    motion.addEventListener("change", updateMotion);
     document.addEventListener("visibilitychange", updateVisibility);
     const element = rootRef.current;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.25 });
-    if (element) observer.observe(element);
+    const observer = "IntersectionObserver" in window
+      ? new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting))
+      : null;
+    if (element) observer?.observe(element);
     return () => {
-      observer.disconnect();
-      motion.removeEventListener("change", updateMotion);
+      observer?.disconnect();
       document.removeEventListener("visibilitychange", updateVisibility);
     };
   }, []);
@@ -53,18 +45,17 @@ export function WorkPortfolio() {
     if (!requested || turn) return;
     if (!pages[requested.to].photos.every((photo) => ready.has(photo.src))) return;
     const frame = window.requestAnimationFrame(() => {
-      if (reducedMotion) setIndex(requested.to);
-      else setTurn({ from: index, ...requested });
+      setTurn({ from: index, ...requested });
       setRequested(null);
     });
     return () => window.cancelAnimationFrame(frame);
-  }, [requested, turn, ready, index, reducedMotion]);
+  }, [requested, turn, ready, index]);
 
   useEffect(() => {
-    if (!playing || !pages[index].photos.every((photo) => ready.has(photo.src))) return;
+    if (!playing) return;
     const timer = window.setTimeout(() => setRequested({ to: (index + 1) % pages.length, direction: 1 }), 6000);
     return () => window.clearTimeout(timer);
-  }, [playing, index, ready]);
+  }, [playing, index]);
 
   const markReady = (src: string) => setReady((previous) => previous.has(src) ? previous : new Set([...previous, src]));
   const select = (to: number, direction: number) => {
@@ -84,6 +75,7 @@ export function WorkPortfolio() {
               fill
               sizes={pages[pageIndex].photos.length > 1 ? "(min-width: 1024px) 25vw, 50vw" : "(min-width: 1024px) 50vw, 100vw"}
               className="object-cover"
+              loading={decorative || pageIndex === requested?.to ? "eager" : "lazy"}
               onLoad={decorative ? undefined : () => markReady(photo.src)}
               onError={decorative ? undefined : () => { setFailed((previous) => new Set([...previous, photo.src])); markReady(photo.src); }}
             />
@@ -110,8 +102,6 @@ export function WorkPortfolio() {
         aria-roledescription="carrusel"
         aria-label="Fotografías de obras de PPYM"
         className="work-portfolio-album"
-        onPointerEnter={(event) => { if (event.pointerType === "mouse") setHovered(true); }}
-        onPointerLeave={() => setHovered(false)}
         onFocusCapture={(event) => { if (!(event.target as HTMLElement).closest(".work-portfolio-play")) setPaused(true); }}
         onKeyDown={(event) => {
           if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
@@ -122,9 +112,9 @@ export function WorkPortfolio() {
       >
         <div className="work-portfolio-toolbar">
           <span className="font-mono text-[10px] uppercase tracking-[.16em] text-white/65">Registro fotográfico</span>
-          <button type="button" className="work-portfolio-play" onClick={() => { setPaused(automatic); if (automatic) setRequested(null); }} disabled={reducedMotion} aria-label={automatic ? "Pausar presentación" : "Reproducir presentación"}>
+          <button type="button" className="work-portfolio-play" onClick={() => { setPaused(automatic); if (automatic) setRequested(null); }} aria-label={automatic ? "Pausar presentación" : "Reproducir presentación"}>
             {automatic ? <Pause aria-hidden size={14} /> : <Play aria-hidden size={14} />}
-            <span>{reducedMotion ? "Modo manual" : automatic ? "Pausar" : "Reproducir"}</span>
+            <span>{automatic ? "Pausar" : "Reproducir"}</span>
           </button>
         </div>
 
