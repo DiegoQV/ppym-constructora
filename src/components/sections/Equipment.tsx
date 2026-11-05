@@ -93,7 +93,7 @@ export function Equipment() {
           </div>
           <div className="border-l-2 border-technical-yellow pl-6 lg:mb-2 lg:pl-8">
             <p className="max-w-lg text-base leading-7 text-text-gray sm:text-lg">No se trata de acumular máquinas. Se trata de articular el recurso correcto con el momento correcto.</p>
-            <p className="mt-3 font-mono text-[7px] uppercase tracking-[.16em] text-text-gray/55">Visualizaciones referenciales · Disponibilidad según alcance</p>
+            <p className="mt-3 font-mono text-[7px] uppercase tracking-[.16em] text-text-gray/55">Disponibilidad según alcance</p>
           </div>
         </Reveal>
 

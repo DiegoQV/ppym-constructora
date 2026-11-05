@@ -12,7 +12,7 @@ export function LocalBusinessJsonLd() {
     legalName: company.legalName,
     url: site.url,
     logo: `${site.url}/logo/ppym-logo-navbar-inverse.webp`,
-    image: `${site.url}/images/hero/ppym-large-construction-team-right-v4.webp`,
+    image: `${site.url}/images/obras/fachada-amarilla-revestimiento.webp`,
     description: site.description,
     taxID: company.ruc,
     foundingDate: String(company.activitiesStarted),

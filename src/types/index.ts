@@ -7,6 +7,7 @@ export interface Service {
   description: string;
   image: string;
   imageAlt: string;
+  imageLabel?: string;
   imagePosition: string;
   items: string[];
   whatsappMessage: string;

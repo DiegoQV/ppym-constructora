@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { HeroSlideshow } from "@/components/sections/HeroSlideshow";
 import { ArrowDownRight, MessageCircle } from "lucide-react";
 import { TechoPropioLogo } from "@/components/ui/TechoPropioLogo";
 import { Button } from "@/components/ui/Button";
@@ -7,48 +7,11 @@ import { company } from "@/data/company";
 import { technicalEntity } from "@/data/navigation";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
 
-function TechnicalOverlay() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
-      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className="h-full w-full" fill="none">
-        <g stroke="currentColor" className="technical-lines text-white/12" strokeWidth="1">
-          <path d="M700 175h610M700 160v30m610-30v30" />
-          <path d="m712 175 14-5v10-5Zm586 0-14-5v10-5Z" fill="currentColor" />
-          <path d="M735 215v455m165-455v455m195-455v455m165-455v455" strokeDasharray="5 8" />
-          <path d="M680 670h650M680 655v30m650-30v30" />
-          <circle className="technical-orbit" cx="1260" cy="250" r="38" />
-        </g>
-        <g fill="currentColor" className="technical-labels text-white/28" fontFamily="monospace" fontSize="11" letterSpacing="1.5">
-          <text x="930" y="157">ELEV. 01 / REFERENCIA CONCEPTUAL</text>
-          <text x="1218" y="316">N / 00°</text>
-          <text x="1228" y="688">NPT ±0.00</text>
-        </g>
-        <g stroke="currentColor" className="technical-markers text-technical-yellow/55" strokeWidth="2">
-          <path d="M695 670h52" /><circle cx="900" cy="425" r="4" fill="currentColor" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
 export function Hero() {
   const advisoryUrl = createWhatsAppUrl(company.phone, "Hola, quisiera solicitar asesoría técnica.");
 
   return (
-    <section id="inicio" className="hero-shell relative isolate flex min-h-[760px] overflow-hidden bg-charcoal pb-16 pt-30 text-white sm:min-h-[800px] sm:pt-36 lg:min-h-[850px] lg:items-center lg:py-32">
-      <Image
-        src="/images/hero/ppym-large-construction-team-right-v4.webp"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="hero-photo hero-photo-enter -z-30 object-cover object-[73%_center] sm:object-[68%_center] lg:object-center"
-      />
-      <div aria-hidden className="hero-primary-gradient absolute inset-0 -z-20 bg-[linear-gradient(90deg,rgba(4,9,12,.96)_0%,rgba(4,9,12,.88)_30%,rgba(4,9,12,.42)_56%,rgba(4,9,12,.04)_100%)] max-lg:bg-[linear-gradient(180deg,rgba(4,9,12,.96)_0%,rgba(4,9,12,.86)_55%,rgba(4,9,12,.48)_100%)]" />
-      <div aria-hidden className="hero-secondary-gradient absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(4,9,12,.32)_0%,transparent_25%,transparent_70%,rgba(4,9,12,.68)_100%)]" />
-      <div aria-hidden className="absolute inset-0 -z-10 hero-grid opacity-30" />
-      <TechnicalOverlay />
-
+    <HeroSlideshow>
       <Container className="relative">
         <div className="hero-copy max-w-[47rem]">
           <p className="hero-eyebrow hero-enter mb-7 flex max-w-xl items-start gap-3 text-[11px] font-bold uppercase leading-5 tracking-[0.15em] text-technical-yellow sm:mb-8 sm:text-xs">
@@ -56,13 +19,20 @@ export function Hero() {
             <span className="whitespace-nowrap sm:hidden">Ingeniería · Construcción · Consultoría</span>
             <span className="hidden sm:inline">Ingeniería, construcción y consultoría técnica</span>
           </p>
-          <h1 className="hero-title max-w-[11.5ch] font-heading text-[clamp(2.5rem,11.7vw,3.15rem)] font-bold leading-[1.04] tracking-[-0.052em] text-white sm:text-[clamp(3.15rem,6.5vw,5.45rem)] md:leading-[1] lg:leading-[0.96]">
-            <span className="hero-title-mask-v2 block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-1 block whitespace-nowrap">Soluciones</span></span>
-            <span className="hero-title-mask-v2 block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-2 block whitespace-nowrap">técnicas para</span></span>
-            <span className="hero-title-mask-v2 block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-3 block whitespace-nowrap"><span className="cement-fill" data-text="construir">construir</span> con</span></span>
-            <span className="hero-title-mask-v2 hero-title-mask-descender block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-4 block whitespace-nowrap">seguridad.</span></span>
+          <h1 aria-label="Soluciones técnicas para construir con seguridad." className="hero-title max-w-[11.5ch] font-heading text-[clamp(2.5rem,11.7vw,3.15rem)] font-extrabold leading-[1.04] tracking-[-0.052em] text-white sm:text-[clamp(3.2125rem,6.65vw,5.575rem)] md:leading-[1] lg:leading-[0.96]">
+            <span className="block lg:hidden">
+              <span className="hero-title-mask-v2 block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-1 block whitespace-nowrap">Soluciones</span></span>
+              <span className="hero-title-mask-v2 block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-2 block whitespace-nowrap">técnicas para</span></span>
+              <span className="hero-title-mask-v2 block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-3 block whitespace-nowrap"><span className="cement-fill" data-text="construir">construir</span> con</span></span>
+              <span className="hero-title-mask-v2 hero-title-mask-descender block overflow-hidden"><span className="hero-title-line-v2 hero-title-line-v2-4 block whitespace-nowrap">seguridad.</span></span>
+            </span>
+            <span className="hidden lg:block">
+              <span className="hero-title-mask-v2"><span className="hero-title-line-v2 hero-title-line-v2-1">Soluciones técnicas</span></span>
+              <span className="hero-title-mask-v2"><span className="hero-title-line-v2 hero-title-line-v2-2">para <span className="cement-fill" data-text="construir">construir</span></span></span>
+              <span className="hero-title-mask-v2 hero-title-mask-descender"><span className="hero-title-line-v2 hero-title-line-v2-3">con seguridad.</span></span>
+            </span>
           </h1>
-          <p className="hero-description hero-enter hero-enter-delay-2 mt-7 max-w-[42rem] text-base leading-7 text-white/88 sm:text-lg sm:leading-8">
+          <p className="hero-description hero-enter hero-enter-delay-2 mt-7 max-w-[42rem] text-base font-[550] leading-7 text-white/88 sm:text-lg sm:leading-8">
             Saneamiento físico-legal, expedientes para licencias, elaboración de planos, topografía y construcción en Chachapoyas y la región Amazonas.
           </p>
           <div className="hero-trust hero-enter hero-enter-delay-3 relative mt-6 inline-flex max-w-full overflow-hidden border border-technical-yellow/34 bg-[radial-gradient(circle_at_12%_20%,rgba(231,185,40,.2),transparent_42%),linear-gradient(112deg,rgba(39,36,24,.94)_0%,rgba(21,23,24,.9)_72%)] px-3 py-2.5 text-left shadow-[0_16px_36px_rgba(0,0,0,.28),0_0_24px_rgba(231,185,40,.06)] backdrop-blur-md sm:px-3.5 sm:py-3">
@@ -94,6 +64,6 @@ export function Hero() {
           </div>
         </div>
       </Container>
-    </section>
+    </HeroSlideshow>
   );
 }

@@ -81,9 +81,10 @@ export const services: Service[] = [
     number: "05",
     title: "Construcción y consultoría",
     description: "Atención de proyectos de construcción y necesidades de soporte técnico de acuerdo con el alcance de cada encargo.",
-    image: "/images/services/construccion-consultoria.webp",
-    imageAlt: "Visual conceptual de profesionales supervisando una obra en un entorno inspirado en Chachapoyas",
-    imagePosition: "center 64%",
+    image: "/images/obras/fachada-amarilla-revestimiento.webp",
+    imageAlt: "Vivienda amarilla con ventanas de marco negro y revestimiento de piedra en el zócalo",
+    imageLabel: "Fachada y acabados · PPYM",
+    imagePosition: "center",
     items: [
       "Evaluación del requerimiento",
       "Definición del alcance técnico",

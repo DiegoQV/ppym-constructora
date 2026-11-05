@@ -87,9 +87,11 @@ export function ServicesExplorer({ services, phone }: ServicesExplorerProps) {
                     style={{ objectPosition: service.imagePosition }}
                   />
                   <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(17,19,21,.5),transparent_48%,rgba(17,19,21,.12))]" />
-                  <span className="absolute bottom-3 right-3 bg-charcoal/78 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-white/68 backdrop-blur-sm">
-                    Imagen referencial
-                  </span>
+                  {service.imageLabel && (
+                    <span className="absolute bottom-3 right-3 bg-charcoal/78 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-white/68 backdrop-blur-sm">
+                      {service.imageLabel}
+                    </span>
+                  )}
                 </div>
 
                 <div className="service-panel-content relative px-5 py-6 sm:px-7 sm:py-8 lg:grid lg:grid-cols-[0.85fr_1.15fr] lg:gap-10 lg:px-9 lg:py-9">

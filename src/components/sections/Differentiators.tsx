@@ -6,10 +6,9 @@ import {
   Route,
   type LucideIcon,
 } from "lucide-react";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { DifferentiatorsMotion } from "@/components/sections/DifferentiatorsMotion";
+import { WorkPortfolio } from "@/components/sections/WorkPortfolio";
 import { company } from "@/data/company";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -86,45 +85,9 @@ export function Differentiators() {
           </p>
         </div>
 
-        <Reveal className="differentiators-scene mt-12">
-        <figure className="differentiators-visual relative min-h-[560px] overflow-hidden border border-white/10 bg-graphite sm:min-h-[620px] lg:min-h-[680px]">
-          <Image
-            src="/images/about/ppym-del-predio-a-la-obra-v1.webp"
-            alt="Visual conceptual que conecta planos topográficos, cimentación y arquitectura sobre un terreno andino"
-            fill
-            priority={false}
-            sizes="(min-width: 1280px) 1280px, 100vw"
-            className="differentiators-image object-cover object-[62%_center] sm:object-center"
-          />
-          <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,11,.92)_0%,rgba(8,10,11,.72)_29%,rgba(8,10,11,.08)_66%,rgba(8,10,11,.12)_100%)]" />
-          <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,11,.08)_55%,rgba(8,10,11,.76)_100%)]" />
-          <div className="differentiators-visual-content absolute inset-0 flex flex-col justify-between p-6 sm:p-10 lg:p-14">
-            <div className="differentiators-copy max-w-xl">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-technical-yellow">
-                Capacidad conectada
-              </p>
-              <DifferentiatorsMotion />
-              <p className="differentiators-description mt-7 max-w-md text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
-                Cada decisión técnica, documental y constructiva encuentra su lugar dentro de una misma ruta.
-              </p>
-            </div>
-
-            <div className="flex items-end justify-between gap-6">
-              <div className="hidden items-center gap-3 sm:flex">
-                <span className="size-2 bg-technical-yellow" />
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/52">
-                  Plano · Terreno · Estructura
-                </p>
-              </div>
-              <figcaption className="mr-auto bg-charcoal/85 px-3 py-2 font-mono text-[8px] uppercase tracking-[0.16em] text-white/58 backdrop-blur-sm sm:ml-auto sm:mr-0">
-                Visual conceptual
-              </figcaption>
-            </div>
-          </div>
-          <span aria-hidden className="absolute right-0 top-0 h-1 w-1/3 bg-technical-yellow" />
-          <span aria-hidden className="absolute bottom-0 left-0 h-1 w-20 bg-technical-yellow" />
-        </figure>
-        </Reveal>
+        <div className="differentiators-scene mt-12">
+          <WorkPortfolio />
+        </div>
 
         <div className="mt-7 flex items-center justify-between sm:hidden">
           <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/42">Cuatro criterios</p>
