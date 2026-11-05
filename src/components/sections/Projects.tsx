@@ -67,12 +67,12 @@ export function Projects() {
             <p className="font-mono text-[9px] uppercase tracking-[.2em] text-technical-yellow">Obras realizadas</p>
             <h2 ref={headingRef} id="projects-title" className="project-heading mt-3 max-w-[16ch] font-heading text-[clamp(3.2rem,5vw,5.8rem)] font-bold leading-[.9] tracking-[-.07em]">
               <span className="project-heading-mask"><span className="project-heading-line">Obras que hablan</span></span>
-              <span className="project-heading-mask"><span className="project-heading-line">por</span></span>
+              <span className="project-heading-mask"><span className="project-heading-line">por</span></span>{" "}
               <span className="project-heading-mask project-heading-mask-accent"><span className="project-heading-line">nosotros.</span></span>
             </h2>
           </div>
           <div className="border-l border-technical-yellow/75 pl-6 lg:mb-1 lg:pl-8">
-            <p className="max-w-lg text-base leading-7 text-white/75 sm:text-lg">De la fachada a los detalles interiores. Conoce nuestras viviendas y los acabados de cada espacio.</p>
+            <p className="projects-heading-description max-w-lg text-base leading-7 text-white/75 sm:text-lg">De la fachada a los detalles interiores. Conoce nuestras viviendas y los acabados de cada espacio.</p>
             <p className="mt-3 font-mono text-[9px] uppercase tracking-[.16em] text-white/55">Explora las galerías · 14 fotografías</p>
           </div>
         </div>

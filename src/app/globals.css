@@ -1570,4 +1570,8 @@ html { scroll-behavior: smooth; }
   body > footer > .max-w-7xl {
     padding-inline: 5.25rem;
   }
+
+  .projects-heading-block { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-heading-mask:not(:first-child) { display: inline-block; vertical-align: top; }
+  .projects-heading-description { text-wrap: balance; }
 }
