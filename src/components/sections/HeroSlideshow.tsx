@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 
@@ -65,7 +65,7 @@ export function HeroSlideshow({ children }: { children: ReactNode }) {
         {slides.map((slide, slideIndex) => (
           <div key={slide.src} className={`hero-slide ${slideIndex === index ? "is-active" : ""}`}>
             <div className="hero-slide-frame">
-              <Image src={slide.src} alt="" fill sizes="100vw" preload={slideIndex === 0} loading={slideIndex === 0 ? undefined : "eager"} className="hero-slide-image" style={{ objectPosition: slide.position, scale: slide.scale }}
+              <Image src={slide.src} alt="" fill sizes="100vw" preload={slideIndex === 0} loading={slideIndex === 0 ? undefined : "eager"} className="hero-slide-image" style={{ "--hero-image-position": slide.position, "--hero-image-scale": slide.scale ?? 1 } as CSSProperties}
                 onLoad={() => {
                   setLoaded(current => current.includes(slideIndex) ? current : [...current, slideIndex]);
                   if (requested === slideIndex) {
