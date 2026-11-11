@@ -13,5 +13,5 @@ import { FloatingContact } from "@/components/ui/FloatingContact";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 
 export default function Home() {
-  return <><LocalBusinessJsonLd /><Navbar /><main><Hero /><Credentials /><About /><Services /><Differentiators /><Process /><Projects /><Equipment /><Contact /></main><Footer /><FloatingContact /></>;
+  return <><LocalBusinessJsonLd /><Navbar /><main><Hero /><Credentials /><About /><Services /><Projects /><Differentiators /><Process /><Equipment /><Contact /></main><Footer /><FloatingContact /></>;
 }

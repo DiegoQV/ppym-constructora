@@ -1400,7 +1400,9 @@ html { scroll-behavior: smooth; }
     pointer-events: none;
   }
   .hero-immersive .hero-slider-controls { gap: .375rem; pointer-events: auto; }
-  .hero-immersive .hero-slider-arrow { background: rgba(7, 13, 16, .78); border-color: rgba(255, 255, 255, .5); }
+  .hero-immersive .hero-slider-arrow { width: 2rem; height: 2rem; background: rgba(7, 13, 16, .78); border-color: rgba(255, 255, 255, .5); }
+  .hero-immersive .hero-slider-arrow svg { width: .875rem; height: .875rem; }
+  .hero-immersive .hero-slider-toggle svg { width: .75rem; height: .75rem; }
   .hero-immersive .hero-eyebrow { margin-bottom: 1.125rem; text-shadow: none; }
   .hero-immersive .hero-title { font-size: clamp(2.125rem, 9.6vw, 3rem); line-height: 1.06; text-shadow: none; }
   .hero-immersive .hero-title::before { display: none; }
