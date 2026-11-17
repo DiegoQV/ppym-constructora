@@ -2,19 +2,26 @@ import { services } from "@/data/services";
 import { company } from "@/data/company";
 import { stages } from "@/data/process";
 import { capabilities } from "@/data/equipment";
-import { photos, type Turn } from "@/lib/project-chat";
+import { accreditation, photos, techoPropioHomes, type Turn } from "@/lib/project-chat";
+import { technicalEntity } from "@/data/navigation";
 
 const catalog = {
   empresa: { nombre: company.legalName, direccion: company.address, ciudad: company.city, region: company.region, telefono: company.displayPhone },
   servicios: services.map(({ title, description, items }) => ({ title, description, items })),
+  acreditacion: { descripcion: accreditation, codigoET: technicalEntity.code },
   proceso: stages,
   equipos: capabilities.map(({ title, role, applications }) => ({ title, role, applications })),
-  fotos: photos.map(({ src, caption, alt }) => ({ id: src, caption, alt })),
+  fotos: photos.map(photo => ({
+    id: photo.src, caption: photo.caption, alt: photo.alt,
+    programa: techoPropioHomes.includes(photo) ? "Techo Propio" : undefined,
+  })),
 };
 const instructions = `Eres el asistente de proyectos de PPYM en Perú. Conversa en español natural y breve.
 Responde primero a la pregunta y usa los datos ya compartidos, incluidas correcciones. Haz como máximo una pregunta si aporta algo.
 Usa únicamente el catálogo para afirmar datos de la empresa. No inventes precios, plazos, disponibilidad, permisos, medidas, ubicaciones de obras ni requisitos legales.
 Si quieren ver obras, devuelve en fotos los identificadores exactos de las imágenes pertinentes, en orden, sin enlaces en el texto.
+Al presentar por primera vez una fachada identificada con Techo Propio, cuenta que PPYM construyó esa vivienda con el programa y menciona brevemente su acreditación vigente. Si preguntan por la acreditación, comparte su código exacto.
+Presenta la marca con hechos pertinentes a la consulta. Deja que el visitante siga mirando fotos o preguntando por aquí; evita repetir la presentación en cada turno. Solo atribuye al programa las fotos identificadas. No prometas bonos, cupos, elegibilidad ni aprobación.
 Para referencias como «esa», usa la foto seleccionada y las imágenes que aparecieron en el diálogo. Si no está claro, pregunta cuál.
 Contesta la última pregunta dentro del chat. Si piden más contexto, retoma el tema anterior y explica algo concreto del catálogo que aún no hayas dicho.
 Si falta un dato para orientar bien, explica lo que sí se sabe y pregunta por el dato faltante. Si el tema anterior no está claro, pide una aclaración breve.
@@ -66,7 +73,10 @@ export async function POST(request: Request) {
     || (payload.selected !== "" && !validPhotos.has(payload.selected))) return new Response(null, { status: 400 });
 
   const key = process.env.GEMINI_API_KEY;
-  if (!key) return new Response(null, { status: 503 });
+  if (!key?.trim()) {
+    console.warn("[ppym-chat] Falta GEMINI_API_KEY en el entorno del despliegue.");
+    return new Response(null, { status: 503 });
+  }
   if (Date.now() - windowStart >= 60000) { windowStart = Date.now(); requests = 0; }
   if (requests >= 20) return new Response(null, { status: 429 });
   requests++;
@@ -89,7 +99,10 @@ export async function POST(request: Request) {
         },
       }),
     });
-    if (!response.ok) return new Response(null, { status: response.status === 429 ? 429 : 503 });
+    if (!response.ok) {
+      console.warn("[ppym-chat] Gemini rechazó la solicitud.", { status: response.status });
+      return new Response(null, { status: response.status === 429 ? 429 : 503 });
+    }
     const data = await response.json();
     const reply = JSON.parse(data.candidates?.[0]?.content?.parts?.filter((p: { thought?: boolean }) => !p.thought).map((p: { text?: string }) => p.text ?? "").join("") || "{}");
     if (typeof reply.texto !== "string" || !reply.texto.trim() || typeof reply.resumen !== "string" || !Array.isArray(reply.fotos)) throw new Error("format");
@@ -98,7 +111,8 @@ export async function POST(request: Request) {
       photos: [...new Set(reply.fotos.filter((id: string) => validPhotos.has(id)))],
       contact: reply.contacto === true, summary: reply.resumen.slice(0, 800),
     }, { headers: { "Cache-Control": "no-store" } });
-  } catch {
+  } catch (error) {
+    console.warn("[ppym-chat] No se pudo completar la respuesta.", { tipo: error instanceof Error ? error.name : "desconocido" });
     return new Response(null, { status: 503 });
   }
 }
