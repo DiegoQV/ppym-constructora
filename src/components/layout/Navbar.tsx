@@ -67,9 +67,11 @@ export function Navbar() {
         <div className="flex items-center gap-2 min-[1180px]:hidden">
           <button ref={chatButton} type="button" aria-label="Chat IA de PPYM" aria-haspopup="dialog" aria-expanded={assistantOpen} aria-controls={assistantOpen ? "project-assistant" : undefined}
             onClick={() => { setOpen(false); setAssistantOpen(value => !value); }}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-technical-yellow/80 bg-charcoal px-3.5 text-sm font-semibold text-technical-yellow shadow-[0_0_12px_rgba(231,185,40,.23)] transition-colors hover:border-technical-yellow hover:bg-[#302b19] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-technical-yellow">
-            <Image src="/ppym-assistant.webp" alt="" width={28} height={28} className="size-7 shrink-0 object-contain" />
-            Chat IA
+            className="group inline-flex min-h-11 shrink-0 items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-technical-yellow">
+            <span className="inline-flex h-[38px] items-center gap-1.5 rounded-full border border-technical-yellow/80 bg-charcoal px-[11px] text-[13px] font-semibold text-technical-yellow shadow-[0_0_8px_rgba(231,185,40,.2)] transition-colors group-hover:border-technical-yellow group-hover:bg-[#302b19]">
+              <Image src="/ppym-assistant.webp" alt="" width={24} height={24} className="size-6 shrink-0 object-contain" />
+              Chat IA
+            </span>
           </button>
           <button type="button" className="grid size-11 place-items-center text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-technical-yellow" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => { setAssistantOpen(false); setOpen(value => !value); }}>{open ? <X aria-hidden /> : <Menu aria-hidden />}</button>
         </div>
