@@ -3,14 +3,14 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp, MessageSquareText, RotateCcw, X, ZoomIn } from "lucide-react";
+import { ArrowUp, RotateCcw, X, ZoomIn } from "lucide-react";
 import { WorkGallery } from "@/components/ui/WorkGallery";
 import { company } from "@/data/company";
 import type { WorkPhoto } from "@/data/projects";
 import { catalogReply, photos, shortcuts, type Turn } from "@/lib/project-chat";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
 
-const greeting: Turn = { role: "assistant", text: "Hola, ¿qué proyecto tienes en mente? Puedo orientarte o mostrarte alguna de nuestras obras." };
+const greeting: Turn = { role: "assistant", text: "Hola, soy el asistente virtual de PPYM. ¿Quieres construir, conocer nuestras viviendas o consultar por un trámite?" };
 const chip = "rounded-full border border-charcoal/20 bg-white px-3 py-2 text-xs font-semibold hover:border-charcoal";
 type Gallery = { items: WorkPhoto[]; index: number };
 
@@ -112,16 +112,19 @@ export function ProjectAssistant({ open, onOpenChange, headerLauncher }: {
     <button ref={launcher} type="button" aria-label="Abrir asistente de proyectos" aria-expanded={open} aria-controls="project-assistant"
       hidden={open} onClick={() => onOpenChange(true)}
       className="assistant-launcher fixed right-6 bottom-26 z-40 size-16 rounded-2xl border-2 border-technical-yellow bg-charcoal text-technical-yellow shadow-lg max-[1180px]:hidden">
-      <MessageSquareText aria-hidden className="mx-auto size-6" />
+      <Image src="/ppym-assistant.webp" alt="" width={48} height={48} className="mx-auto size-12 object-contain drop-shadow-[0_0_5px_rgba(231,185,40,.25)]" />
     </button>
     {open && <section id="project-assistant" ref={panel} role="dialog" aria-labelledby="chat-title" tabIndex={-1}
       onKeyDown={e => { if (e.key === "Escape" && !gallery) onOpenChange(false); }}
       className="assistant-panel fixed inset-x-2 bottom-[calc(.5rem+env(safe-area-inset-bottom)+var(--keyboard,0px))] z-60 flex h-[min(44rem,calc(var(--chat-height,100dvh)-1rem-env(safe-area-inset-bottom)))] flex-col overflow-hidden rounded-2xl border border-charcoal/15 bg-warm-white text-charcoal shadow-[0_16px_64px_#11131545] outline-none sm:left-auto sm:right-6 sm:w-[26rem]">
-      <header className="flex shrink-0 items-center gap-3 bg-charcoal px-4 py-4 text-white">
-        <span className="grid size-10 place-items-center rounded-xl bg-technical-yellow text-charcoal"><MessageSquareText aria-hidden size={21} /></span>
-        <div className="flex-1"><p className="text-xs font-semibold text-technical-yellow">PPYM</p><h2 id="chat-title" className="font-heading text-lg font-bold">Asistente de proyectos</h2></div>
-        {turns.length > 1 && <button type="button" aria-label="Nueva conversación" title="Nueva conversación" onClick={restart} className="grid size-10 place-items-center rounded-full hover:bg-white/10"><RotateCcw size={17}/></button>}
-        <button type="button" aria-label="Cerrar asistente" onClick={() => onOpenChange(false)} className="grid size-10 place-items-center rounded-full hover:bg-white/10"><X size={20}/></button>
+      <header className="flex shrink-0 items-center gap-2 border-b border-technical-yellow/25 bg-charcoal px-3 py-4 text-white">
+        <Image src="/ppym-assistant.webp" alt="" width={44} height={44} className="size-11 shrink-0 object-contain drop-shadow-[0_0_7px_rgba(231,185,40,.25)]" />
+        <div className="min-w-0 flex-1">
+          <h2 id="chat-title" className="font-heading text-lg font-bold leading-tight">Asistente <span className="text-technical-yellow">PPYM</span></h2>
+          <p className="mt-1 text-xs leading-snug text-white/70">Conversemos sobre tu próxima obra</p>
+        </div>
+        {turns.length > 1 && <button type="button" aria-label="Nueva conversación" title="Nueva conversación" onClick={restart} className="grid size-10 shrink-0 place-items-center rounded-full hover:bg-white/10"><RotateCcw size={17}/></button>}
+        <button type="button" aria-label="Cerrar asistente" onClick={() => onOpenChange(false)} className="grid size-10 shrink-0 place-items-center rounded-full hover:bg-white/10"><X size={20}/></button>
       </header>
       <div ref={feed} className="assistant-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5">
         <div role="log" aria-label="Conversación" aria-live="polite" className="space-y-3">

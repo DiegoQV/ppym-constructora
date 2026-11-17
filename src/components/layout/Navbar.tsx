@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight, Menu, MessageSquareText, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { FloatingContact } from "@/components/ui/FloatingContact";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -68,7 +68,7 @@ export function Navbar() {
           <button ref={chatButton} type="button" aria-label="Chat IA de PPYM" aria-haspopup="dialog" aria-expanded={assistantOpen} aria-controls={assistantOpen ? "project-assistant" : undefined}
             onClick={() => { setOpen(false); setAssistantOpen(value => !value); }}
             className="inline-flex min-h-11 items-center gap-2 rounded-full border border-technical-yellow/80 bg-charcoal px-3.5 text-sm font-semibold text-technical-yellow shadow-[0_0_12px_rgba(231,185,40,.23)] transition-colors hover:border-technical-yellow hover:bg-[#302b19] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-technical-yellow">
-            <MessageSquareText aria-hidden className="size-[19px]" />
+            <Image src="/ppym-assistant.webp" alt="" width={28} height={28} className="size-7 shrink-0 object-contain" />
             Chat IA
           </button>
           <button type="button" className="grid size-11 place-items-center text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-technical-yellow" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => { setAssistantOpen(false); setOpen(value => !value); }}>{open ? <X aria-hidden /> : <Menu aria-hidden />}</button>
