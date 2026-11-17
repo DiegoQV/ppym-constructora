@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { ProjectAssistant } from "@/components/ui/ProjectAssistant";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
 
-export function FloatingContact() {
-  const [assistantOpen, setAssistantOpen] = useState(false);
+export function FloatingContact({ assistantOpen, onOpenChange, headerLauncher }: {
+  assistantOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+  headerLauncher: RefObject<HTMLButtonElement | null>;
+}) {
   const contactRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -13,28 +16,16 @@ export function FloatingContact() {
     const contact = contactRef.current;
     if (!hero || !contact) return;
 
-    const mobile = window.matchMedia("(max-width: 639px)");
-    const updateDock = () => {
-      const bounds = hero.getBoundingClientRect();
-      contact.style.setProperty("--hero-bottom", `${bounds.bottom + window.scrollY}px`);
-      contact.dataset.heroVisible = String(mobile.matches && bounds.bottom > 0 && bounds.top < window.innerHeight);
-    };
-    const resizeObserver = new ResizeObserver(updateDock);
-    const intersectionObserver = new IntersectionObserver(updateDock);
-    resizeObserver.observe(hero);
-    intersectionObserver.observe(hero);
-    mobile.addEventListener("change", updateDock);
-    updateDock();
-    return () => {
-      resizeObserver.disconnect();
-      intersectionObserver.disconnect();
-      mobile.removeEventListener("change", updateDock);
-    };
+    const observer = new IntersectionObserver(([entry]) => {
+      contact.dataset.heroVisible = String(entry.isIntersecting);
+    });
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div ref={contactRef} className="floating-contact contents">
-      <ProjectAssistant open={assistantOpen} onOpenChange={setAssistantOpen} />
+    <div ref={contactRef} data-hero-visible="true" className="floating-contact contents">
+      <ProjectAssistant open={assistantOpen} onOpenChange={onOpenChange} headerLauncher={headerLauncher} />
       <WhatsAppFloat hidden={assistantOpen} />
     </div>
   );

@@ -63,9 +63,9 @@ export function Projects() {
         </div>
 
         <div className="projects-heading-block grid items-end gap-6 py-7 lg:grid-cols-[1fr_.75fr]">
-          <div>
+          <div className="@container">
             <p className="font-mono text-[9px] uppercase tracking-[.2em] text-technical-yellow">Obras realizadas</p>
-            <h2 ref={headingRef} id="projects-title" className="project-heading mt-3 max-w-[16ch] font-heading text-[clamp(3.2rem,5vw,5.8rem)] font-bold leading-[.9] tracking-[-.07em]">
+            <h2 ref={headingRef} id="projects-title" className="project-heading mt-3 font-heading text-[min(12.8cqw,clamp(3.2rem,5vw,5.8rem))] font-bold leading-[.9] tracking-[-.07em]">
               <span className="project-heading-mask"><span className="project-heading-line">Obras que hablan</span></span>
               <span className="project-heading-mask"><span className="project-heading-line">por</span></span>{" "}
               <span className="project-heading-mask project-heading-mask-accent"><span className="project-heading-line">nosotros.</span></span>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, MessageSquareText, X } from "lucide-react";
+import { FloatingContact } from "@/components/ui/FloatingContact";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { company } from "@/data/company";
@@ -12,6 +13,8 @@ import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [assistantOpen, setAssistantOpen] = useState(false);
+  const chatButton = useRef<HTMLButtonElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const advisoryUrl = createWhatsAppUrl(company.phone, "Hola, quisiera solicitar asesoría técnica.");
 
@@ -30,6 +33,7 @@ export function Navbar() {
   }, [open]);
 
   return (
+    <>
     <header className={cn("fixed inset-x-0 top-0 z-50 border-b transition duration-300", scrolled || open ? "border-white/10 bg-charcoal/95 shadow-[0_8px_30px_rgba(0,0,0,.14)] backdrop-blur-md" : "border-transparent bg-charcoal/20 backdrop-blur-[2px]")}>
       <Container className="navbar-container flex h-20 items-center justify-between min-[1180px]:h-24">
         <a href="#inicio" className="group relative flex min-h-11 items-center text-white transition duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow" aria-label={`${company.shortName}, ir al inicio`}>
@@ -60,7 +64,15 @@ export function Navbar() {
           <ArrowUpRight aria-hidden className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </a>
 
-        <button type="button" className="grid size-11 place-items-center text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-technical-yellow min-[1180px]:hidden" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((value) => !value)}>{open ? <X aria-hidden /> : <Menu aria-hidden />}</button>
+        <div className="flex items-center gap-2 min-[1180px]:hidden">
+          <button ref={chatButton} type="button" aria-label="Chat IA de PPYM" aria-haspopup="dialog" aria-expanded={assistantOpen} aria-controls={assistantOpen ? "project-assistant" : undefined}
+            onClick={() => { setOpen(false); setAssistantOpen(value => !value); }}
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-technical-yellow/80 bg-charcoal px-3.5 text-sm font-semibold text-technical-yellow shadow-[0_0_12px_rgba(231,185,40,.23)] transition-colors hover:border-technical-yellow hover:bg-[#302b19] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-technical-yellow">
+            <MessageSquareText aria-hidden className="size-[19px]" />
+            Chat IA
+          </button>
+          <button type="button" className="grid size-11 place-items-center text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-technical-yellow" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => { setAssistantOpen(false); setOpen(value => !value); }}>{open ? <X aria-hidden /> : <Menu aria-hidden />}</button>
+        </div>
       </Container>
 
       <div id="mobile-navigation" aria-hidden={!open} inert={!open} className={cn("overflow-hidden border-t border-white/10 bg-charcoal transition-[max-height,opacity] duration-300 min-[1180px]:hidden", open ? "max-h-[calc(100vh-5rem)] opacity-100 min-[1024px]:max-h-[calc(100vh-4.5rem)]" : "pointer-events-none max-h-0 opacity-0")}>
@@ -70,5 +82,7 @@ export function Navbar() {
         </nav>
       </div>
     </header>
+    <FloatingContact assistantOpen={assistantOpen} onOpenChange={setAssistantOpen} headerLauncher={chatButton} />
+    </>
   );
 }

@@ -9,9 +9,8 @@ import { Process } from "@/components/sections/Process";
 import { Projects } from "@/components/sections/Projects";
 import { Services } from "@/components/sections/Services";
 import { Contact } from "@/components/sections/Contact";
-import { FloatingContact } from "@/components/ui/FloatingContact";
 import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 
 export default function Home() {
-  return <><LocalBusinessJsonLd /><Navbar /><main><Hero /><Credentials /><About /><Services /><Projects /><Differentiators /><Process /><Equipment /><Contact /></main><Footer /><FloatingContact /></>;
+  return <><LocalBusinessJsonLd /><Navbar /><main><Hero /><Credentials /><About /><Services /><Projects /><Differentiators /><Process /><Equipment /><Contact /></main><Footer /></>;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, MessageSquareText, RotateCcw, X, ZoomIn } from "lucide-react";
@@ -14,7 +14,11 @@ const greeting: Turn = { role: "assistant", text: "Hola, ¿qué proyecto tienes 
 const chip = "rounded-full border border-charcoal/20 bg-white px-3 py-2 text-xs font-semibold hover:border-charcoal";
 type Gallery = { items: WorkPhoto[]; index: number };
 
-export function ProjectAssistant({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
+export function ProjectAssistant({ open, onOpenChange, headerLauncher }: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  headerLauncher: RefObject<HTMLButtonElement | null>;
+}) {
   const [turns, setTurns] = useState<Turn[]>([greeting]);
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
@@ -35,6 +39,7 @@ export function ProjectAssistant({ open, onOpenChange }: { open: boolean; onOpen
     if (!open) return;
     panel.current?.focus({ preventScroll: true });
     const target = launcher.current;
+    const headerButton = headerLauncher.current;
     const viewport = window.visualViewport;
     const resize = () => {
       if (!viewport || !panel.current) return;
@@ -47,9 +52,10 @@ export function ProjectAssistant({ open, onOpenChange }: { open: boolean; onOpen
     return () => {
       viewport?.removeEventListener("resize", resize);
       viewport?.removeEventListener("scroll", resize);
-      target?.focus({ preventScroll: true });
+      const visibleLauncher = headerButton?.getClientRects().length ? headerButton : target;
+      visibleLauncher?.focus({ preventScroll: true });
     };
-  }, [open]);
+  }, [open, headerLauncher]);
   useEffect(() => {
     if (open && feed.current) feed.current.scrollTop = feed.current.scrollHeight;
   }, [turns, busy, open, reviewingContact]);
@@ -105,7 +111,7 @@ export function ProjectAssistant({ open, onOpenChange }: { open: boolean; onOpen
   return <>
     <button ref={launcher} type="button" aria-label="Abrir asistente de proyectos" aria-expanded={open} aria-controls="project-assistant"
       hidden={open} onClick={() => onOpenChange(true)}
-      className="assistant-launcher fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom))] right-4 z-40 size-13 rounded-2xl border-2 border-technical-yellow bg-charcoal text-technical-yellow shadow-lg sm:right-6 sm:bottom-26 sm:size-16">
+      className="assistant-launcher fixed right-6 bottom-26 z-40 size-16 rounded-2xl border-2 border-technical-yellow bg-charcoal text-technical-yellow shadow-lg max-[1180px]:hidden">
       <MessageSquareText aria-hidden className="mx-auto size-6" />
     </button>
     {open && <section id="project-assistant" ref={panel} role="dialog" aria-labelledby="chat-title" tabIndex={-1}
