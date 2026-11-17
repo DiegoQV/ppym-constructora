@@ -6,10 +6,16 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { WorkCollection } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
-export function WorkGallery({ collection, onClose }: { collection: WorkCollection; onClose: () => void }) {
+export function WorkGallery({ collection, onClose, initialIndex = 0, onSelect }: {
+  collection: WorkCollection;
+  onClose: () => void;
+  initialIndex?: number;
+  onSelect?: (src: string) => void;
+}) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(initialIndex);
   const current = collection.photos[index];
+  useEffect(() => { onSelect?.(current.src); }, [current.src, onSelect]);
   const move = (direction: number) => setIndex((value) => (value + direction + collection.photos.length) % collection.photos.length);
 
   useEffect(() => {
