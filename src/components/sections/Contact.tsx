@@ -3,7 +3,7 @@
 import { ArrowUpRight, MapPin, MessageCircle, Phone } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
-import { company } from "@/data/company";
+import { company, officeMap } from "@/data/company";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
@@ -14,7 +14,7 @@ const contactUrl = createWhatsAppUrl(
 
 const contactDetails = [
   { label: "Línea directa", value: company.displayPhone, description: "", action: "Llamar", href: `tel:+51${company.phone}`, Icon: Phone },
-  { label: "Oficina", value: company.address, description: `${company.city}, ${company.region}`, action: "Ver ubicación", href: "https://maps.google.com/?q=Jr.+Sachapuyos+250,+Chachapoyas,+Peru", Icon: MapPin },
+  { label: "Oficina", value: company.address, description: `${company.city}, ${company.region}`, action: "Cómo llegar", href: officeMap.directionsUrl, Icon: MapPin },
 ] as const;
 
 export function Contact() {
@@ -86,6 +86,17 @@ export function Contact() {
               <span className="inline-flex min-h-11 shrink-0 items-center gap-2 text-sm font-medium underline decoration-charcoal/35 underline-offset-4 transition-colors group-hover:decoration-charcoal group-focus-visible:decoration-charcoal">{action}<ArrowUpRight aria-hidden className="size-3.5 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
             </a>
           ))}
+        </div>
+
+        <div className="mt-2 overflow-hidden border border-charcoal/20 bg-[#e9e8e2]">
+          <iframe
+            title="Mapa de la oficina de PPYM en Chachapoyas"
+            src={officeMap.embedUrl}
+            className="block h-64 w-full border-0 sm:h-80 lg:h-[22.5rem]"
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
         </div>
       </Container>
     </section>

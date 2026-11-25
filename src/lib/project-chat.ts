@@ -10,13 +10,31 @@ const housingContext = "Estas fachadas son de viviendas que construimos en PPYM 
 export const accreditation = `PPYM cuenta con acreditación vigente como ${technicalEntity.label} por el ${technicalEntity.issuer}.`;
 
 export const photos = workCollections.flatMap(collection => collection.photos);
-export type Reply = { text: string; photos?: string[]; contact?: boolean };
+export type Reply = { text: string; photos?: string[]; contact?: boolean; directions?: boolean };
 export type Turn = Reply & { role: "user" | "assistant" };
 
-export const shortcuts = ["Ver viviendas", "Consultar servicios", "Cómo empezar"];
+export const shortcuts = ["Ver viviendas", "Consultar servicios", "Cómo empezar", "Cómo llegar"];
 const normalize = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
+export function officeLocationReply(input: string): Reply | undefined {
+  const query = normalize(input).replace(/[¿?¡!.,]/g, " ").replace(/\s+/g, " ").trim();
+  const directQuestion = /^(?:como (?:llego|llegar)|donde (?:quedan|estan(?: ubicados)?|se (?:ubican|encuentran)|los encuentro)|(?:cual es )?(?:(?:su|tu|la) )?(?:direccion|ubicacion))$/.test(query);
+  const officeMention = /\b(?:oficinas?|sede)\b/.test(query);
+  const locationQuestion = /\b(?:direccion|ubicacion|mapa|como (?:llego|llegar)|donde (?:quedan?|estan?|se (?:ubican?|encuentran?)))\b/.test(query);
+  const companyLocation = /\b(?:(?:direccion|ubicacion|mapa) de|como (?:llego|llegar) a|donde (?:queda|esta|se ubica|se encuentra)) ppym\b/.test(query);
+
+  if (directQuestion || (officeMention && locationQuestion) || companyLocation) {
+    return {
+      text: `Nuestra oficina está en ${company.address}, ${company.city}, ${company.region}.`,
+      directions: true,
+    };
+  }
+}
+
 export function catalogReply(input: string, selected: string): Reply {
+  const location = officeLocationReply(input);
+  if (location) return location;
+
   const query = normalize(input);
   const construction = /\b(?:construccion|construir|edificar|edificacion)\b/.test(query);
   const wantsPhotos = /\b(?:ver|muestra\w*|ensena\w*|fotos?|imagenes|galeria|ejemplos?)\b/.test(query);

@@ -24,24 +24,21 @@ export function About() {
     <section
       id="nosotros"
       aria-labelledby="about-title"
-      className="about-section relative scroll-mt-20 overflow-hidden bg-[#ebeae5] py-24 text-charcoal sm:py-28 lg:scroll-mt-24 lg:py-32"
+      className="about-section relative scroll-mt-20 overflow-hidden bg-[#ebeae5] pt-12 pb-24 text-charcoal sm:py-28 lg:scroll-mt-24 lg:py-32"
     >
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-charcoal/14" />
       <div aria-hidden className="absolute -right-28 top-40 size-[34rem] rounded-full border border-charcoal/[.045]" />
       <div aria-hidden className="absolute -right-12 top-56 size-[22rem] rounded-full border border-charcoal/[.045]" />
 
       <Container className="relative">
-        <div className="about-section-index flex items-center justify-between gap-6 border-b border-charcoal/15 pb-6">
+        <div className="about-section-index border-b border-charcoal/15 pb-4 sm:pb-6">
           <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-gray">
             <span className="h-px w-8 bg-technical-yellow" />
             Nosotros
           </p>
-          <p className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-text-gray/65 sm:block">
-            Chachapoyas · Amazonas
-          </p>
         </div>
 
-        <div className="about-layout mt-14 grid gap-14 lg:grid-cols-[1.12fr_.88fr] lg:items-start lg:gap-20 xl:gap-28">
+        <div className="about-layout mt-6 grid gap-14 sm:mt-10 lg:mt-14 lg:grid-cols-[1.12fr_.88fr] lg:items-start lg:gap-20 xl:gap-28">
           <Reveal className="about-collage order-2 lg:order-1 lg:pt-0.5">
             <div className="grid grid-cols-[1.08fr_.92fr] gap-3 sm:gap-5">
               <figure className="about-photo-interactive about-photo-frame about-photo-frame-1 about-photo-primary relative min-h-[500px] overflow-hidden bg-charcoal sm:min-h-[650px]">
@@ -86,8 +83,8 @@ export function About() {
                     Inicio de actividades
                   </p>
                   <div className="flex items-end justify-between gap-4">
-                    <strong className="font-heading text-[clamp(3.4rem,5vw,5rem)] font-bold leading-none tracking-[-0.07em]">2018</strong>
-                    <span className="mb-1 font-mono text-[9px] uppercase tracking-[0.14em] text-charcoal/55">Chachapoyas</span>
+                    <strong className="font-heading text-[clamp(3.4rem,5vw,5rem)] font-bold leading-none tracking-[-0.07em]">{company.activitiesStarted}</strong>
+                    <span className="mb-1 font-mono text-[9px] uppercase tracking-[0.14em] text-charcoal/55">{company.city}</span>
                   </div>
                 </div>
               </div>
@@ -116,13 +113,10 @@ export function About() {
           </Reveal>
 
           <Reveal className="about-copy order-1 lg:order-2">
-            <p className="about-overline font-mono text-[10px] uppercase tracking-[0.2em] text-text-gray">
-              Constructora &amp; Consultora
-            </p>
             <h2
               id="about-title"
               aria-label="Somos PPYM."
-              className="about-title mt-6 max-w-[9ch] font-heading text-[clamp(3.5rem,6vw,5.6rem)] font-bold leading-[.92] tracking-[-0.065em]"
+              className="about-title font-heading text-[clamp(2.5rem,13vw,3.5rem)] font-bold leading-[.92] tracking-[-0.065em] sm:text-[clamp(3.5rem,6vw,5.6rem)]"
             >
               <span aria-hidden className="about-title-typed block w-fit whitespace-nowrap">
                 {Array.from("Somos PPYM.").map((character, index) => (
@@ -136,11 +130,11 @@ export function About() {
                 ))}
               </span>
             </h2>
-            <h3 className="about-subtitle mt-8 max-w-xl font-heading text-2xl font-semibold leading-[1.15] tracking-[-0.035em] sm:text-3xl">
-              Construcción, consultoría y gestión técnica desde Chachapoyas.
-            </h3>
+            <p className="about-subtitle mt-4 max-w-xl font-heading text-xl font-semibold leading-[1.2] tracking-[-0.035em] sm:mt-6 sm:text-3xl">
+              Constructora y consultora en {company.city}, {company.region}, desde&nbsp;{company.activitiesStarted}.
+            </p>
             <p className="about-paragraph about-paragraph-first mt-6 max-w-xl text-base leading-7 text-text-gray sm:text-lg sm:leading-8">
-              Constructora &amp; Consultora PPYM E.I.R.L. inició actividades en 2018 con una propuesta orientada a resolver de manera integral las necesidades técnicas, legales y operativas de cada proyecto.
+              Constructora &amp; Consultora PPYM E.I.R.L. nació con una propuesta orientada a resolver de manera integral las necesidades técnicas, legales y operativas de cada proyecto.
             </p>
             <p className="about-paragraph about-paragraph-second mt-4 max-w-xl text-base leading-7 text-text-gray sm:text-lg sm:leading-8">
               Desde el saneamiento del predio hasta la elaboración de planos, la topografía y la construcción, buscamos que el cliente encuentre orientación clara y continuidad en una sola empresa.

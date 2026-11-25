@@ -70,8 +70,8 @@ export function Equipment() {
             <p className="font-mono text-[9px] uppercase tracking-[.2em] text-text-gray">Recursos que responden</p>
             <h2 ref={headingRef} id="equipment-title" className="equipment-heading mt-3 max-w-[14ch] font-heading text-[clamp(3.25rem,5.2vw,5.7rem)] font-bold leading-[.88] tracking-[-.075em]">
               {["La", "capacidad", "se", "organiza"].map((word) => (
-                <span key={word} className="equipment-heading-mask">
-                  <span className="equipment-heading-word">{word}{word === "organiza" && <span className="equipment-heading-period">.</span>}</span>
+                <span key={word} className="equipment-heading-word">
+                  {word}{word === "organiza" && <span className="equipment-heading-period">.</span>}
                 </span>
               ))}
             </h2>

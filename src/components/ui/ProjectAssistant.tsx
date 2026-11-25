@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp, RotateCcw, X, ZoomIn } from "lucide-react";
+import { ArrowUp, ArrowUpRight, RotateCcw, X, ZoomIn } from "lucide-react";
 import { WorkGallery } from "@/components/ui/WorkGallery";
-import { company } from "@/data/company";
+import { company, officeMap } from "@/data/company";
 import type { WorkPhoto } from "@/data/projects";
-import { catalogReply, photos, shortcuts, type Turn } from "@/lib/project-chat";
+import { catalogReply, officeLocationReply, photos, shortcuts, type Turn } from "@/lib/project-chat";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
 
 const greeting: Turn = { role: "assistant", text: "Hola, soy el asistente virtual de PPYM. ¿Quieres construir, conocer nuestras viviendas o consultar por un trámite?" };
@@ -73,8 +73,9 @@ export function ProjectAssistant({ open, onOpenChange, headerLauncher }: {
     if (!text || pending.current) return;
     const history: Turn[] = [...turns, { role: "user", text }];
     setTurns(history); setDraft(""); setHandoff(null);
-    if (local || shortcuts.includes(text)) {
-      setTurns([...history, { role: "assistant", ...catalogReply(text, selected) }]);
+    const location = officeLocationReply(text);
+    if (location || local || shortcuts.includes(text)) {
+      setTurns([...history, { role: "assistant", ...(location ?? catalogReply(text, selected)) }]);
       return;
     }
     const controller = new AbortController();
@@ -140,6 +141,17 @@ export function ProjectAssistant({ open, onOpenChange, headerLauncher }: {
                     <span className="block px-2 py-2 font-heading text-xs font-semibold">{photo.caption}</span>
                   </button>)}
                 </div>}
+                {turn.directions && (
+                  <a
+                    href={officeMap.directionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={chip + " mt-3 inline-flex min-h-11 items-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal"}
+                  >
+                    Cómo llegar en Google Maps
+                    <ArrowUpRight aria-hidden className="size-3.5 shrink-0" />
+                  </a>
+                )}
                 {turn.contact && <button type="button" onClick={prepareContact} className={chip + " mt-3"}>Preparar consulta</button>}
               </div>
             </div>;

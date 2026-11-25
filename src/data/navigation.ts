@@ -13,10 +13,3 @@ export const technicalEntity = {
   code: "AMA-1096-26-2N-25",
   status: "verified",
 } as const;
-
-export const trustIndicators = [
-  { overline: "Trayectoria", label: "Desde 2018" },
-  { overline: "Acreditación", label: "Techo Propio", status: technicalEntity.status },
-  { overline: "Enfoque", label: "Soluciones integrales" },
-  { overline: "Sede", label: "Chachapoyas, Amazonas" },
-] as const;
