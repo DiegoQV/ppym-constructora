@@ -15,6 +15,11 @@ export type Turn = Reply & { role: "user" | "assistant" };
 
 export const shortcuts = ["Ver viviendas", "Consultar servicios", "Cómo empezar", "Cómo llegar"];
 const normalize = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const genericServiceTerms = new Set([
+  "como", "construccion", "esta", "estan", "este", "esto", "hacer", "hago", "hola",
+  "para", "proyecto", "proyectos", "puedo", "quiero", "servicio", "servicios", "sobre",
+  "tengo", "trabajo", "trabajos",
+]);
 
 export function officeLocationReply(input: string): Reply | undefined {
   const query = normalize(input).replace(/[¿?¡!.,]/g, " ").replace(/\s+/g, " ").trim();
@@ -45,6 +50,11 @@ export function catalogReply(input: string, selected: string): Reply {
   if (/cotiz|precio|cuanto cuesta|presupuesto|whatsapp|hablar con (?:un |el )?asesor|plazo/.test(query)) {
     return { text: "El equipo puede evaluar el alcance y confirmar costos y plazos. Puedes revisar tu consulta antes de enviarla por WhatsApp.", contact: true };
   }
+  const mentionsProperty = /\b(?:terrenos?|predios?|lotes?|propiedad(?:es)?)\b/.test(query);
+  const mentionsRegistration = /\b(?:inscri\w*|registr\w*|titulos?|titulacion)\b/.test(query);
+  if ((mentionsProperty && mentionsRegistration) || /\b(?:sunarp|inmatriculacion)\b/.test(query)) {
+    return { text: "Podemos orientarte con el servicio de saneamiento físico-legal. El primer paso es revisar la situación del terreno y los documentos que ya tienes. ¿Con qué documento cuentas sobre el terreno?" };
+  }
   if ((!construction || wantsPhotos) && /un (nivel|piso)|1 piso/.test(query)) {
     const item = techoPropioHomes.find(p => p.caption === "Vivienda de un nivel");
     if (item) return { text: "Construimos esta vivienda de un nivel con el programa Techo Propio. " + accreditation, photos: [item.src] };
@@ -69,11 +79,13 @@ export function catalogReply(input: string, selected: string): Reply {
   if (construction && !/licencia|permiso|expediente|topogra|saneamiento|catastro|planos?|diseno|equipos?|ploteo|escaneo/.test(query)) {
     return { text: "Claro. ¿Qué te gustaría resolver sobre la construcción? Cuéntame si estás planeando la obra o si ya empezaste y tienes una duda concreta." };
   }
-  const words = query.split(/\W+/).filter(w => w.length > 3 && w !== "construccion");
-  const ranked = services.map(s => ({ service: s, score: words.filter(w => normalize([s.title, ...s.items].join(" ")).includes(w)).length }))
-    .sort((a, b) => b.score - a.score);
-  if (ranked[0].score) {
-    const service = ranked[0].service;
+  const words = [...new Set(query.split(/\W+/))].filter(word => word.length > 3 && !genericServiceTerms.has(word));
+  const [best, runnerUp] = services.map(service => {
+    const terms = new Set(normalize([service.title, ...service.items].join(" ")).split(/\W+/));
+    return { service, score: words.filter(word => terms.has(word)).length };
+  }).sort((a, b) => b.score - a.score);
+  if (best && best.score > (runnerUp?.score ?? 0)) {
+    const { service } = best;
     return { text: service.title + ". " + service.description + "\n\n" + service.items.join(" · ") };
   }
   if (/servicio|ofrecen/.test(query)) return { text: "Podemos ayudarte con:\n" + services.map(s => "• " + s.title).join("\n") };
