@@ -24,11 +24,13 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 Configura `GEMINI_API_KEY` como variable del servidor. `GEMINI_MODEL` permite elegir el modelo principal y usa `gemini-3.1-flash-lite` por defecto.
 
-`GROQ_API_KEY` activa Groq con `openai/gpt-oss-20b` como respaldo. Si Gemini falla, Groq recibe el mismo historial y genera la respuesta. Si solo se configura la clave de Groq, el asistente lo usa directamente. Puedes crear la clave en [GroqCloud](https://console.groq.com/keys).
+`GROQ_API_KEY` activa Groq con `openai/gpt-oss-20b` como primer respaldo. Puedes crear la clave en [GroqCloud](https://console.groq.com/keys).
 
-Guarda la clave en las variables de entorno del proyecto en Vercel para Production y genera un nuevo despliegue. Para desarrollo local, usa `.env.local`.
+`CLOUDFLARE_ACCOUNT_ID` y `CLOUDFLARE_API_TOKEN` activan Cloudflare Workers AI con `@cf/meta/llama-3.3-70b-instruct-fp8-fast` como segundo respaldo. Obtén el ID y crea el token en [Workers AI → Use REST API](https://developers.cloudflare.com/workers-ai/get-started/rest-api/). Cada proveedor que se consulta recibe el mismo historial. El asistente usa los proveedores configurados en el orden Gemini, Groq y Cloudflare.
 
-Si Groq no está configurado, `GEMINI_FALLBACK_MODEL` permite reintentar con un segundo modelo de Gemini con la misma clave. Debe admitir respuestas JSON estructuradas. Si queda vacío, el asistente reintenta con el modelo principal después de un fallo temporal.
+Guarda las variables en Vercel para Production y genera un nuevo despliegue. Para desarrollo local, usa `.env.local`. Los logs de Vercel muestran `Cloudflare respondió como proveedor de IA` cuando lo usa el chat.
+
+Cuando Gemini es el único proveedor configurado, `GEMINI_FALLBACK_MODEL` permite reintentar con un segundo modelo de Gemini con la misma clave. Debe admitir respuestas JSON estructuradas. Si queda vacío, el asistente reintenta con el modelo principal después de un fallo temporal.
 
 ## Learn More
 

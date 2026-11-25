@@ -189,7 +189,7 @@ export function ProjectAssistant({ open, onOpenChange, headerLauncher }: {
           <input aria-label="Tu mensaje" placeholder="Escribe tu consulta…" maxLength={1000} value={draft} onChange={e => setDraft(e.target.value)} className="min-w-0 flex-1 rounded-xl border border-charcoal/20 bg-warm-white px-3 py-2.5 text-base focus:outline-charcoal" />
           <button aria-label="Enviar mensaje" disabled={busy || !draft.trim()} className="grid size-11 place-items-center rounded-xl bg-technical-yellow disabled:opacity-40"><ArrowUp size={21}/></button>
         </form>
-        <p className="mt-2 text-[11px] leading-4 text-text-gray">Gemini y Groq pueden procesar tus mensajes. Evita incluir datos sensibles. <Link href="/privacidad" className="underline">Privacidad</Link></p>
+        <p className="mt-2 text-[11px] leading-4 text-text-gray">Los proveedores de IA procesan tus mensajes. Evita incluir datos sensibles. <Link href="/privacidad" className="underline">Privacidad</Link></p>
         <button type="button" disabled={busy} onClick={prepareContact} className="mt-1 py-1.5 text-xs font-semibold underline decoration-technical-yellow underline-offset-4">Hablar con el equipo</button>
       </footer>
       {gallery && <WorkGallery collection={{ number: "", name: "Fotos de tu consulta", description: "", photos: gallery.items }} initialIndex={gallery.index} onSelect={setSelected} onClose={() => setGallery(null)} />}

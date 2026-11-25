@@ -38,13 +38,25 @@ const validPhotos = new Set(photos.map(p => p.src));
 const limit = 32768;
 const transientGeminiErrors = new Set([500, 502, 503, 504]);
 const replyFields = ["texto", "fotos", "contacto", "resumen"];
+const replySchema = {
+  type: "object",
+  required: replyFields,
+  additionalProperties: false,
+  properties: {
+    texto: { type: "string" },
+    fotos: { type: "array", items: { type: "string", enum: [...validPhotos] } },
+    contacto: { type: "boolean" },
+    resumen: { type: "string" },
+  },
+};
 let windowStart = 0;
 let requests = 0;
 
+type Provider = "Gemini" | "Groq" | "Cloudflare";
 type ModelReply = { text: string; photos: string[]; contact: boolean; summary: string };
 type Attempt = { status: number | null; reply?: ModelReply };
 
-async function generateReply(provider: "Gemini" | "Groq", send: () => Promise<Response>): Promise<Attempt> {
+async function generateReply(provider: Provider, send: () => Promise<Response>): Promise<Attempt> {
   let status: number | null = null;
   try {
     const response = await send();
@@ -56,11 +68,16 @@ async function generateReply(provider: "Gemini" | "Groq", send: () => Promise<Re
     }
 
     const data = await response.json();
-    const content = provider === "Gemini"
-      ? data.candidates?.[0]?.content?.parts?.filter((part: { thought?: boolean }) => !part.thought)
-        .map((part: { text?: string }) => part.text ?? "").join("")
-      : data.choices?.[0]?.message?.content;
-    const { texto, fotos, contacto, resumen } = JSON.parse(content || "{}");
+    let content: unknown = data.choices?.[0]?.message?.content;
+    if (provider === "Gemini") {
+      content = data.candidates?.[0]?.content?.parts?.filter((part: { thought?: boolean }) => !part.thought)
+        .map((part: { text?: string }) => part.text ?? "").join("");
+    } else if (provider === "Cloudflare") {
+      content = data.success === true ? data.result?.response : undefined;
+    }
+    const parsed: unknown = typeof content === "string" ? JSON.parse(content) : content;
+    if (!parsed || typeof parsed !== "object") throw new Error("format");
+    const { texto, fotos, contacto, resumen } = parsed as Record<string, unknown>;
     if (typeof texto !== "string" || !texto.trim() || typeof resumen !== "string" || !Array.isArray(fotos)) {
       throw new Error("format");
     }
@@ -69,7 +86,7 @@ async function generateReply(provider: "Gemini" | "Groq", send: () => Promise<Re
       status,
       reply: {
         text: texto.trim().slice(0, 1500),
-        photos: [...new Set(fotos.filter((id: string) => validPhotos.has(id)))],
+        photos: [...new Set(fotos.filter((id: unknown) => typeof id === "string" && validPhotos.has(id)))],
         contact: contacto === true,
         summary: resumen.slice(0, 800),
       },
@@ -116,24 +133,26 @@ function askGroq(key: string, input: string, signal: AbortSignal) {
       temperature: 0.3,
       response_format: {
         type: "json_schema",
-        json_schema: {
-          name: "respuesta_ppym",
-          strict: true,
-          schema: {
-            type: "object",
-            required: replyFields,
-            additionalProperties: false,
-            properties: {
-              texto: { type: "string" },
-              fotos: { type: "array", items: { type: "string", enum: [...validPhotos] } },
-              contacto: { type: "boolean" },
-              resumen: { type: "string" },
-            },
-          },
-        },
+        json_schema: { name: "respuesta_ppym", strict: true, schema: replySchema },
       },
     }),
   }));
+}
+
+function askCloudflare(accountId: string, token: string, input: string, signal: AbortSignal) {
+  return generateReply("Cloudflare", () => fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(accountId)}/ai/run/@cf/meta/llama-3.3-70b-instruct-fp8-fast`,
+    {
+      method: "POST", redirect: "error", cache: "no-store", signal,
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        messages: [{ role: "system", content: instructions }, { role: "user", content: input }],
+        temperature: 0.3,
+        max_tokens: 1000,
+        response_format: { type: "json_schema", json_schema: replySchema },
+      }),
+    },
+  ));
 }
 
 async function readPayload(request: Request) {
@@ -171,7 +190,10 @@ export async function POST(request: Request) {
 
   const geminiKey = process.env.GEMINI_API_KEY?.trim();
   const groqKey = process.env.GROQ_API_KEY?.trim();
-  if (!geminiKey && !groqKey) {
+  const cloudflareAccountId = process.env.CLOUDFLARE_ACCOUNT_ID?.trim();
+  const cloudflareToken = process.env.CLOUDFLARE_API_TOKEN?.trim();
+  const hasCloudflare = Boolean(cloudflareAccountId && cloudflareToken);
+  if (!geminiKey && !groqKey && !hasCloudflare) {
     console.warn("[ppym-chat] Falta una clave de IA en el entorno del despliegue.");
     return new Response(null, { status: 503 });
   }
@@ -184,16 +206,25 @@ export async function POST(request: Request) {
   const model = process.env.GEMINI_MODEL?.trim() || "gemini-3.1-flash-lite";
   const fallbackModel = process.env.GEMINI_FALLBACK_MODEL?.trim() || model;
   const deadline = AbortSignal.any([request.signal, AbortSignal.timeout(14500)]);
+  // When Cloudflare is enabled, leave it the last five seconds of the total budget.
+  const groqDeadline = hasCloudflare ? AbortSignal.any([deadline, AbortSignal.timeout(9500)]) : deadline;
   let attempt: Attempt = { status: null };
 
   if (geminiKey) {
-    const primarySignal = AbortSignal.any([deadline, AbortSignal.timeout(groqKey ? 8000 : 12000)]);
+    let geminiTimeout = 12000;
+    if (groqKey || hasCloudflare) geminiTimeout = 8000;
+    if (groqKey && hasCloudflare) geminiTimeout = 5500;
+    const primarySignal = AbortSignal.any([deadline, AbortSignal.timeout(geminiTimeout)]);
     attempt = await askGemini(geminiKey, model, input, primarySignal);
   }
+  if (!attempt.reply && !deadline.aborted && groqKey) {
+    attempt = await askGroq(groqKey, input, groqDeadline);
+  }
   if (!attempt.reply && !deadline.aborted) {
-    if (groqKey) {
-      attempt = await askGroq(groqKey, input, deadline);
-    } else if (geminiKey) {
+    if (cloudflareAccountId && cloudflareToken) {
+      attempt = await askCloudflare(cloudflareAccountId, cloudflareToken, input, deadline);
+      if (attempt.reply) console.info("[ppym-chat] Cloudflare respondió como proveedor de IA.");
+    } else if (!groqKey && geminiKey) {
       const { status } = attempt;
       const switchModel = fallbackModel !== model && (status === 429 || status === 404);
       if (status === null || transientGeminiErrors.has(status) || switchModel) {
