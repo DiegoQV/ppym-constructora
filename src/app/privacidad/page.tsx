@@ -25,8 +25,8 @@ const sections = [
     title: "Datos que podemos tratar",
     content: (
       <>
-        <p>El asistente utiliza Google Gemini. Al enviar una pregunta, nuestro servidor transmite a Google los mensajes recientes, un resumen de la consulta y la referencia de la foto seleccionada para generar una respuesta. Los accesos rápidos al catálogo funcionan en tu navegador.</p>
-        <p>La conversación se mantiene en memoria durante tu visita. En el nivel gratuito, Google puede utilizar el contenido recibido para mejorar sus productos. Evita introducir datos sensibles o documentos personales. Puedes revisar y editar el texto antes de abrir WhatsApp.</p>
+        <p>El asistente utiliza Google Gemini y puede recurrir a Groq para generar una respuesta. Al enviar una pregunta, nuestro servidor comparte con el proveedor que atienda la consulta los mensajes recientes, un resumen y la referencia de la foto seleccionada, si la hay. Si Gemini falla, Groq puede recibir la misma consulta. Los accesos rápidos al catálogo funcionan en tu navegador.</p>
+        <p>La conversación se mantiene en memoria durante tu visita. En el nivel gratuito, Google puede utilizar el contenido recibido para mejorar sus productos. Puedes consultar <a className="underline underline-offset-4" href="https://console.groq.com/docs/your-data">cómo trata los datos Groq</a>. Evita introducir datos sensibles o documentos personales. Puedes revisar y editar el texto antes de abrir WhatsApp.</p>
         <p>Si decides contactarnos por WhatsApp o teléfono, podremos recibir los datos que proporciones voluntariamente, como nombre, número telefónico, ubicación del proyecto, documentos y detalles de tu consulta.</p>
         <p>El proveedor de alojamiento puede generar registros técnicos limitados, como dirección IP, navegador, fecha y solicitudes realizadas, necesarios para seguridad y funcionamiento del servicio.</p>
       </>
@@ -44,7 +44,7 @@ const sections = [
     title: "Destinatarios y servicios externos",
     content: (
       <p>
-        No vendemos datos personales. Solo podrán acceder proveedores indispensables para alojamiento, comunicaciones o soporte, y autoridades cuando exista una obligación legal. Al elegir WhatsApp, la comunicación también queda sujeta a las condiciones y políticas de Meta/WhatsApp, una plataforma externa a PPYM.
+        No vendemos datos personales. Solo podrán acceder proveedores indispensables para alojamiento, generación de respuestas del asistente, comunicaciones o soporte, y autoridades cuando exista una obligación legal. Al elegir WhatsApp, la comunicación también queda sujeta a las condiciones y políticas de Meta/WhatsApp, una plataforma externa a PPYM.
       </p>
     ),
   },

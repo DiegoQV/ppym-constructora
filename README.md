@@ -20,6 +20,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Asistente de PPYM
+
+Configura `GEMINI_API_KEY` como variable del servidor. `GEMINI_MODEL` permite elegir el modelo principal y usa `gemini-3.1-flash-lite` por defecto.
+
+`GROQ_API_KEY` activa Groq con `openai/gpt-oss-20b` como respaldo. Si Gemini falla, Groq recibe el mismo historial y genera la respuesta. Si solo se configura la clave de Groq, el asistente lo usa directamente. Puedes crear la clave en [GroqCloud](https://console.groq.com/keys).
+
+Guarda la clave en las variables de entorno del proyecto en Vercel para Production y genera un nuevo despliegue. Para desarrollo local, usa `.env.local`.
+
+Si Groq no está configurado, `GEMINI_FALLBACK_MODEL` permite reintentar con un segundo modelo de Gemini con la misma clave. Debe admitir respuestas JSON estructuradas. Si queda vacío, el asistente reintenta con el modelo principal después de un fallo temporal.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

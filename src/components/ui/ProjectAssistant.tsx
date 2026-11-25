@@ -7,7 +7,7 @@ import { ArrowUp, ArrowUpRight, RotateCcw, X, ZoomIn } from "lucide-react";
 import { WorkGallery } from "@/components/ui/WorkGallery";
 import { company, officeMap } from "@/data/company";
 import type { WorkPhoto } from "@/data/projects";
-import { catalogReply, officeLocationReply, photos, shortcuts, type Turn } from "@/lib/project-chat";
+import { catalogReply, photos, shortcuts, type Turn } from "@/lib/project-chat";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
 
 const greeting: Turn = { role: "assistant", text: "Hola, soy el asistente virtual de PPYM. ¿Quieres construir, conocer nuestras viviendas o consultar por un trámite?" };
@@ -22,7 +22,7 @@ export function ProjectAssistant({ open, onOpenChange, headerLauncher }: {
   const [turns, setTurns] = useState<Turn[]>([greeting]);
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
-  const [limited, setLimited] = useState(false);
+  const [failedPrompt, setFailedPrompt] = useState<string | null>(null);
   const [selected, setSelected] = useState("");
   const [gallery, setGallery] = useState<Gallery | null>(null);
   const [summary, setSummary] = useState("");
@@ -58,24 +58,25 @@ export function ProjectAssistant({ open, onOpenChange, headerLauncher }: {
   }, [open, headerLauncher]);
   useEffect(() => {
     if (open && feed.current) feed.current.scrollTop = feed.current.scrollHeight;
-  }, [turns, busy, open, reviewingContact]);
+  }, [turns, busy, failedPrompt, open, reviewingContact]);
   useEffect(() => () => pending.current?.abort(), []);
 
   function restart() {
     pending.current?.abort();
     pending.current = null;
     setTurns([greeting]); setDraft(""); setSelected(""); setSummary("");
-    setLimited(false); setHandoff(null); setBusy(false);
+    setFailedPrompt(null); setHandoff(null); setBusy(false);
   }
 
-  async function send(input: string, local = false) {
+  async function send(input: string, local = false, retry = false) {
     const text = input.trim();
     if (!text || pending.current) return;
-    const history: Turn[] = [...turns, { role: "user", text }];
-    setTurns(history); setDraft(""); setHandoff(null);
-    const location = officeLocationReply(text);
-    if (location || local || shortcuts.includes(text)) {
-      setTurns([...history, { role: "assistant", ...(location ?? catalogReply(text, selected)) }]);
+    const history: Turn[] = retry ? turns : [...turns, { role: "user", text }];
+    setTurns(history); setFailedPrompt(null); setHandoff(null);
+    if (!retry) setDraft("");
+    const catalog = catalogReply(text, selected, turns);
+    if (catalog.directions || local || shortcuts.includes(text)) {
+      setTurns([...history, { role: "assistant", ...catalog }]);
       return;
     }
     const controller = new AbortController();
@@ -90,21 +91,29 @@ export function ProjectAssistant({ open, onOpenChange, headerLauncher }: {
       if (!result.ok) throw new Error("unavailable");
       const reply = await result.json();
       if (pending.current !== controller) return;
-      setTurns([...history, { role: "assistant", text: reply.text, photos: reply.photos, contact: reply.contact }]);
-      setSummary(reply.summary); setLimited(false);
+      setTurns([...history, { role: "assistant", text: reply.text, photos: reply.photos, contact: reply.contact, registration: catalog.registration }]);
+      setSummary(reply.summary);
     } catch {
       if (pending.current !== controller) return;
-      setTurns([...history, { role: "assistant", ...catalogReply(text, selected) }]);
-      setSummary(previous => [previous, text].filter(Boolean).join("\n").slice(-800));
-      setLimited(true);
+      setFailedPrompt(text);
     } finally {
       clearTimeout(timeout);
       if (pending.current === controller) { pending.current = null; setBusy(false); }
     }
   }
 
+  function useCatalog() {
+    if (!failedPrompt || pending.current) return;
+    const reply = catalogReply(failedPrompt, selected, turns.slice(0, -1));
+    setTurns([...turns, { role: "assistant", ...reply }]);
+    setSummary(previous => [previous, failedPrompt].filter(Boolean).join("\n").slice(-800));
+    setFailedPrompt(null);
+  }
+
   function prepareContact() {
-    const details = summary || turns.filter(t => t.role === "user" && !shortcuts.includes(t.text)).slice(-4).map(t => t.text).join("\n");
+    const details = summary
+      ? [summary, failedPrompt].filter(Boolean).join("\n")
+      : turns.filter(t => t.role === "user" && !shortcuts.includes(t.text)).slice(-4).map(t => t.text).join("\n");
     setHandoff(["Hola, quisiera consultar sobre un proyecto con PPYM.", details, reference && "Foto de referencia: " + reference.caption].filter(Boolean).join("\n\n"));
     requestAnimationFrame(() => note.current?.focus());
   }
@@ -158,8 +167,16 @@ export function ProjectAssistant({ open, onOpenChange, headerLauncher }: {
           })}
         </div>
         {busy && <p role="status" className="mt-3 text-sm text-text-gray">Preparando respuesta…</p>}
-        {limited && <p role="status" className="mt-3 text-xs text-text-gray">Gemini no está disponible. Puedes explorar el catálogo o escribir al equipo.</p>}
-        {(turns.length === 1 || limited) && <div className="mt-3 flex flex-wrap gap-2">{shortcuts.map(label => <button type="button" key={label} disabled={busy} onClick={() => send(label, true)} className={chip}>{label}</button>)}</div>}
+        {failedPrompt && (
+          <div className="mt-3 rounded-xl border border-charcoal/15 bg-white p-3">
+            <p role="status" className="text-sm text-text-gray">La IA no pudo responder en este momento. Tu pregunta sigue en el chat.</p>
+            <div className="mt-2 flex flex-wrap items-center gap-x-3">
+              <button type="button" onClick={() => void send(failedPrompt, false, true)} className="min-h-11 rounded-lg bg-technical-yellow px-3 text-sm font-semibold">Reintentar con IA</button>
+              <button type="button" onClick={useCatalog} className="min-h-11 text-xs font-semibold underline underline-offset-4">Consultar catálogo</button>
+            </div>
+          </div>
+        )}
+        {turns.length === 1 && <div className="mt-3 flex flex-wrap gap-2">{shortcuts.map(label => <button type="button" key={label} disabled={busy} onClick={() => send(label, true)} className={chip}>{label}</button>)}</div>}
         {handoff !== null && <div className="mt-4 rounded-xl border border-charcoal/15 bg-white p-3">
           <label htmlFor="ppym-handoff" className="font-heading text-sm font-bold">Tu consulta para el equipo</label>
           <textarea id="ppym-handoff" ref={note} rows={4} value={handoff} onChange={e => setHandoff(e.target.value)} className="my-2 block w-full rounded border border-charcoal/20 p-2 text-base" />
@@ -172,7 +189,7 @@ export function ProjectAssistant({ open, onOpenChange, headerLauncher }: {
           <input aria-label="Tu mensaje" placeholder="Escribe tu consulta…" maxLength={1000} value={draft} onChange={e => setDraft(e.target.value)} className="min-w-0 flex-1 rounded-xl border border-charcoal/20 bg-warm-white px-3 py-2.5 text-base focus:outline-charcoal" />
           <button aria-label="Enviar mensaje" disabled={busy || !draft.trim()} className="grid size-11 place-items-center rounded-xl bg-technical-yellow disabled:opacity-40"><ArrowUp size={21}/></button>
         </form>
-        <p className="mt-2 text-[11px] leading-4 text-text-gray">Gemini procesa tus mensajes. Evita incluir datos sensibles. <Link href="/privacidad" className="underline">Privacidad</Link></p>
+        <p className="mt-2 text-[11px] leading-4 text-text-gray">Gemini y Groq pueden procesar tus mensajes. Evita incluir datos sensibles. <Link href="/privacidad" className="underline">Privacidad</Link></p>
         <button type="button" disabled={busy} onClick={prepareContact} className="mt-1 py-1.5 text-xs font-semibold underline decoration-technical-yellow underline-offset-4">Hablar con el equipo</button>
       </footer>
       {gallery && <WorkGallery collection={{ number: "", name: "Fotos de tu consulta", description: "", photos: gallery.items }} initialIndex={gallery.index} onSelect={setSelected} onClose={() => setGallery(null)} />}

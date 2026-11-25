@@ -36,8 +36,105 @@ Catálogo público: ` + JSON.stringify(catalog);
 
 const validPhotos = new Set(photos.map(p => p.src));
 const limit = 32768;
+const transientGeminiErrors = new Set([500, 502, 503, 504]);
+const replyFields = ["texto", "fotos", "contacto", "resumen"];
 let windowStart = 0;
 let requests = 0;
+
+type ModelReply = { text: string; photos: string[]; contact: boolean; summary: string };
+type Attempt = { status: number | null; reply?: ModelReply };
+
+async function generateReply(provider: "Gemini" | "Groq", send: () => Promise<Response>): Promise<Attempt> {
+  let status: number | null = null;
+  try {
+    const response = await send();
+    status = response.status;
+    if (!response.ok) {
+      await response.body?.cancel().catch(() => undefined);
+      console.warn("[ppym-chat] El proveedor rechazó la solicitud.", { provider, status });
+      return { status };
+    }
+
+    const data = await response.json();
+    const content = provider === "Gemini"
+      ? data.candidates?.[0]?.content?.parts?.filter((part: { thought?: boolean }) => !part.thought)
+        .map((part: { text?: string }) => part.text ?? "").join("")
+      : data.choices?.[0]?.message?.content;
+    const { texto, fotos, contacto, resumen } = JSON.parse(content || "{}");
+    if (typeof texto !== "string" || !texto.trim() || typeof resumen !== "string" || !Array.isArray(fotos)) {
+      throw new Error("format");
+    }
+
+    return {
+      status,
+      reply: {
+        text: texto.trim().slice(0, 1500),
+        photos: [...new Set(fotos.filter((id: string) => validPhotos.has(id)))],
+        contact: contacto === true,
+        summary: resumen.slice(0, 800),
+      },
+    };
+  } catch (error) {
+    console.warn("[ppym-chat] No se pudo completar la respuesta.", {
+      provider, status, tipo: error instanceof Error ? error.name : "desconocido",
+    });
+    return { status };
+  }
+}
+
+function askGemini(key: string, model: string, input: string, signal: AbortSignal) {
+  return generateReply("Gemini", () => fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
+    {
+      method: "POST", redirect: "error", cache: "no-store", signal,
+      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: instructions }] },
+        contents: [{ role: "user", parts: [{ text: input }] }],
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: { type: "OBJECT", required: replyFields, properties: {
+            texto: { type: "STRING" }, fotos: { type: "ARRAY", items: { type: "STRING", enum: [...validPhotos] } },
+            contacto: { type: "BOOLEAN" }, resumen: { type: "STRING" },
+          } }, temperature: 0.3, maxOutputTokens: 1600,
+        },
+      }),
+    },
+  ));
+}
+
+function askGroq(key: string, input: string, signal: AbortSignal) {
+  return generateReply("Groq", () => fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST", redirect: "error", cache: "no-store", signal,
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+    body: JSON.stringify({
+      model: "openai/gpt-oss-20b",
+      messages: [{ role: "system", content: instructions }, { role: "user", content: input }],
+      reasoning_effort: "low",
+      reasoning_format: "hidden",
+      max_completion_tokens: 1200,
+      temperature: 0.3,
+      response_format: {
+        type: "json_schema",
+        json_schema: {
+          name: "respuesta_ppym",
+          strict: true,
+          schema: {
+            type: "object",
+            required: replyFields,
+            additionalProperties: false,
+            properties: {
+              texto: { type: "string" },
+              fotos: { type: "array", items: { type: "string", enum: [...validPhotos] } },
+              contacto: { type: "boolean" },
+              resumen: { type: "string" },
+            },
+          },
+        },
+      },
+    }),
+  }));
+}
 
 async function readPayload(request: Request) {
   const reader = request.body?.getReader();
@@ -72,9 +169,10 @@ export async function POST(request: Request) {
     || typeof payload.summary !== "string" || payload.summary.length > 800
     || (payload.selected !== "" && !validPhotos.has(payload.selected))) return new Response(null, { status: 400 });
 
-  const key = process.env.GEMINI_API_KEY;
-  if (!key?.trim()) {
-    console.warn("[ppym-chat] Falta GEMINI_API_KEY en el entorno del despliegue.");
+  const geminiKey = process.env.GEMINI_API_KEY?.trim();
+  const groqKey = process.env.GROQ_API_KEY?.trim();
+  if (!geminiKey && !groqKey) {
+    console.warn("[ppym-chat] Falta una clave de IA en el entorno del despliegue.");
     return new Response(null, { status: 503 });
   }
   if (Date.now() - windowStart >= 60000) { windowStart = Date.now(); requests = 0; }
@@ -82,37 +180,30 @@ export async function POST(request: Request) {
   requests++;
 
   const history = payload.history.map(({ role, text, photos }: Turn) => ({ role, text, photos }));
-  const model = process.env.GEMINI_MODEL || "gemini-3.1-flash-lite";
-  try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
-      method: "POST", redirect: "error", cache: "no-store", signal: AbortSignal.timeout(12000),
-      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: instructions }] },
-        contents: [{ role: "user", parts: [{ text: JSON.stringify({ history, selected: payload.selected, summary: payload.summary }) }] }],
-        generationConfig: {
-          responseMimeType: "application/json",
-          responseSchema: { type: "OBJECT", required: ["texto", "fotos", "contacto", "resumen"], properties: {
-            texto: { type: "STRING" }, fotos: { type: "ARRAY", items: { type: "STRING", enum: [...validPhotos] } },
-            contacto: { type: "BOOLEAN" }, resumen: { type: "STRING" },
-          } }, temperature: 0.3, maxOutputTokens: 1600,
-        },
-      }),
-    });
-    if (!response.ok) {
-      console.warn("[ppym-chat] Gemini rechazó la solicitud.", { status: response.status });
-      return new Response(null, { status: response.status === 429 ? 429 : 503 });
-    }
-    const data = await response.json();
-    const reply = JSON.parse(data.candidates?.[0]?.content?.parts?.filter((p: { thought?: boolean }) => !p.thought).map((p: { text?: string }) => p.text ?? "").join("") || "{}");
-    if (typeof reply.texto !== "string" || !reply.texto.trim() || typeof reply.resumen !== "string" || !Array.isArray(reply.fotos)) throw new Error("format");
-    return Response.json({
-      text: reply.texto.trim().slice(0, 1500),
-      photos: [...new Set(reply.fotos.filter((id: string) => validPhotos.has(id)))],
-      contact: reply.contacto === true, summary: reply.resumen.slice(0, 800),
-    }, { headers: { "Cache-Control": "no-store" } });
-  } catch (error) {
-    console.warn("[ppym-chat] No se pudo completar la respuesta.", { tipo: error instanceof Error ? error.name : "desconocido" });
-    return new Response(null, { status: 503 });
+  const input = JSON.stringify({ history, selected: payload.selected, summary: payload.summary });
+  const model = process.env.GEMINI_MODEL?.trim() || "gemini-3.1-flash-lite";
+  const fallbackModel = process.env.GEMINI_FALLBACK_MODEL?.trim() || model;
+  const deadline = AbortSignal.any([request.signal, AbortSignal.timeout(14500)]);
+  let attempt: Attempt = { status: null };
+
+  if (geminiKey) {
+    const primarySignal = AbortSignal.any([deadline, AbortSignal.timeout(groqKey ? 8000 : 12000)]);
+    attempt = await askGemini(geminiKey, model, input, primarySignal);
   }
+  if (!attempt.reply && !deadline.aborted) {
+    if (groqKey) {
+      attempt = await askGroq(groqKey, input, deadline);
+    } else if (geminiKey) {
+      const { status } = attempt;
+      const switchModel = fallbackModel !== model && (status === 429 || status === 404);
+      if (status === null || transientGeminiErrors.has(status) || switchModel) {
+        await new Promise(resolve => setTimeout(resolve, 650 + Math.random() * 350));
+        attempt = await askGemini(geminiKey, fallbackModel, input, deadline);
+      }
+    }
+  }
+
+  return attempt.reply
+    ? Response.json(attempt.reply, { headers: { "Cache-Control": "no-store" } })
+    : new Response(null, { status: attempt.status === 429 ? 429 : 503 });
 }

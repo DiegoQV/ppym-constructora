@@ -10,7 +10,13 @@ const housingContext = "Estas fachadas son de viviendas que construimos en PPYM 
 export const accreditation = `PPYM cuenta con acreditación vigente como ${technicalEntity.label} por el ${technicalEntity.issuer}.`;
 
 export const photos = workCollections.flatMap(collection => collection.photos);
-export type Reply = { text: string; photos?: string[]; contact?: boolean; directions?: boolean };
+export type Reply = {
+  text: string;
+  photos?: string[];
+  contact?: boolean;
+  directions?: boolean;
+  registration?: "documents" | "review";
+};
 export type Turn = Reply & { role: "user" | "assistant" };
 
 export const shortcuts = ["Ver viviendas", "Consultar servicios", "Cómo empezar", "Cómo llegar"];
@@ -36,7 +42,52 @@ export function officeLocationReply(input: string): Reply | undefined {
   }
 }
 
-export function catalogReply(input: string, selected: string): Reply {
+function landRegistrationReply(query: string, previousReply: Turn | undefined): Reply | undefined {
+  const mentionsProperty = /\b(?:terrenos?|predios?|lotes?|propiedad(?:es)?)\b/.test(query);
+  const mentionsRegistration = /\b(?:inscri\w*|registr\w*|titulos?|titulacion)\b/.test(query);
+  const isRegistrationQuestion = (mentionsProperty && mentionsRegistration) || /\b(?:sunarp|inmatriculacion)\b/.test(query);
+  const stage = previousReply?.role === "assistant" ? previousReply.registration : undefined;
+  if (!stage && !isRegistrationQuestion) return;
+
+  const answer = query.replace(/[¿?¡!.,]/g, " ").replace(/\s+/g, " ").trim();
+  const mentionsDocument = /\b(?:planos?|croquis|contratos?|escrituras?|constancias?|titulos?|documentos?)\b/.test(answer);
+  const describesDocuments = /^(?:(?:solo|solamente|por ahora) )?(?:tengo|tenemos|se tiene|cuento con|contamos con|se cuenta con|hay)\b/.test(answer);
+  const namesDocument = /^(?:solo )?(?:(?:el|la|un|una|mi) )?(?:plano|croquis|contrato|escritura|constancia|titulo)$/.test(answer);
+  const hasNoDocuments = /^(?:(?:aun|todavia) )?no (?:tengo|tenemos|se tiene) (?:ningun documento|documentos|nada)$/.test(answer);
+  if ((mentionsDocument && describesDocuments) || namesDocument || hasNoDocuments) {
+    if (hasNoDocuments) {
+      return {
+        text: "Si por ahora no tienes documentos, el equipo de saneamiento físico-legal puede orientarte a partir de la información que sí tengas del predio.",
+        registration: "review",
+      };
+    }
+    const startingPoint = /\bplanos?\b/.test(answer)
+      ? "Gracias, con el plano podemos empezar a revisar qué información hay sobre el terreno."
+      : "Gracias, eso aclara con qué documentación podemos empezar a revisar el terreno.";
+    return {
+      text: startingPoint + " El equipo de saneamiento físico-legal puede ayudarte a identificar qué falta para evaluar la inscripción.",
+      registration: "review",
+    };
+  }
+
+  if (stage && /^(?:y )?(?:que paso|que hago|que sigue|que hago ahora|ahora que hago|ahora que|como sigo|cual es el siguiente paso)$/.test(answer)) {
+    return {
+      text: stage === "review"
+        ? "Seguimos con la consulta sobre la inscripción del terreno. El siguiente paso es revisar qué información hay del predio. Puedes preparar esa consulta desde «Hablar con el equipo»."
+        : "Seguimos revisando cómo orientar la inscripción del terreno. Para empezar, dime si tienes un plano, un contrato u otro documento del predio.",
+      registration: stage,
+    };
+  }
+
+  if (isRegistrationQuestion) {
+    return {
+      text: "Podemos orientarte con el servicio de saneamiento físico-legal. El primer paso es revisar la situación del terreno y los documentos que ya tienes. ¿Con qué documento cuentas sobre el terreno?",
+      registration: "documents",
+    };
+  }
+}
+
+export function catalogReply(input: string, selected: string, history: readonly Turn[] = []): Reply {
   const location = officeLocationReply(input);
   if (location) return location;
 
@@ -50,11 +101,8 @@ export function catalogReply(input: string, selected: string): Reply {
   if (/cotiz|precio|cuanto cuesta|presupuesto|whatsapp|hablar con (?:un |el )?asesor|plazo/.test(query)) {
     return { text: "El equipo puede evaluar el alcance y confirmar costos y plazos. Puedes revisar tu consulta antes de enviarla por WhatsApp.", contact: true };
   }
-  const mentionsProperty = /\b(?:terrenos?|predios?|lotes?|propiedad(?:es)?)\b/.test(query);
-  const mentionsRegistration = /\b(?:inscri\w*|registr\w*|titulos?|titulacion)\b/.test(query);
-  if ((mentionsProperty && mentionsRegistration) || /\b(?:sunarp|inmatriculacion)\b/.test(query)) {
-    return { text: "Podemos orientarte con el servicio de saneamiento físico-legal. El primer paso es revisar la situación del terreno y los documentos que ya tienes. ¿Con qué documento cuentas sobre el terreno?" };
-  }
+  const registration = landRegistrationReply(query, history.at(-1));
+  if (registration) return registration;
   if ((!construction || wantsPhotos) && /un (nivel|piso)|1 piso/.test(query)) {
     const item = techoPropioHomes.find(p => p.caption === "Vivienda de un nivel");
     if (item) return { text: "Construimos esta vivienda de un nivel con el programa Techo Propio. " + accreditation, photos: [item.src] };
