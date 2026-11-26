@@ -47,7 +47,7 @@ export function WorkGallery({ collection, onClose, initialIndex = 0, onSelect }:
       <div className="work-gallery-panel">
         <header className="flex items-center justify-between gap-4 border-b border-white/15 px-4 py-3 sm:px-6">
           <div>
-            <p className="font-mono text-[9px] uppercase tracking-[.18em] text-technical-yellow">Obras realizadas · PPYM</p>
+            <p className="technical-label text-technical-yellow">Obras realizadas · PPYM</p>
             <h3 id="work-gallery-title" className="mt-1 font-heading text-xl font-semibold">{collection.name}</h3>
           </div>
           <button type="button" autoFocus onClick={() => dialogRef.current?.close()} aria-label="Cerrar galería" className="gallery-control"><X aria-hidden size={22} /></button>
@@ -60,7 +60,7 @@ export function WorkGallery({ collection, onClose, initialIndex = 0, onSelect }:
           <figcaption className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6">
             <div aria-live="polite" aria-atomic="true">
               <p className="text-sm text-white/90">{current.caption}</p>
-              <p className="mt-1 font-mono text-[10px] text-white/55">{String(index + 1).padStart(2, "0")} / {String(collection.photos.length).padStart(2, "0")}</p>
+              <p className="technical-label mt-1 text-white">{String(index + 1).padStart(2, "0")} / {String(collection.photos.length).padStart(2, "0")}</p>
             </div>
             <div className="flex shrink-0 gap-2">
               <button type="button" onClick={() => move(-1)} aria-label="Foto anterior" className="gallery-control"><ChevronLeft aria-hidden size={22} /></button>

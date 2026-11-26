@@ -57,17 +57,17 @@ export function Equipment() {
   }, []);
 
   return (
-    <section id="equipos" aria-labelledby="equipment-title" className={cn("equipment-section relative scroll-mt-20 overflow-hidden bg-[#deddd7] py-20 text-charcoal sm:py-24 lg:h-[calc(100svh-1.9rem)] lg:min-h-[844px] lg:scroll-mt-24 lg:pt-8 lg:pb-24", headingArmed && "heading-armed", headingVisible && "heading-visible")}>
+    <section id="equipos" aria-labelledby="equipment-title" className={cn("equipment-section relative scroll-mt-20 overflow-hidden bg-[#deddd7] py-20 text-charcoal sm:py-24 lg:flex lg:min-h-[max(844px,calc(100svh-1.9rem))] lg:scroll-mt-24 lg:flex-col lg:pt-8 lg:pb-24", headingArmed && "heading-armed", headingVisible && "heading-visible")}>
       <div aria-hidden className="absolute inset-0 technical-grid-dark opacity-[.18]" />
-      <Container className="relative lg:flex lg:h-full lg:flex-col">
+      <Container className="relative lg:flex lg:min-h-0 lg:flex-1 lg:flex-col">
         <div className="flex items-center justify-between gap-6 border-b border-charcoal/15 pb-4">
-          <p className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[.2em] text-text-gray"><span className="h-px w-8 bg-technical-yellow" />Capacidad operativa</p>
-          <p className="hidden font-mono text-[8px] uppercase tracking-[.2em] text-text-gray/60 sm:block">Equipo · criterio · coordinación</p>
+          <p className="section-label flex items-center gap-3 text-charcoal"><span aria-hidden className="h-px w-8 shrink-0 bg-technical-yellow" />Capacidad operativa</p>
+          <p className="technical-label hidden text-charcoal sm:block">Equipo · criterio · coordinación</p>
         </div>
 
         <Reveal className="equipment-heading-block mb-5 mt-6 grid items-end gap-5 sm:mb-6 sm:mt-7 lg:mb-7 lg:grid-cols-[1fr_.72fr] lg:gap-6">
           <div>
-            <p className="font-mono text-[9px] uppercase tracking-[.2em] text-text-gray">Recursos que responden</p>
+            <p className="section-label text-charcoal">Recursos que responden</p>
             <h2 ref={headingRef} id="equipment-title" className="equipment-heading mt-3 max-w-[14ch] font-heading text-[clamp(3.25rem,5.2vw,5.7rem)] font-bold leading-[.88] tracking-[-.075em]">
               {["La", "capacidad", "se", "organiza"].map((word) => (
                 <span key={word} className="equipment-heading-word">
@@ -77,8 +77,8 @@ export function Equipment() {
             </h2>
           </div>
           <div className="border-l-2 border-technical-yellow pl-6 lg:mb-2 lg:pl-8">
-            <p className="max-w-lg text-base leading-7 text-text-gray sm:text-lg">No se trata de acumular máquinas. Se trata de articular el recurso correcto con el momento correcto.</p>
-            <p className="mt-3 font-mono text-[7px] uppercase tracking-[.16em] text-text-gray/55">Disponibilidad según alcance</p>
+            <p className="max-w-lg text-base font-medium leading-7 text-charcoal/85 sm:text-lg">No se trata de acumular máquinas. Se trata de articular el recurso correcto con el momento correcto.</p>
+            <p className="technical-label mt-3 text-charcoal">Disponibilidad según alcance</p>
           </div>
         </Reveal>
 
@@ -86,7 +86,7 @@ export function Equipment() {
         <div role="tablist" aria-label="Capacidades operativas" className="grid grid-cols-2 border-l border-t border-charcoal/15 lg:grid-cols-4">
           {capabilities.map((item, index) => {
             const selected = index === activeIndex;
-            return <button ref={(element) => { tabRefs.current[index] = element; }} key={item.number} id={`equipment-tab-${item.number}`} type="button" role="tab" tabIndex={selected ? 0 : -1} aria-selected={selected} aria-controls="equipment-panel" onClick={() => setActiveIndex(index)} onKeyDown={(event) => handleTabKeyDown(event, index)} className={cn("equipment-tab flex min-h-18 items-center justify-between gap-4 border-b border-r border-charcoal/15 px-4 text-left transition-colors focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-charcoal sm:px-5", selected ? "bg-technical-yellow" : "bg-[#e9e8e3] hover:bg-white")}><span><span className="font-mono text-[8px] tracking-[.18em] text-charcoal/50">{item.number}</span><span className="mt-1 block font-heading text-base font-semibold tracking-[-.025em] sm:text-lg">{item.short}</span></span><span className={cn("size-1.5 rounded-full", selected ? "bg-charcoal" : "bg-charcoal/20")} /></button>;
+            return <button ref={(element) => { tabRefs.current[index] = element; }} key={item.number} id={`equipment-tab-${item.number}`} type="button" role="tab" tabIndex={selected ? 0 : -1} aria-selected={selected} aria-controls="equipment-panel" onClick={() => setActiveIndex(index)} onKeyDown={(event) => handleTabKeyDown(event, index)} className={cn("equipment-tab flex min-h-18 items-center justify-between gap-4 border-b border-r border-charcoal/15 px-4 text-left transition-colors focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-charcoal sm:px-5", selected ? "bg-technical-yellow" : "bg-[#e9e8e3] hover:bg-white")}><span><span className="technical-label text-charcoal">{item.number}</span><span className="mt-1 block font-heading text-base font-semibold tracking-[-.025em] sm:text-lg">{item.short}</span></span><span className={cn("size-1.5 rounded-full", selected ? "bg-charcoal" : "bg-charcoal/20")} /></button>;
           })}
         </div>
 
@@ -97,22 +97,31 @@ export function Equipment() {
             <div aria-hidden className="technical-grid absolute inset-0 opacity-20 mix-blend-screen" />
             <div aria-hidden className="equipment-scan absolute inset-y-0 left-0 z-10 w-px bg-technical-yellow"><span className="absolute -left-1 top-1/2 size-2 rounded-full bg-technical-yellow shadow-[0_0_0_6px_rgba(231,185,40,.12)]" /></div>
             <span aria-hidden className="absolute bottom-4 left-6 font-heading text-[clamp(8rem,18vw,17rem)] font-bold leading-none tracking-[-.09em] text-white/[.08] sm:left-10">{active.number}</span>
-            <div className="absolute bottom-6 right-6 border border-white/25 bg-charcoal/75 px-4 py-3 backdrop-blur-sm sm:bottom-8 sm:right-8"><p className="font-mono text-[7px] uppercase tracking-[.18em] text-white/45">Campo de aplicación</p><p className="mt-1 font-mono text-[8px] uppercase tracking-[.18em] text-technical-yellow">Amazonas · operación coordinada</p></div>
+            <div className="absolute bottom-6 left-6 right-6 ml-auto w-fit max-w-[calc(100%_-_3rem)] border border-white/25 bg-charcoal/85 px-4 py-3 backdrop-blur-sm sm:bottom-8 sm:right-8 sm:max-w-[calc(100%_-_3.5rem)]">
+              <p className="technical-label text-white">Campo de aplicación</p>
+              <p className="technical-label mt-1 text-technical-yellow">Amazonas · operación coordinada</p>
+            </div>
           </div>
 
           <div key={active.number} id="equipment-panel" role="tabpanel" aria-labelledby={`equipment-tab-${active.number}`} className="equipment-panel-enter flex min-h-[500px] flex-col bg-charcoal p-7 text-white sm:p-9 lg:min-h-0 lg:p-6">
             <div className="flex items-start justify-between gap-5">
-              <div><p className="font-mono text-[8px] uppercase tracking-[.2em] text-white/38">Capacidad {active.number}</p><p className="mt-2 font-mono text-[9px] uppercase tracking-[.2em] text-technical-yellow">{active.short}</p></div>
+              <div>
+                <p className="technical-label text-white">Capacidad {active.number}</p>
+                <p className="technical-label mt-2 text-technical-yellow">{active.short}</p>
+              </div>
               <span className="grid size-12 place-items-center border border-white/15 text-technical-yellow"><ActiveIcon aria-hidden className="size-5" strokeWidth={1.35} /></span>
             </div>
             <div className="equipment-panel-body my-auto py-5 lg:py-3">
               <h3 className="font-heading text-[clamp(2.35rem,2.8vw,3.2rem)] font-semibold leading-[.92] tracking-[-.06em]">{active.title}</h3>
-              <p className="equipment-panel-role mt-3 text-sm leading-6 text-white/62">{active.role}</p>
+              <p className="equipment-panel-role mt-3 text-sm font-medium leading-6 text-white/85">{active.role}</p>
               <div className="equipment-applications mt-4 border-t border-white/15">
-                {active.applications.map((application, index) => <p key={application} className="equipment-application flex items-center gap-4 border-b border-white/15 py-2 text-[.82rem] text-white/72"><span className="font-mono text-[7px] text-technical-yellow">0{index + 1}</span>{application}</p>)}
+                {active.applications.map((application, index) => <p key={application} className="equipment-application flex items-center gap-4 border-b border-white/15 py-2 text-[.82rem] text-white/85"><span className="technical-label text-technical-yellow">0{index + 1}</span>{application}</p>)}
               </div>
             </div>
-            <div className="equipment-criterion border-l border-technical-yellow pl-4"><p className="font-mono text-[7px] uppercase tracking-[.16em] text-white/35">Criterio operativo</p><p className="equipment-criterion-copy mt-1.5 text-xs leading-5 text-white/68">{active.criterion}</p></div>
+            <div className="equipment-criterion border-l border-technical-yellow pl-4">
+              <p className="technical-label text-white">Criterio operativo</p>
+              <p className="equipment-criterion-copy mt-1.5 text-xs font-medium leading-5 text-white/85">{active.criterion}</p>
+            </div>
           </div>
         </div>
         </Reveal>

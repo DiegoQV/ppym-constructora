@@ -21,7 +21,7 @@ export function About() {
       className="scroll-mt-20 border-t border-charcoal/15 bg-[#ebeae5] py-10 text-charcoal sm:py-16 lg:scroll-mt-24 lg:py-[clamp(4rem,6vw,6rem)]"
     >
       <Container>
-        <p className="flex items-center gap-3 border-b border-charcoal/20 pb-4 font-mono text-[11px] font-medium uppercase tracking-[.16em] text-charcoal/75 sm:pb-5">
+        <p className="section-label flex items-center gap-3 border-b border-charcoal/20 pb-4 text-charcoal sm:pb-5">
           <span aria-hidden className="h-0.5 w-7 bg-technical-yellow" />
           Nosotros
         </p>
@@ -41,10 +41,10 @@ export function About() {
             <p className="mt-4 max-w-[42ch] text-base leading-relaxed text-charcoal/78 sm:text-[1.0625rem] lg:hidden">
               Acompañamos tu proyecto desde la revisión del terreno hasta la ejecución de la obra.
             </p>
-            <p className="mt-5 hidden max-w-[42ch] text-[1.0625rem] leading-relaxed text-charcoal/78 lg:block">
+            <p className="mt-5 hidden max-w-[42ch] text-[1.0625rem] font-medium leading-relaxed text-charcoal/90 lg:block">
               En PPYM coordinamos la revisión del predio, los trámites, los planos y la construcción según las necesidades de cada proyecto.
             </p>
-            <p className="mt-3 hidden max-w-[42ch] text-[1.0625rem] leading-relaxed text-charcoal/78 lg:block">
+            <p className="mt-3 hidden max-w-[42ch] text-[1.0625rem] font-medium leading-relaxed text-charcoal/90 lg:block">
               Si ya tienes un terreno, un plano o una obra en marcha, revisamos contigo qué conviene resolver primero.
             </p>
           </div>
@@ -61,13 +61,13 @@ export function About() {
             </div>
             <figcaption className="grid grid-cols-[minmax(0,1fr)_auto] border border-t-0 border-charcoal/20 lg:block lg:border-0">
               <div className="self-center px-3 py-3 sm:px-5 lg:flex lg:flex-wrap lg:items-baseline lg:gap-x-3 lg:px-0 lg:pb-0">
-                <p className="font-mono text-[.625rem] font-medium uppercase leading-4 tracking-[.09em] text-charcoal/72 sm:text-[.6875rem]">
+                <p className="technical-label text-charcoal">
                   Vivienda terminada
                 </p>
                 <p className="mt-0.5 text-sm font-medium leading-snug sm:text-base lg:mt-0 lg:text-sm">{featuredHousePhoto.caption}</p>
               </div>
               <p className="flex flex-col justify-center border-l-2 border-technical-yellow bg-technical-yellow/12 px-3 py-3 sm:px-5 lg:hidden">
-                <span className="font-mono text-[.625rem] font-medium uppercase leading-4 tracking-[.08em] text-charcoal/75 sm:text-[.6875rem]">
+                <span className="technical-label text-charcoal">
                   PPYM desde
                 </span>
                 <strong className="font-heading text-3xl font-semibold leading-none tracking-[-.04em] sm:text-[2.5rem]">
@@ -80,7 +80,7 @@ export function About() {
 
         <Reveal className="about-reveal about-facts mt-5 sm:mt-7 lg:grid lg:grid-cols-[minmax(0,.68fr)_minmax(0,1.45fr)_minmax(0,1.12fr)] lg:border-y lg:border-charcoal/20">
           <p className="hidden items-center gap-3 border-l-2 border-technical-yellow px-5 py-4 lg:flex xl:px-6">
-            <span className="font-mono text-[11px] font-medium uppercase tracking-[.1em] text-charcoal/75">Desde</span>
+            <span className="technical-label text-charcoal">Desde</span>
             <strong className="font-heading text-[2.5rem] font-semibold leading-none tracking-[-.04em]">{company.activitiesStarted}</strong>
           </p>
 
@@ -88,9 +88,9 @@ export function About() {
             <TechoPropioLogo className="sm:size-12" />
             <div className="min-w-0">
               <p className="font-heading text-base font-semibold leading-tight">{technicalEntity.label}</p>
-              <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-charcoal/78">
+              <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs font-medium text-charcoal/85">
                 <span>{technicalEntity.issuer}</span>
-                <span className="font-mono text-[11px]">ET {technicalEntity.code}</span>
+                <span className="font-mono text-[11px] font-semibold">ET {technicalEntity.code}</span>
               </p>
             </div>
           </div>

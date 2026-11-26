@@ -71,7 +71,7 @@ export function Differentiators() {
               <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-technical-yellow lg:mt-0 lg:mb-3" strokeWidth={1.6} />
               <div>
                 <h3 className="font-heading text-lg leading-tight font-semibold tracking-[-0.025em]">{title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-white/70">{description}</p>
+                <p className="mt-1.5 text-sm font-medium leading-relaxed text-white/85">{description}</p>
               </div>
             </li>
           ))}

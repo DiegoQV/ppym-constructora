@@ -17,8 +17,8 @@ export function Footer() {
               </span>
               <span className="sr-only">{company.legalName}</span>
             </a>
-            <p className="mt-5 max-w-md font-heading text-xl font-medium leading-8 tracking-[-.035em] text-white/72 sm:text-2xl">Arquitectura, ingeniería y construcción articuladas desde el territorio.</p>
-            <p className="mt-5 font-mono text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-technical-yellow">Desde {company.activitiesStarted} · {company.city}, {company.region}</p>
+            <p className="mt-5 max-w-md font-heading text-xl font-medium leading-8 tracking-[-.035em] text-white/85 sm:text-2xl">Arquitectura, ingeniería y construcción articuladas desde el territorio.</p>
+            <p className="technical-label mt-5 text-technical-yellow">Desde {company.activitiesStarted} · {company.city}, {company.region}</p>
           </div>
 
           <nav aria-label="Navegación del pie de página">
@@ -35,9 +35,9 @@ export function Footer() {
           <div>
             <p className="text-xs font-semibold uppercase leading-5 tracking-[.1em] text-white/90">Información de la empresa</p>
             <dl className="mt-5 space-y-5 text-sm">
-              <div><dt className="text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-white/70">Razón social</dt><dd className="mt-1.5 max-w-[25ch] leading-5 text-white/85">{company.legalName}</dd></div>
-              <div><dt className="text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-white/70">RUC</dt><dd className="mt-1.5 text-white/85">{company.ruc}</dd></div>
-              <div><dt className="text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-white/70">Ubicación</dt><dd className="mt-1.5 leading-5 text-white/85">{company.city}, {company.region}, {company.country}</dd></div>
+              <div><dt className="technical-label text-white">Razón social</dt><dd className="mt-1.5 max-w-[25ch] leading-5 text-white/85">{company.legalName}</dd></div>
+              <div><dt className="technical-label text-white">RUC</dt><dd className="mt-1.5 text-white/85">{company.ruc}</dd></div>
+              <div><dt className="technical-label text-white">Ubicación</dt><dd className="mt-1.5 leading-5 text-white/85">{company.city}, {company.region}, {company.country}</dd></div>
             </dl>
           </div>
         </div>

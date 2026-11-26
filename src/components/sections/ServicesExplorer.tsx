@@ -63,7 +63,7 @@ export function ServicesExplorer({ services, phone }: ServicesExplorerProps) {
               )}
             >
               {!isActive && <span aria-hidden className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-technical-yellow transition-transform duration-500 ease-out group-hover:scale-x-100" />}
-              <span className={cn("font-mono text-[11px] tracking-[0.16em] transition-colors duration-300", isActive ? "text-technical-yellow" : "text-text-gray group-hover:text-technical-yellow")}>
+              <span className="technical-label text-charcoal">
                 {service.number}
               </span>
               <span className={cn("service-trigger-title font-heading text-xl font-semibold tracking-[-0.025em] transition-transform duration-300 ease-out sm:text-2xl lg:text-[1.7rem]", !isActive && "group-hover:translate-x-1")}>
@@ -88,7 +88,7 @@ export function ServicesExplorer({ services, phone }: ServicesExplorerProps) {
                   />
                   <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(17,19,21,.5),transparent_48%,rgba(17,19,21,.12))]" />
                   {service.imageLabel && (
-                    <span className="absolute bottom-3 right-3 bg-charcoal/78 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-white/68 backdrop-blur-sm">
+                    <span className="technical-label absolute bottom-3 right-3 bg-charcoal/85 px-2 py-1 text-white backdrop-blur-sm">
                       {service.imageLabel}
                     </span>
                   )}
@@ -100,7 +100,7 @@ export function ServicesExplorer({ services, phone }: ServicesExplorerProps) {
                 </span>
 
                 <div className="service-copy-enter relative">
-                  <p className="service-description max-w-md text-sm leading-6 text-white/74 sm:text-base sm:leading-7">
+                  <p className="service-description max-w-md text-sm font-medium leading-6 text-white/85 sm:text-base sm:leading-7">
                     {service.description}
                   </p>
                   <a
@@ -115,7 +115,7 @@ export function ServicesExplorer({ services, phone }: ServicesExplorerProps) {
                 </div>
 
                 <div className="service-scope-enter relative mt-8 border-t border-white/12 pt-6 lg:mt-0 lg:border-l lg:border-t-0 lg:pl-9 lg:pt-0">
-                  <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-technical-yellow">
+                  <p className="technical-label mb-4 text-technical-yellow">
                     Principales alcances
                   </p>
                   <ul className="service-scope-list grid gap-y-3">

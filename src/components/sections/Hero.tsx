@@ -40,15 +40,15 @@ export function Hero() {
             <span aria-hidden className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,rgba(231,185,40,.62),rgba(231,185,40,.12)_52%,transparent)]" />
             <TechoPropioLogo className="relative mr-3 self-center" />
             <div className="relative min-w-0">
-              <span className="mb-0.5 flex items-center gap-1.5 text-[8px] font-bold uppercase tracking-[0.15em] text-technical-yellow sm:text-[9px]">
+              <span className="mb-0.5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[.1em] text-technical-yellow">
                 <span aria-hidden className="size-1 rounded-full bg-technical-yellow" />
                 Acreditación vigente
               </span>
               <strong className="block font-heading text-xs font-semibold leading-[18px] text-white sm:text-sm">{technicalEntity.label}</strong>
               <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[10px] leading-4 text-white/68 sm:text-[11px]">
-                <span className="font-medium text-white/78">{technicalEntity.issuer}</span>
+                <span className="font-semibold text-white/85">{technicalEntity.issuer}</span>
                 <span className="text-white/25" aria-hidden>•</span>
-                <span className="font-mono text-[8px] tracking-[0.04em] text-white/58 sm:text-[9px]">ET {technicalEntity.code}</span>
+                <span className="font-mono text-[11px] font-semibold text-white/85">ET {technicalEntity.code}</span>
               </p>
             </div>
           </div>

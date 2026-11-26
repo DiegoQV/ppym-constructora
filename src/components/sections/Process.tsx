@@ -10,7 +10,7 @@ export function Process() {
       className="scroll-mt-20 bg-[#e9e8e2] py-14 text-charcoal sm:py-20 lg:scroll-mt-24 lg:py-24"
     >
       <Container>
-        <p className="flex items-center gap-3 font-mono text-[11px] tracking-[0.18em] text-text-gray uppercase">
+        <p className="section-label flex items-center gap-3 text-charcoal">
           <span aria-hidden className="h-px w-8 bg-technical-yellow" />
           Método PPYM
         </p>
@@ -32,7 +32,7 @@ export function Process() {
                 className="object-cover"
               />
             </div>
-            <figcaption className="mt-2 text-xs text-text-gray">
+            <figcaption className="mt-2 text-xs font-medium text-charcoal/85">
               Ilustración del proceso constructivo
             </figcaption>
           </figure>
@@ -53,7 +53,7 @@ export function Process() {
                   <h3 className="font-heading text-lg leading-tight font-bold tracking-[-0.025em] sm:text-xl">
                     {title}
                   </h3>
-                  <p className="mt-1 max-w-lg text-sm leading-6 text-text-gray sm:text-base">
+                  <p className="mt-1 max-w-lg text-sm font-medium leading-6 text-charcoal/85 sm:text-base">
                     {output}
                   </p>
                 </div>

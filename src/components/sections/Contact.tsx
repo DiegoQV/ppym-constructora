@@ -48,8 +48,8 @@ export function Contact() {
       <div aria-hidden className="technical-grid-dark absolute inset-0 opacity-[.07]" />
       <Container className="contact-container relative py-20 sm:py-24 lg:pb-24 lg:pt-20">
           <div className="contact-kicker flex items-center justify-between gap-6 border-b border-charcoal/20 pb-4">
-            <p className="flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[.12em] text-charcoal"><span className="h-px w-8 bg-charcoal" />Contacto</p>
-            <p className="hidden font-mono text-xs font-semibold uppercase tracking-[.08em] text-charcoal/85 sm:block">Chachapoyas · Amazonas · Perú</p>
+            <p className="section-label flex items-center gap-3 text-charcoal"><span className="h-px w-8 bg-charcoal" />Contacto</p>
+            <p className="technical-label hidden text-charcoal sm:block">Chachapoyas · Amazonas · Perú</p>
           </div>
 
         <div className="contact-main grid gap-10 py-10 sm:py-12 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:gap-14 lg:py-12">
@@ -66,7 +66,7 @@ export function Contact() {
             <span aria-hidden className="absolute right-5 top-4 font-mono text-[4.5rem] leading-none text-white/[.035]">↗</span>
             <p className="text-xs font-bold uppercase leading-5 tracking-[.1em] text-technical-yellow">Empecemos por su consulta</p>
             <h3 className="relative mt-5 max-w-[15ch] font-heading text-3xl font-semibold leading-[1.1] tracking-[-.04em] sm:text-4xl">¿Qué necesita resolver?</h3>
-            <p className="relative mt-5 max-w-md text-base leading-7 text-white/75 sm:text-lg">Cuéntenos qué necesita, dónde está su proyecto y en qué etapa se encuentra.</p>
+            <p className="relative mt-5 max-w-md text-base font-medium leading-7 text-white/85 sm:text-lg">Cuéntenos qué necesita, dónde está su proyecto y en qué etapa se encuentra.</p>
             <a href={contactUrl} target="_blank" rel="noopener noreferrer" className="contact-primary-cta group relative mt-7 flex min-h-14 items-center justify-between gap-3 bg-technical-yellow px-4 py-4 text-sm font-bold text-charcoal transition-colors hover:bg-technical-yellow-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-technical-yellow sm:px-5 sm:text-base">
               <span className="flex items-center gap-2.5"><MessageCircle aria-hidden className="size-5 shrink-0" />Escribir por WhatsApp</span>
               <ArrowUpRight aria-hidden className="size-5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
