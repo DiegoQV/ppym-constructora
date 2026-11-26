@@ -1,18 +1,12 @@
 import Image from "next/image";
-import { ArrowUpRight, Check } from "lucide-react";
-import { TechoPropioLogo } from "@/components/ui/TechoPropioLogo";
+import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { TechoPropioLogo } from "@/components/ui/TechoPropioLogo";
 import { company } from "@/data/company";
 import { technicalEntity } from "@/data/navigation";
+import { featuredHousePhoto } from "@/data/projects";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
-
-const qualities = [
-  "Soluciones técnicas y legales integrales",
-  "Asesoría personalizada",
-  "Confidencialidad y seguridad",
-  "Entrega oportuna",
-] as const;
 
 export function About() {
   const advisoryUrl = createWhatsAppUrl(
@@ -24,134 +18,95 @@ export function About() {
     <section
       id="nosotros"
       aria-labelledby="about-title"
-      className="about-section relative scroll-mt-20 overflow-hidden bg-[#ebeae5] pt-12 pb-24 text-charcoal sm:py-28 lg:scroll-mt-24 lg:py-32"
+      className="scroll-mt-20 border-t border-charcoal/15 bg-[#ebeae5] py-10 text-charcoal sm:py-16 lg:scroll-mt-24 lg:py-[clamp(4rem,6vw,6rem)]"
     >
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-charcoal/14" />
-      <div aria-hidden className="absolute -right-28 top-40 size-[34rem] rounded-full border border-charcoal/[.045]" />
-      <div aria-hidden className="absolute -right-12 top-56 size-[22rem] rounded-full border border-charcoal/[.045]" />
+      <Container>
+        <p className="flex items-center gap-3 border-b border-charcoal/20 pb-4 font-mono text-[11px] font-medium uppercase tracking-[.16em] text-charcoal/75 sm:pb-5">
+          <span aria-hidden className="h-0.5 w-7 bg-technical-yellow" />
+          Nosotros
+        </p>
 
-      <Container className="relative">
-        <div className="about-section-index border-b border-charcoal/15 pb-4 sm:pb-6">
-          <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-text-gray">
-            <span className="h-px w-8 bg-technical-yellow" />
-            Nosotros
-          </p>
-        </div>
-
-        <div className="about-layout mt-6 grid gap-14 sm:mt-10 lg:mt-14 lg:grid-cols-[1.12fr_.88fr] lg:items-start lg:gap-20 xl:gap-28">
-          <Reveal className="about-collage order-2 lg:order-1 lg:pt-0.5">
-            <div className="grid grid-cols-[1.08fr_.92fr] gap-3 sm:gap-5">
-              <figure className="about-photo-interactive about-photo-frame about-photo-frame-1 about-photo-primary relative min-h-[500px] overflow-hidden bg-charcoal sm:min-h-[650px]">
-                <Image
-                  src="/images/about/ppym-supervision-chachapoyas-v3.webp"
-                  alt="Escena conceptual de supervisión profesional en una obra de Chachapoyas"
-                  fill
-                  sizes="(min-width: 1280px) 360px, (min-width: 1024px) 30vw, 54vw"
-                  className="about-photo-image object-cover object-[52%_center]"
-                />
-                <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(17,19,21,.62)_100%)]" />
-                <div aria-hidden className="about-photo-weave absolute inset-0 z-[1]" />
-                <div aria-hidden className="about-photo-lines absolute inset-0 z-[2]">
-                  <span className="about-photo-line about-photo-line-top-left" />
-                  <span className="about-photo-line about-photo-line-top-right" />
-                  <span className="about-photo-line about-photo-line-bottom-left" />
-                  <span className="about-photo-line about-photo-line-bottom-right" />
-                </div>
-              </figure>
-
-              <div className="grid grid-rows-[1fr_auto] gap-3 sm:gap-5">
-                <figure className="about-photo-interactive about-photo-frame about-photo-frame-2 about-photo-secondary relative min-h-[330px] overflow-hidden bg-charcoal sm:min-h-[450px]">
-                  <Image
-                    src="/images/about/ppym-vivienda-andina-v3.webp"
-                    alt="Propuesta conceptual de vivienda contemporánea adaptada al entorno andino"
-                    fill
-                    sizes="(min-width: 1280px) 310px, (min-width: 1024px) 27vw, 46vw"
-                    className="about-photo-image object-cover object-[56%_center]"
-                  />
-                  <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,transparent_60%,rgba(17,19,21,.38)_100%)]" />
-                  <div aria-hidden className="about-photo-weave absolute inset-0 z-[1]" />
-                  <div aria-hidden className="about-photo-lines absolute inset-0 z-[2]">
-                    <span className="about-photo-line about-photo-line-top-left" />
-                    <span className="about-photo-line about-photo-line-top-right" />
-                    <span className="about-photo-line about-photo-line-bottom-left" />
-                    <span className="about-photo-line about-photo-line-bottom-right" />
-                  </div>
-                </figure>
-
-                <div className="about-year-card flex min-h-40 flex-col justify-between bg-technical-yellow p-5 text-charcoal sm:min-h-44 sm:p-6">
-                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-charcoal/62">
-                    Inicio de actividades
-                  </p>
-                  <div className="flex items-end justify-between gap-4">
-                    <strong className="font-heading text-[clamp(3.4rem,5vw,5rem)] font-bold leading-none tracking-[-0.07em]">{company.activitiesStarted}</strong>
-                    <span className="mb-1 font-mono text-[9px] uppercase tracking-[0.14em] text-charcoal/55">{company.city}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="about-credential mt-3 grid overflow-hidden bg-charcoal text-white sm:mt-5 sm:grid-cols-[1fr_auto]">
-              <div className="about-credential-copy flex items-start gap-4 px-5 py-5 sm:px-6">
-                <TechoPropioLogo className="self-center" />
-                <div>
-                  <p className="text-sm font-semibold text-white sm:text-base">{technicalEntity.label}</p>
-                  <p className="mt-1 text-sm text-white/52">por el {technicalEntity.issuer}</p>
-                  <p className="mt-2 font-mono text-[9px] tracking-[0.08em] text-white/34">ET · {technicalEntity.code}</p>
-                </div>
-              </div>
-
-              <a
-                href={advisoryUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex min-h-20 items-center justify-between gap-5 bg-technical-yellow px-5 py-5 text-sm font-semibold text-charcoal transition-colors hover:bg-technical-yellow-hover focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-charcoal sm:w-56 sm:px-6"
-              >
-                Conversar sobre mi proyecto
-                <ArrowUpRight aria-hidden className="size-4 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </a>
-            </div>
-          </Reveal>
-
-          <Reveal className="about-copy order-1 lg:order-2">
+        <Reveal className="about-reveal mt-6 grid gap-y-5 sm:mt-8 sm:gap-y-7 lg:mt-10 lg:grid-cols-[minmax(0,.76fr)_minmax(0,1.24fr)] lg:items-center lg:gap-x-[clamp(3rem,6vw,6rem)]">
+          <div className="about-intro">
             <h2
               id="about-title"
-              aria-label="Somos PPYM."
-              className="about-title font-heading text-[clamp(2.5rem,13vw,3.5rem)] font-bold leading-[.92] tracking-[-0.065em] sm:text-[clamp(3.5rem,6vw,5.6rem)]"
+              className="font-heading text-[clamp(2.375rem,11.8vw,3rem)] font-[650] leading-[1.06] tracking-[-.035em] sm:text-[clamp(3rem,6vw,4.5rem)] lg:text-[clamp(3.375rem,4.65vw,4.25rem)] lg:leading-[1.02]"
             >
-              <span aria-hidden className="about-title-typed block w-fit whitespace-nowrap">
-                {Array.from("Somos PPYM.").map((character, index) => (
-                  <span
-                    key={`${character}-${index}`}
-                    className="about-title-character"
-                    style={{ transitionDelay: `${120 + index * 55}ms` }}
-                  >
-                    {character === " " ? "\u00a0" : character}
-                  </span>
-                ))}
-              </span>
+              <span className="lg:hidden">Somos PPYM.</span>
+              <span className="hidden lg:block">Del terreno<br />a la obra.</span>
             </h2>
-            <p className="about-subtitle mt-4 max-w-xl font-heading text-xl font-semibold leading-[1.2] tracking-[-0.035em] sm:mt-6 sm:text-3xl">
-              Constructora y consultora en {company.city}, {company.region}, desde&nbsp;{company.activitiesStarted}.
+            <p className="mt-3 max-w-[28ch] text-balance font-heading text-xl font-semibold leading-[1.3] tracking-[-.015em] sm:mt-4 sm:text-2xl">
+              Constructora y consultora en {company.city}, {company.region}.
             </p>
-            <p className="about-paragraph about-paragraph-first mt-6 max-w-xl text-base leading-7 text-text-gray sm:text-lg sm:leading-8">
-              Constructora &amp; Consultora PPYM E.I.R.L. nació con una propuesta orientada a resolver de manera integral las necesidades técnicas, legales y operativas de cada proyecto.
+            <p className="mt-4 max-w-[42ch] text-base leading-relaxed text-charcoal/78 sm:text-[1.0625rem] lg:hidden">
+              Acompañamos tu proyecto desde la revisión del terreno hasta la ejecución de la obra.
             </p>
-            <p className="about-paragraph about-paragraph-second mt-4 max-w-xl text-base leading-7 text-text-gray sm:text-lg sm:leading-8">
-              Desde el saneamiento del predio hasta la elaboración de planos, la topografía y la construcción, buscamos que el cliente encuentre orientación clara y continuidad en una sola empresa.
+            <p className="mt-5 hidden max-w-[42ch] text-[1.0625rem] leading-relaxed text-charcoal/78 lg:block">
+              En PPYM coordinamos la revisión del predio, los trámites, los planos y la construcción según las necesidades de cada proyecto.
             </p>
+            <p className="mt-3 hidden max-w-[42ch] text-[1.0625rem] leading-relaxed text-charcoal/78 lg:block">
+              Si ya tienes un terreno, un plano o una obra en marcha, revisamos contigo qué conviene resolver primero.
+            </p>
+          </div>
 
-            <ul className="about-qualities mt-9 grid gap-x-6 gap-y-4 border-y border-charcoal/15 py-7 sm:grid-cols-2">
-              {qualities.map((quality) => (
-                <li key={quality} className="about-quality flex items-start gap-3 text-sm leading-6 text-charcoal/78">
-                  <Check aria-hidden className="mt-1 size-4 shrink-0 text-technical-yellow" strokeWidth={2.5} />
-                  {quality}
-                </li>
-              ))}
-            </ul>
+          <figure className="about-figure min-w-0">
+            <div className="about-photo-frame relative aspect-[4/3] overflow-hidden bg-charcoal/10 sm:aspect-[16/10] lg:aspect-[3/2]">
+              <Image
+                src={featuredHousePhoto.src}
+                alt={featuredHousePhoto.alt}
+                fill
+                sizes="(min-width: 1280px) 800px, (min-width: 1024px) 65vw, calc(100vw - 3rem)"
+                className="object-cover lg:scale-[1.16]"
+              />
+            </div>
+            <figcaption className="grid grid-cols-[minmax(0,1fr)_auto] border border-t-0 border-charcoal/20 lg:block lg:border-0">
+              <div className="self-center px-3 py-3 sm:px-5 lg:flex lg:flex-wrap lg:items-baseline lg:gap-x-3 lg:px-0 lg:pb-0">
+                <p className="font-mono text-[.625rem] font-medium uppercase leading-4 tracking-[.09em] text-charcoal/72 sm:text-[.6875rem]">
+                  Vivienda terminada
+                </p>
+                <p className="mt-0.5 text-sm font-medium leading-snug sm:text-base lg:mt-0 lg:text-sm">{featuredHousePhoto.caption}</p>
+              </div>
+              <p className="flex flex-col justify-center border-l-2 border-technical-yellow bg-technical-yellow/12 px-3 py-3 sm:px-5 lg:hidden">
+                <span className="font-mono text-[.625rem] font-medium uppercase leading-4 tracking-[.08em] text-charcoal/75 sm:text-[.6875rem]">
+                  PPYM desde
+                </span>
+                <strong className="font-heading text-3xl font-semibold leading-none tracking-[-.04em] sm:text-[2.5rem]">
+                  {company.activitiesStarted}
+                </strong>
+              </p>
+            </figcaption>
+          </figure>
+        </Reveal>
 
-          </Reveal>
-        </div>
+        <Reveal className="about-reveal about-facts mt-5 sm:mt-7 lg:grid lg:grid-cols-[minmax(0,.68fr)_minmax(0,1.45fr)_minmax(0,1.12fr)] lg:border-y lg:border-charcoal/20">
+          <p className="hidden items-center gap-3 border-l-2 border-technical-yellow px-5 py-4 lg:flex xl:px-6">
+            <span className="font-mono text-[11px] font-medium uppercase tracking-[.1em] text-charcoal/75">Desde</span>
+            <strong className="font-heading text-[2.5rem] font-semibold leading-none tracking-[-.04em]">{company.activitiesStarted}</strong>
+          </p>
 
+          <div className="hidden items-center gap-3.5 border-l border-charcoal/20 px-5 py-4 lg:flex xl:px-6">
+            <TechoPropioLogo className="sm:size-12" />
+            <div className="min-w-0">
+              <p className="font-heading text-base font-semibold leading-tight">{technicalEntity.label}</p>
+              <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-charcoal/78">
+                <span>{technicalEntity.issuer}</span>
+                <span className="font-mono text-[11px]">ET {technicalEntity.code}</span>
+              </p>
+            </div>
+          </div>
+
+          <div className="lg:flex lg:items-center lg:border-l lg:border-charcoal/20 lg:px-4 xl:px-6">
+            <a
+              href={advisoryUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex min-h-11 items-center gap-3 border-b-2 border-technical-yellow py-2 text-sm font-semibold transition-colors hover:border-charcoal focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-charcoal"
+            >
+              Conversar sobre mi proyecto
+              <ArrowUpRight aria-hidden className="size-4 shrink-0 transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5" />
+            </a>
+          </div>
+        </Reveal>
       </Container>
     </section>
   );

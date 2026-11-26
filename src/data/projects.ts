@@ -17,6 +17,12 @@ const photo = (file: string, caption: string, alt: string): WorkPhoto => ({
 
 // Supplied and authorized by the client on 2026-11-03 as photographs of PPYM's work.
 // Descriptive groupings only: project names, locations and dates were not supplied.
+export const featuredHousePhoto = photo(
+  "fachada-amarilla-revestimiento",
+  "Fachada y revestimiento exterior",
+  "Vivienda amarilla con ventanas de marco negro, acceso central y revestimiento de piedra en el zócalo",
+);
+
 export const workCollections: WorkCollection[] = [
   {
     number: "01",
@@ -24,7 +30,7 @@ export const workCollections: WorkCollection[] = [
     description: "Fachadas, accesos y exteriores de nuestras obras realizadas.",
     photos: [
       photo("fachada-puerta-madera", "Fachada con puerta de madera", "Vivienda terminada con fachada crema, puerta de madera, dos ventanas y revestimiento en el zócalo"),
-      photo("fachada-amarilla-revestimiento", "Fachada y revestimiento exterior", "Vivienda amarilla con ventanas de marco negro, acceso central y revestimiento de piedra en el zócalo"),
+      featuredHousePhoto,
       photo("fachada-amarilla-zocalo-rojo", "Vivienda de un nivel", "Fachada amarilla con zócalo rojo, dos ventanas y cubierta metálica"),
       photo("fachada-area-lavado", "Exterior con área de lavado", "Fachada crema con puerta abierta, lavadero exterior y bajante pluvial"),
       photo("viviendas-accesos-independientes", "Fachadas y accesos", "Vista amplia de viviendas terminadas con fachadas crema y amarilla y accesos independientes"),

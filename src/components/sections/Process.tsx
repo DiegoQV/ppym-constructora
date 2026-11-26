@@ -21,8 +21,23 @@ export function Process() {
           Decidir antes de construir.
         </h2>
 
-        <div className="mt-8 grid gap-8 lg:mt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-12 xl:gap-16">
-          <ol role="list" aria-label="Etapas del proceso">
+        <div className="mt-6 grid gap-6 lg:mt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-12 xl:gap-16">
+          <figure className="lg:order-2">
+            <div className="relative aspect-video overflow-hidden border-b-2 border-technical-yellow bg-charcoal">
+              <Image
+                src="/images/process/ppym-proceso-constructivo-v1.webp"
+                alt="Una edificación en distintas etapas de construcción sobre una ladera de Amazonas"
+                fill
+                sizes="(min-width: 1280px) 576px, (min-width: 1024px) 45vw, calc(100vw - 3rem)"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="mt-2 text-xs text-text-gray">
+              Ilustración del proceso constructivo
+            </figcaption>
+          </figure>
+
+          <ol role="list" aria-label="Etapas del proceso" className="lg:order-1">
             {stages.map(({ number, title, output }) => (
               <li
                 key={number}
@@ -45,21 +60,6 @@ export function Process() {
               </li>
             ))}
           </ol>
-
-          <figure>
-            <div className="relative aspect-video overflow-hidden border-b-2 border-technical-yellow bg-charcoal">
-              <Image
-                src="/images/process/ppym-proceso-constructivo-v1.webp"
-                alt="Una edificación en distintas etapas de construcción sobre una ladera de Amazonas"
-                fill
-                sizes="(min-width: 1280px) 576px, (min-width: 1024px) 45vw, calc(100vw - 3rem)"
-                className="object-cover"
-              />
-            </div>
-            <figcaption className="mt-2 text-xs text-text-gray">
-              Ilustración del proceso constructivo
-            </figcaption>
-          </figure>
         </div>
       </Container>
     </section>
