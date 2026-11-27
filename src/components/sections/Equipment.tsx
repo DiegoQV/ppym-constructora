@@ -62,13 +62,12 @@ export function Equipment() {
       <Container className="relative lg:flex lg:min-h-0 lg:flex-1 lg:flex-col">
         <div className="flex items-center justify-between gap-6 border-b border-charcoal/15 pb-4">
           <p className="section-label flex items-center gap-3 text-charcoal"><span aria-hidden className="h-px w-8 shrink-0 bg-technical-yellow" />Capacidad operativa</p>
-          <p className="technical-label hidden text-charcoal sm:block">Equipo · criterio · coordinación</p>
+          <p className="technical-label hidden text-charcoal/65 sm:block">Equipo · criterio · coordinación</p>
         </div>
 
         <Reveal className="equipment-heading-block mb-5 mt-6 grid items-end gap-5 sm:mb-6 sm:mt-7 lg:mb-7 lg:grid-cols-[1fr_.72fr] lg:gap-6">
           <div>
-            <p className="section-label text-charcoal">Recursos que responden</p>
-            <h2 ref={headingRef} id="equipment-title" className="equipment-heading mt-3 max-w-[14ch] font-heading text-[clamp(3.25rem,5.2vw,5.7rem)] font-bold leading-[.88] tracking-[-.075em]">
+            <h2 ref={headingRef} id="equipment-title" className="equipment-heading max-w-[14ch] font-heading text-[clamp(3.25rem,5.2vw,5.7rem)] font-bold leading-[.88] tracking-[-.075em]">
               {["La", "capacidad", "se", "organiza"].map((word) => (
                 <span key={word} className="equipment-heading-word">
                   {word}{word === "organiza" && <span className="equipment-heading-period">.</span>}
@@ -91,13 +90,23 @@ export function Equipment() {
         </div>
 
         <div className="equipment-console grid border-x border-b border-charcoal/15 lg:min-h-0 lg:flex-1 lg:grid-cols-[1fr_22rem]">
-          <div className="relative min-h-[540px] overflow-hidden bg-charcoal lg:min-h-0">
-            <Image key={active.image} src={active.image} alt={`Visualización referencial de ${active.title.toLowerCase()} en Amazonas`} fill sizes="(min-width: 1024px) 860px, 100vw" className="equipment-image-enter equipment-image object-cover" />
+          <div className={cn("relative overflow-hidden bg-charcoal lg:min-h-0", active.compactImageOnMobile ? "min-h-[360px] sm:min-h-[480px]" : "min-h-[540px]")}>
+            <Image
+              key={active.image}
+              src={active.image}
+              alt={active.imageAlt ?? `Visualización referencial de ${active.title.toLowerCase()} en Amazonas`}
+              fill
+              sizes="(min-width: 1024px) 860px, 100vw"
+              className="equipment-image-enter equipment-image object-cover"
+            />
             <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-black/15" />
             <div aria-hidden className="technical-grid absolute inset-0 opacity-20 mix-blend-screen" />
             <div aria-hidden className="equipment-scan absolute inset-y-0 left-0 z-10 w-px bg-technical-yellow"><span className="absolute -left-1 top-1/2 size-2 rounded-full bg-technical-yellow shadow-[0_0_0_6px_rgba(231,185,40,.12)]" /></div>
             <span aria-hidden className="absolute bottom-4 left-6 font-heading text-[clamp(8rem,18vw,17rem)] font-bold leading-none tracking-[-.09em] text-white/[.08] sm:left-10">{active.number}</span>
-            <div className="absolute bottom-6 left-6 right-6 ml-auto w-fit max-w-[calc(100%_-_3rem)] border border-white/25 bg-charcoal/85 px-4 py-3 backdrop-blur-sm sm:bottom-8 sm:right-8 sm:max-w-[calc(100%_-_3.5rem)]">
+            <div className={cn(
+              "absolute left-6 right-6 ml-auto w-fit max-w-[calc(100%_-_3rem)] border border-white/25 bg-charcoal/85 px-4 py-3 backdrop-blur-sm sm:right-8 sm:max-w-[calc(100%_-_3.5rem)]",
+              active.compactImageOnMobile ? "top-3 sm:top-5" : "bottom-6 sm:bottom-8",
+            )}>
               <p className="technical-label text-white">Campo de aplicación</p>
               <p className="technical-label mt-1 text-technical-yellow">Amazonas · operación coordinada</p>
             </div>
